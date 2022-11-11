@@ -1,0 +1,670 @@
+<template>
+  <div class="main-container">
+    <div style="display: none" :class="{ overlay: fullscreen }"></div>
+    <div style="display: none" :class="{ overlayContent: fullscreen }">
+      <img
+        :src="getClickedProduct.image"
+        :alt="getClickedProduct.variance"
+        @click="fullscreen = !fullscreen"
+      />
+    </div>
+    <div class="breadcrumb">
+      <p>
+        <router-link to="/">Home</router-link> /
+        <router-link to="/about">Socks For Summer</router-link>
+      </p>
+    </div>
+    <div class="content-container">
+      <div class="img-container">
+        <div>
+          <figure
+            class="product-img"
+            @mousemove="zoom"
+            @click="fullscreen = !fullscreen"
+            :style="{ backgroundImage: 'url(' + getClickedProduct.image + ')' }"
+          >
+            <img :src="getClickedProduct.image" />
+          </figure>
+          <div class="img-variances">
+            <figure
+              v-for="(item, index) in productListDetail"
+              :key="index"
+              @click="handleClickItem(index)"
+              :class="classActive(index)"
+            >
+              <img :src="item.image" :alt="item.variance" />
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="description-container">
+        <h2>{{ title }}</h2>
+        <hr />
+        <p class="product-price"><span>₫</span>{{ formatOriginalPrice }}</p>
+        <p>{{ description }}</p>
+        <p>One size: 35-40</p>
+        <p>Height: 15cm</p>
+        <p>Thickness: Medium</p>
+        <p>Variance: {{ getClickedProduct.variance }}</p>
+        <p class="stock">
+          <span>{{ getClickedProduct.stock }} </span> in stock
+        </p>
+        <p class="quantity">
+          <label for="quantity">Quantity:</label>
+          <button class="qtyminus" aria-hidden="true" @click="decreaseQuantity">
+            &minus;
+          </button>
+          <input
+            type="number"
+            name="quantity"
+            id="quantity"
+            min="1"
+            :max="getClickedProduct.stock"
+            step="1"
+            value="1"
+          />
+          <button class="qtyplus" aria-hidden="true" @click="increaseQuantity">
+            &plus;
+          </button>
+
+          <button class="add-cart" @click="handleAddToCart">ADD TO CART</button>
+        </p>
+        <div class="product-meta">
+          <span class="sku-wrapper"
+            >SKU: <span class="sku">HHS07-1300</span></span
+          >
+
+          <span class="posted-in"
+            >Category: <a href="" rel="tag">Socks For Summer</a></span
+          >
+        </div>
+        <div class="social-icons">
+          <div
+            class="round-circle facebook-share"
+            data-hover="Share on Facebook"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </div>
+          <div class="round-circle twitter-share" data-hover="Share on Twitter">
+            <i class="fab fa-twitter"></i>
+          </div>
+          <div class="round-circle email-share" data-hover="Email to a friend">
+            <i class="far fa-envelope"></i>
+          </div>
+          <div
+            class="round-circle pinterest-share"
+            data-hover="Pin on Pinterest"
+          >
+            <i class="fab fa-pinterest"></i>
+          </div>
+          <div
+            class="round-circle linkedin-share"
+            data-hover="Share on LinkedIn"
+          >
+            <i class="fab fa-linkedin"></i>
+          </div>
+        </div>
+        <div class="cart">Giỏ hàng ({{ cartNumber }})</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  title: "Pla.Socks",
+  data() {
+    return {
+      fullscreen: false,
+      title: "Happy High",
+      originalPrice: 51000,
+      description:
+        "The Socks only have one size, and are stretchy, suitable for shoes in the size range above according to EU size standards.",
+      sale: 0.1,
+      selectedItem: 0,
+      cartNumber: 0,
+      productListDetail: [
+        {
+          variance: "Type 1",
+          image:
+            "https://plasocks.com/wp-content/uploads/2022/07/z3571975991764_6c5aac385ee991d1f32ba5405d596470-768x768.jpg",
+          stock: "0",
+        },
+        {
+          variance: "Type 2",
+          image:
+            "https://plasocks.com/wp-content/uploads/2022/07/z3571975989496_320be5d4342a3a90a48516b143ba6885.jpg",
+          stock: "2",
+        },
+        {
+          variance: "Type 3",
+          image:
+            "https://plasocks.com/wp-content/uploads/2022/07/z3571976000984_b32c5ed8c85e787edb59281f6d7da799-768x768.jpg",
+          stock: "5",
+        },
+        {
+          variance: "Type 4",
+          image:
+            "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+          stock: "10",
+        },
+      ],
+    };
+  },
+  name: "ProductItem",
+  props: {
+    msg: String,
+  },
+  methods: {
+    zoom(event) {
+      let zoomer = event.currentTarget;
+      let offsetX, offsetY, x, y;
+
+      event.offsetX
+        ? (offsetX = event.offsetX)
+        : (offsetX = event.touches[0].pageX);
+      event.offsetY
+        ? (offsetY = event.offsetY)
+        : (offsetX = event.touches[0].pageX);
+      x = (offsetX / zoomer.offsetWidth) * 120;
+      y = (offsetY / zoomer.offsetHeight) * 120;
+      zoomer.style.backgroundPosition = x + "% " + y + "%";
+    },
+    handleZoom() {
+      this.fullscreen = !this.fullscreen;
+    },
+    decreaseQuantity() {
+      var value = parseInt(document.getElementById("quantity").value, 10);
+      value = isNaN(value) ? 0 : value;
+      value < 1 ? (value = 1) : "";
+      value--;
+      document.getElementById("quantity").value = value;
+    },
+    increaseQuantity() {
+      var value = parseInt(document.getElementById("quantity").value, 10);
+      value = isNaN(value) ? 0 : value;
+      value++;
+      document.getElementById("quantity").value = value;
+    },
+    handleClickItem(index) {
+      this.selectedItem = index;
+    },
+    handleAddToCart() {
+      var value = parseInt(document.getElementById("quantity").value, 10);
+      if (
+        this.getClickedProduct.stock == 0 ||
+        this.getClickedProduct.stock < value
+      ) {
+        this.$toast.open({
+          message: "Không đủ sản phẩm để thêm vào giỏ hàng",
+          type: "error",
+          duration: 2000,
+          dismissible: true,
+          position: "bottom",
+        });
+      } else {
+        this.cartNumber += value;
+        this.getClickedProduct.stock -= value;
+        this.$toast.open({
+          message: "Đã thêm thành công vào giỏ hàng",
+          type: "success",
+          duration: 2000,
+          dismissible: true,
+          position: "bottom",
+        });
+      }
+    },
+    classActive(index) {
+      return {
+        active: this.selectedItem === index,
+      };
+    },
+  },
+  computed: {
+    formatOriginalPrice() {
+      let number = this.originalPrice;
+      return new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "VND",
+      }).format(number);
+    },
+    getClickedProduct() {
+      let index = this.selectedItem;
+      return this.productListDetail[index];
+    },
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+/* Sass Config */
+$btn_grey: #f9f9f9; /* Contrast : 7.2:1 */
+/* End Sass Config */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  max-width: 1080px;
+  margin: 0px auto;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #ddd;
+
+  .inactive {
+    display: none;
+  }
+
+  @keyframes go-full-screen {
+    from {
+      opacity: 1;
+    }
+    to {
+      height: 100%;
+      width: 100vw;
+      inset: 0;
+      opacity: 0;
+    }
+  }
+
+  .overlay {
+    display: flex !important;
+    transition: 0.3 ease;
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #000;
+    opacity: 0.7;
+    filter: alpha(opacity = 70) !important;
+    z-index: 9999999;
+    animation: go-full-screen 500ms ease-in-out;
+  }
+
+  .overlayContent {
+    display: flex !important;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 45vw;
+    height: 45vw;
+    text-align: center;
+    overflow: hidden;
+    z-index: 9999999;
+    cursor: zoom-out;
+  }
+  .breadcrumb a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #777777;
+    &:hover {
+      color: #111;
+    }
+  }
+  .content-container {
+    display: flex;
+
+    .img-container {
+      flex: 1;
+      padding-right: 15px;
+      zoom: 0.95;
+
+      div {
+        padding-right: 5px;
+      }
+      .product-img {
+        margin: 0;
+        max-width: 550px;
+        max-height: 550px;
+        background-position: 50% 50%;
+        position: relative;
+        overflow: hidden;
+        cursor: zoom-in;
+        margin-bottom: 15px;
+        img {
+          transition: opacity 0.5s;
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          max-height: 100%;
+          &:hover {
+            opacity: 0;
+          }
+        }
+      }
+      .img-variances {
+        display: flex;
+        justify-content: space-between;
+        figure {
+          position: relative;
+          margin: 0;
+          width: 111px;
+          height: 111px;
+          overflow: hidden;
+          transition: opacity 1s ease;
+          cursor: pointer;
+          border: 1px solid transparent;
+          .active {
+            border: 1px solid red;
+          }
+          &:before {
+            content: "";
+            display: block;
+            height: 111px;
+            width: 111px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(52, 73, 94, 0.308);
+            z-index: 999;
+          }
+
+          img {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0) scale(1.2);
+            width: 111px;
+            transition: all 500ms linear;
+          }
+          &:hover {
+            border: 1px solid #a2a2a2;
+            &:before {
+              opacity: 0;
+            }
+            img {
+              transform: translate(-50%, 0) scale(1);
+            }
+          }
+        }
+      }
+    }
+    .description-container {
+      flex: 1;
+      font-size: 1em;
+
+      h2 {
+        font-size: 1.6em;
+        color: #555555;
+        font-weight: 600;
+        margin: 10px 0 15px 0;
+      }
+      hr {
+        position: relative;
+        margin: 0;
+        left: 0;
+        border: none;
+        height: 3px;
+        width: 100px;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .product-price {
+        font-weight: 600;
+        font-size: 1.3em;
+        color: black;
+        span {
+          font-size: smaller;
+          position: relative;
+          bottom: 3px;
+          margin-right: 3px;
+        }
+      }
+      .stock {
+        font-size: 0.9em;
+        font-weight: 500;
+        color: #7a9c59;
+      }
+      .quantity {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 16px;
+        justify-content: left;
+
+        label {
+          flex: 1 0 100%;
+          margin-bottom: 7px;
+        }
+        input {
+          width: 34px;
+          height: 36px;
+          text-align: center;
+          border: 1px solid #ddd;
+          font-family: "Montserrat", sans-serif;
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+          }
+          &:focus {
+            box-shadow: 0 0 5px #ccc;
+          }
+          &:focus-visible {
+            outline: none;
+          }
+        }
+
+        button {
+          font-family: "Montserrat", sans-serif;
+          width: 1.8rem;
+          height: 40px;
+          color: #666;
+          background: $btn_grey;
+          border: 1px solid #ddd;
+          cursor: pointer;
+          transition: 0.3s;
+          &:hover {
+            background-color: #c1c1c1;
+          }
+          &.qtyminus,
+          &.qtyplus {
+            z-index: 999;
+          }
+          &.add-cart {
+            margin-left: 20px;
+            width: fit-content;
+            padding: 5px 22px;
+            font-weight: 600;
+            font-size: 16px;
+            background-color: #f299c2;
+            color: white;
+            &:hover {
+              background-color: #c27a9b;
+              transition: 0.3s;
+            }
+          }
+        }
+      }
+      .product-meta {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        span {
+          padding: 5px 0px;
+          border-top: 1px dotted #ddd;
+        }
+        a {
+          text-decoration: none;
+          color: #777777;
+          &:hover {
+            color: #111;
+          }
+        }
+      }
+      .social-icons {
+        margin-top: 10px;
+        max-width: fit-content;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        column-gap: 10px;
+        .round-circle {
+          width: 28px;
+          height: 28px;
+          border: 2px solid #919191;
+          border-radius: 50%;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: 0.3s ease-in;
+          cursor: pointer;
+          position: relative;
+          &:before {
+            content: attr(data-hover);
+            visibility: hidden;
+            opacity: 0;
+            width: max-content;
+            background-color: black;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+            border-radius: 3px;
+            padding: 7px 7px;
+            transition: opacity 0.8s ease-in-out;
+            transition-delay: 0.2s;
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            bottom: 120%;
+            transform: translate(-50%, 0);
+          }
+        }
+        svg {
+          color: #919191;
+          transition: 0.3s;
+          cursor: pointer;
+        }
+        .facebook-share {
+          &:hover {
+            background-color: #3a589d;
+            border-color: transparent;
+            &:before {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+          &:hover svg {
+            color: white;
+          }
+        }
+        .twitter-share {
+          &:hover {
+            background-color: #2478ba;
+            border-color: transparent;
+            &:before {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+          &:hover svg {
+            color: white;
+          }
+        }
+        .email-share {
+          &:hover {
+            background-color: black;
+            border-color: transparent;
+            &:before {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+          &:hover svg {
+            color: white;
+          }
+        }
+        .pinterest-share {
+          &:hover {
+            background-color: #cb2320;
+            border-color: transparent;
+            &:before {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+          &:hover svg {
+            color: white;
+          }
+        }
+        .linkedin-share {
+          &:hover {
+            background-color: #0072b7;
+            border-color: transparent;
+            &:before {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+          &:hover svg {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .main-container {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .main-container {
+    .overlayContent {
+      width: 70vw;
+      height: 70vw;
+    }
+    .content-container {
+      flex-direction: column;
+      .img-container {
+        padding-left: 0;
+        padding-right: 0;
+        flex: auto;
+        div {
+          padding-right: 0px;
+        }
+        .product-img {
+          position: relative;
+          max-width: 100vw;
+          max-height: 100vw;
+          margin-bottom: 15px;
+          background-size: cover;
+          img {
+            width: 100%;
+            &:hover {
+              opacity: 0;
+            }
+          }
+        }
+        .img-variances {
+          display: flex;
+          justify-content: space-between;
+          figure {
+            display: flex;
+            position: relative;
+            width: 22vw;
+            height: 22vw;
+            max-width: 190px;
+            max-height: 190px;
+            &:before {
+              width: 22vw;
+              height: 22vw;
+              max-width: 190px;
+              max-height: 190px;
+            }
+            img {
+              width: 100%;
+              max-width: 190px;
+            }
+          }
+        }
+      }
+      .description-container {
+        flex: auto;
+      }
+    }
+  }
+}
+</style>
