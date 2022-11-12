@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <div style="display: none" :class="{ overlay: fullscreen }"></div>
+    <v-overlay :value="fullscreen"></v-overlay>
     <div style="display: none" :class="{ overlayContent: fullscreen }">
       <img
         :src="getClickedProduct.image"
@@ -105,7 +105,6 @@
             <i class="fab fa-linkedin"></i>
           </div>
         </div>
-        <div class="cart">Giỏ hàng ({{ cartNumber }})</div>
       </div>
     </div>
   </div>
@@ -204,6 +203,7 @@ export default {
           position: "bottom",
         });
       } else {
+        this.$store.commit("SET_CART", value);
         this.cartNumber += value;
         this.getClickedProduct.stock -= value;
         this.$toast.open({
@@ -232,6 +232,14 @@ export default {
     getClickedProduct() {
       let index = this.selectedItem;
       return this.productListDetail[index];
+    },
+  },
+  watch: {
+    overlay(val) {
+      val &&
+        setTimeout(() => {
+          this.fullscreen = false;
+        }, 2000);
     },
   },
 };
@@ -427,7 +435,7 @@ $btn_grey: #f9f9f9; /* Contrast : 7.2:1 */
         }
         input {
           width: 34px;
-          height: 36px;
+          height: 40px;
           text-align: center;
           border: 1px solid #ddd;
           font-family: "Montserrat", sans-serif;
