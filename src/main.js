@@ -13,8 +13,6 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import vuetify from "./plugins/vuetify";
 
-import vuetify from "./plugins/vuetify";
-
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
