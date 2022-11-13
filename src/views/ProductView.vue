@@ -1,6 +1,8 @@
 <template>
   <div id="container">
     <ProductItem />
+    <ProductItem />
+    <ProductItem />
   </div>
 </template>
 

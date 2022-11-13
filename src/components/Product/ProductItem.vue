@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <v-overlay :value="fullscreen"></v-overlay>
+    <v-overlay :value="fullscreen" style="z-index: 999999999"></v-overlay>
     <div style="display: none" :class="{ overlayContent: fullscreen }">
       <img
         :src="getClickedProduct.image"
@@ -300,7 +300,7 @@ $btn_grey: #f9f9f9; /* Contrast : 7.2:1 */
     height: 45vw;
     text-align: center;
     overflow: hidden;
-    z-index: 9999999;
+    z-index: 9999999999;
     cursor: zoom-out;
   }
   .breadcrumb a {
@@ -466,7 +466,7 @@ $btn_grey: #f9f9f9; /* Contrast : 7.2:1 */
           }
           &.qtyminus,
           &.qtyplus {
-            z-index: 999;
+            z-index: 9;
           }
           &.add-cart {
             margin-left: 20px;

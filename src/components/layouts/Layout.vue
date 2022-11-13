@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavigationBar />
-    <main class="main-slot">
+    <NavigationBar style="position: sticky; top: 0; z-index: 99999999" />
+    <main class="main-slot" style="z-index: -1">
       <slot></slot>
     </main>
     <FooterSection />

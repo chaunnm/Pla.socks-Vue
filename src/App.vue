@@ -20,14 +20,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: "Montserrat", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #777777;
 }
-
 nav {
   padding: 30px;
 }
