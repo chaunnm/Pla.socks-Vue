@@ -1,11 +1,85 @@
 <template>
   <div class="container">
+    <div class="responsive-container">
+      <v-overlay
+        v-model="responsive"
+        absolute
+        opacity="0.8"
+        color="#4db7b3"
+        :value="responsive"
+        style="z-index: 999999; position: fixed"
+      >
+        <div
+          style="
+            width: 50vw;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+          "
+        >
+          <div @click="overlay = false">
+            <v-icon dense class="icons-item exit">fa-x</v-icon>
+          </div>
+
+          <div class="search-frame" v-click-outside="onClickOutside">
+            <v-text-field label="Search" style="font-size: 30px"></v-text-field>
+            <v-icon dense class="icons-item search">fa-magnifying-glass</v-icon>
+          </div>
+          <ul class="links">
+            <li><router-link to="/">PLA.SOCKS</router-link></li>
+            <li>
+              <router-link to="/product">
+                SHOP
+                <i class="fa-solid fa-angle-down"></i>
+              </router-link>
+            </li>
+            <v-list>
+              <v-list-item
+                style="cursor: pointer"
+                v-for="(item, index) in items"
+                :key="index"
+              >
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+            <li><router-link to="/product">CUSTOM</router-link></li>
+            <li><router-link to="/product">OUR STORY</router-link></li>
+            <li><router-link to="/product">REWARDS</router-link></li>
+            <li><router-link to="/product">BLOG</router-link></li>
+            <li><router-link to="/product">CONTACT US</router-link></li>
+          </ul>
+        </div>
+      </v-overlay>
+    </div>
+
     <v-overlay
-      :absolute="absolute"
+      v-model="overlay"
+      :opacity="0.8"
       :value="overlay"
-      style="z-index: 9999999999"
+      style="z-index: 999999; position: fixed"
     >
-      <v-btn color="success" @click="overlay = false"> Hide Overlay </v-btn>
+      <div
+        style="
+          width: 50vw;
+          height: 50vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div @click="overlay = false">
+          <v-icon dense class="icons-item exit">fa-x</v-icon>
+        </div>
+
+        <div class="search-frame" v-click-outside="onClickOutside">
+          <v-text-field label="Search" style="font-size: 30px"></v-text-field>
+          <v-icon dense class="icons-item search">fa-magnifying-glass</v-icon>
+        </div>
+      </div>
     </v-overlay>
     <v-navigation-drawer v-model="drawer" absolute right temporary clipped>
       <div class="exit" @click="handleClickCart()">
@@ -110,8 +184,49 @@
         </div>
       </div>
     </div>
+
     <div class="mainContainer">
       <div class="content">
+        <div class="hamburger-menu">
+          <v-dialog v-model="dialog" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <div v-bind="attrs" v-on="on">
+                <v-icon dense color="#4db7b3" class="icons-item hamburger"
+                  >fa-bars</v-icon
+                >
+                <span>MENU</span>
+              </div>
+            </template>
+
+            <v-card>
+              <v-card-title class="text-h5 grey lighten-2">
+                Privacy Policy
+              </v-card-title>
+
+              <v-card-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est
+                laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" text @click="dialog = false">
+                  I accept
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
         <div class="logo">
           <img
             src="https://plasocks.com/wp-content/uploads/2022/07/289951629_5421917167875766_6698382690436412766_n-removebg-preview.png"
@@ -120,7 +235,7 @@
         </div>
         <ul class="links">
           <li><router-link to="/">PLA.SOCKS</router-link></li>
-          <v-menu offset-y open-on-hover>
+          <v-menu offset-y bottom transition="slide-y-transition" open-on-hover>
             <template v-slot:activator="{ on, attrs }">
               <li v-bind="attrs" v-on="on">
                 <router-link to="/product">
@@ -130,7 +245,11 @@
               </li>
             </template>
             <v-list>
-              <v-list-item v-for="(item, index) in items" :key="index">
+              <v-list-item
+                style="cursor: pointer"
+                v-for="(item, index) in items"
+                :key="index"
+              >
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -140,14 +259,15 @@
           <li><router-link to="/product">REWARDS</router-link></li>
           <li><router-link to="/product">BLOG</router-link></li>
           <li><router-link to="/product">CONTACT US</router-link></li>
+          <li><router-link to="/product">CONTACT US</router-link></li>
         </ul>
         <div class="icons">
           <v-icon small class="icons-item user">fa-user-tie</v-icon>
 
-          <v-icon small class="icons-item search" @click="overlay = !overlay"
-            >fa-magnifying-glass</v-icon
-          >
-          <div @click="handleClickCart()">
+          <div @click="overlay = !overlay">
+            <v-icon small class="icons-item search">fa-magnifying-glass</v-icon>
+          </div>
+          <div @click="handleClickCart()" style="margin-right: 7px">
             <v-badge
               :content="cartNumber"
               :value="cartNumber"
@@ -177,8 +297,8 @@ export default {
         { title: "Socks For Kids" },
       ],
       drawer: false,
-      absolute: true,
-      overlay: true,
+      overlay: false,
+      responsive: false,
     };
   },
   methods: {
@@ -189,6 +309,9 @@ export default {
       // } else {
       //   document.documentElement.style.overflowY = "visible"; // firefox, chrome
       // }
+    },
+    onClickOutside() {
+      this.overlay = false;
     },
   },
   computed: {
@@ -204,15 +327,88 @@ export default {
         document.documentElement.style.overflowY = "visible"; // firefox, chrome
       }
     },
+    overlay(value) {
+      if (value === true) {
+        document.documentElement.style.overflow = "hidden"; // firefox, chrome
+      } else if (value === false) {
+        document.documentElement.style.overflowY = "visible"; // firefox, chrome
+      }
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.container::v-deep .v-overlay--absolute {
+  position: fixed !important;
+}
 .container {
+  .responsive-container {
+    .v-overlay {
+      &__content {
+        .links {
+          list-style-type: none;
+          text-align: center;
+          width: 100%;
+          font-size: 1.5em;
+
+          li {
+            padding: 1rem 0;
+            border-radius: 10px;
+            &:hover {
+              background-color: rgba(0, 0, 0, 0.1);
+            }
+          }
+
+          a {
+            text-decoration: none;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .v-overlay {
+    max-height: 100vh;
+    position: fixed !important;
+    &__content {
+      width: 100vw;
+
+      .exit {
+        float: right;
+        margin-left: 30px;
+        cursor: pointer;
+        &:hover {
+          color: #4db7b3;
+          transition: 0.3 ease;
+        }
+      }
+      .search-frame {
+        display: flex;
+        margin-top: 1vh;
+        .v-input {
+          width: 30vw;
+
+          input {
+            max-height: 45px;
+          }
+        }
+        .search {
+          margin: auto;
+          margin-left: 10px;
+          cursor: pointer;
+          transition: 0.3s ease;
+          &:hover {
+            color: rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+    }
+  }
   aside {
-    z-index: 99999999;
+    z-index: 9999999999999;
     display: flex;
     position: fixed;
     flex-direction: column;
@@ -385,20 +581,31 @@ export default {
   }
   .mainContainer {
     display: flex;
-    position: relative;
+    position: -webkit-sticky;
     width: 100vw;
     height: 72px;
-    &:before {
+    &:after {
       content: "";
       display: block;
       position: absolute;
       left: 0;
-      width: 100%;
+      width: 100vw;
       height: 72px;
       padding: 0;
       opacity: 0.15;
       background: url(https://plasocks.com/wp-content/uploads/2022/07/277602375_1042043753054162_4429385387159967082_n.jpg)
         repeat-x;
+      // background-color: white;
+    }
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      width: 100vw;
+      height: 72px;
+      padding: 0;
+      background-color: white;
     }
     .content {
       height: max-content;
@@ -409,6 +616,19 @@ export default {
       display: flex;
       justify-content: space-between;
       z-index: 99999;
+
+      .hamburger-menu {
+        margin: auto 1rem;
+        color: #4db7b3;
+        display: none;
+        &:hover {
+          cursor: pointer;
+        }
+        span {
+          margin-left: 4px;
+        }
+      }
+
       .logo {
         display: flex;
         img {
@@ -422,6 +642,7 @@ export default {
         margin-top: auto;
         margin-bottom: auto;
         list-style-type: none;
+
         li {
           display: flex;
           margin-right: 10px;
@@ -437,6 +658,17 @@ export default {
           &:hover {
             border-bottom: 3px solid #4db7b3;
             color: black;
+          }
+        }
+        // Chỗ này k được
+        v-menu {
+          v-list {
+            v-list-item {
+              cursor: pointer;
+              &:hover {
+                background-color: red;
+              }
+            }
           }
         }
       }
@@ -483,6 +715,56 @@ export default {
             color: white;
             background-color: black;
             border-color: black;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 850px) {
+  .container {
+    .topBar {
+      display: none;
+    }
+    .mainContainer {
+      .content {
+        .hamburger-menu {
+          display: flex;
+        }
+        .links {
+          display: none;
+        }
+        .icons {
+          padding-right: 15px;
+          grid-template-columns: repeat(1, 1fr);
+          .user,
+          .search {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 850px) {
+  .container {
+    .topBar {
+      display: none;
+    }
+    .mainContainer {
+      .content {
+        .hamburger-menu {
+          display: flex;
+        }
+        .links {
+          display: none;
+        }
+        .icons {
+          padding-right: 15px;
+          grid-template-columns: repeat(1, 1fr);
+          .user,
+          .search {
+            display: none;
           }
         }
       }
