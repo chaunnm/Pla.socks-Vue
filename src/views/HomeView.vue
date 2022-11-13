@@ -1,23 +1,19 @@
 <template>
-  <div id="home">
+  <div>
     <ProductItem />
+    <CommentRate />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import ProductItem from "@/components/ProductItem.vue";
+import CommentRate from "@/components/CommentRate.vue";
 
 export default {
   name: "HomeView",
   components: {
     ProductItem,
-  },
+    CommentRate,
+},
 };
 </script>
-
-<style scoped>
-#home {
-  margin: 0;
-}
-</style>
