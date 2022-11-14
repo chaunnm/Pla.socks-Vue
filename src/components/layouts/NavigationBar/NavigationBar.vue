@@ -1,86 +1,26 @@
 <template>
   <div class="container">
-    <div class="responsive-container">
-      <v-overlay
-        v-model="responsive"
-        absolute
-        opacity="0.8"
-        color="#4db7b3"
-        :value="responsive"
-        style="z-index: 999999; position: fixed"
-      >
-        <div
-          style="
-            width: 50vw;
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: auto;
-          "
-        >
-          <div @click="overlay = false">
-            <v-icon dense class="icons-item exit">fa-x</v-icon>
-          </div>
-
-          <div class="search-frame" v-click-outside="onClickOutside">
-            <v-text-field label="Search" style="font-size: 30px"></v-text-field>
-            <v-icon dense class="icons-item search">fa-magnifying-glass</v-icon>
-          </div>
-          <ul class="links">
-            <li><router-link to="/">PLA.SOCKS</router-link></li>
-            <li>
-              <router-link to="/product">
-                SHOP
-                <i class="fa-solid fa-angle-down"></i>
-              </router-link>
-            </li>
-            <v-list>
-              <v-list-item
-                style="cursor: pointer"
-                v-for="(item, index) in items"
-                :key="index"
-              >
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-            <li><router-link to="/product">CUSTOM</router-link></li>
-            <li><router-link to="/product">OUR STORY</router-link></li>
-            <li><router-link to="/product">REWARDS</router-link></li>
-            <li><router-link to="/product">BLOG</router-link></li>
-            <li><router-link to="/product">CONTACT US</router-link></li>
-          </ul>
-        </div>
-      </v-overlay>
-    </div>
-
     <v-overlay
       v-model="overlay"
       :opacity="0.8"
       :value="overlay"
       style="z-index: 999999; position: fixed"
     >
-      <div
-        style="
-          width: 50vw;
-          height: 50vh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        "
-      >
-        <div @click="overlay = false">
-          <v-icon dense class="icons-item exit">fa-x</v-icon>
+      <div class="search-container">
+        <div @click="overlay = false" class="exit">
+          <v-icon dense class="icons-item">fa-x</v-icon>
         </div>
 
         <div class="search-frame" v-click-outside="onClickOutside">
-          <v-text-field label="Search" style="font-size: 30px"></v-text-field>
+          <div class="col-3 input-effect">
+            <input class="effect-20" type="text" placeholder="" />
+            <label>Search</label>
+          </div>
           <v-icon dense class="icons-item search">fa-magnifying-glass</v-icon>
         </div>
       </div>
     </v-overlay>
+
     <v-navigation-drawer v-model="drawer" absolute right temporary clipped>
       <div class="exit" @click="handleClickCart()">
         <v-icon dense class="icons-item">fa-x</v-icon>
@@ -90,47 +30,24 @@
       <div style="max-width: 90%; margin: 0 auto">
         <v-list nav dense>
           <v-list-item-group active-class="deep-purple--text text--accent-4">
-            <v-list-item>
+            <v-list-item v-for="(item, index) in cartItems" :key="index">
               <div class="cart-item-container">
                 <div class="item-img">
-                  <img
-                    src="https://plasocks.com/wp-content/uploads/2022/07/z3571968145342_c19358b9f7f2ac23258d664362d28f77-600x600.jpg"
-                    alt=""
-                  />
+                  <img :src="item.image" :alt="item.variance" />
                 </div>
                 <div class="cart-item-content">
-                  <router-link to="/">Sunny Daisy</router-link>
+                  <router-link
+                    :to="`/product/${item.itemTitle}/${item.variance}`"
+                    >{{ item.itemTitle }}</router-link
+                  >
                   <div class="quanty-price">
-                    <p>1</p>
+                    <p>{{ item.quantity }}</p>
                     <p>x</p>
-                    <p><span>₫</span>49.000</p>
+                    <p>{{ formatOriginalPrice(item.price) }}</p>
                   </div>
-                  <p class="variance">Variance: 1</p>
+                  <p class="variance">Variance: {{ item.variance }}</p>
                 </div>
-                <div class="delete">
-                  <v-icon x-small class="icons-item">fa-x</v-icon>
-                </div>
-              </div>
-            </v-list-item>
-
-            <v-list-item>
-              <div class="cart-item-container">
-                <div class="item-img">
-                  <img
-                    src="https://plasocks.com/wp-content/uploads/2022/07/z3571968145342_c19358b9f7f2ac23258d664362d28f77-600x600.jpg"
-                    alt=""
-                  />
-                </div>
-                <div class="cart-item-content">
-                  <router-link to="/">Sunny Daisy</router-link>
-                  <div class="quanty-price">
-                    <p>1</p>
-                    <p>x</p>
-                    <p><span>₫</span>49.000</p>
-                  </div>
-                  <p class="variance">Variance: 1</p>
-                </div>
-                <div class="delete">
+                <div class="delete" @click="handleClickDelete(item.cartId)">
                   <v-icon x-small class="icons-item">fa-x</v-icon>
                 </div>
               </div>
@@ -139,7 +56,7 @@
         </v-list>
         <div class="subtotal">
           <p>SUBTOTAL:</p>
-          <p class="total-price">₫100,000</p>
+          <p class="total-price">{{ formatOriginalPrice(totalPrice) }}</p>
         </div>
         <v-btn
           color="#4db7b3"
@@ -168,19 +85,21 @@
       </div>
     </v-navigation-drawer>
 
-    <div class="topBar">
-      <div class="leftSection">
-        Made from recycled plastic bottles in Vietnam
-      </div>
-      <div class="rightSection">
-        <div class="time">
-          <i class="fa-regular fa-clock"></i>
-          <a>10:00 - 22:00</a>
+    <div class="topBar-container">
+      <div class="topBar">
+        <div class="leftSection">
+          Made from recycled plastic bottles in Vietnam
         </div>
-        <div class="divider"></div>
-        <div class="phone">
-          <i class="fa-solid fa-phone"></i>
-          <a href="tel:0388103967">0388.103.967</a>
+        <div class="rightSection">
+          <div class="time">
+            <i class="fa-regular fa-clock"></i>
+            <a>10:00 - 22:00</a>
+          </div>
+          <div class="divider"></div>
+          <div class="phone">
+            <i class="fa-solid fa-phone"></i>
+            <a href="tel:0388103967">0388.103.967</a>
+          </div>
         </div>
       </div>
     </div>
@@ -188,9 +107,13 @@
     <div class="mainContainer">
       <div class="content">
         <div class="hamburger-menu">
-          <v-dialog v-model="dialog" width="500">
+          <v-dialog
+            v-model="dialog"
+            style="height: none"
+            transition="dialog-top-transition"
+          >
             <template v-slot:activator="{ on, attrs }">
-              <div v-bind="attrs" v-on="on">
+              <div class="hello" v-bind="attrs" v-on="on">
                 <v-icon dense color="#4db7b3" class="icons-item hamburger"
                   >fa-bars</v-icon
                 >
@@ -199,31 +122,79 @@
             </template>
 
             <v-card>
-              <v-card-title class="text-h5 grey lighten-2">
-                Privacy Policy
-              </v-card-title>
+              <v-card-text
+                style="
+                  height: 100;
+                  display: flex;
+                  background-color: transparent;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  margin: auto;
+                "
+              >
+                <div
+                  class="responsive-container"
+                  v-click-outside="onClickOutside"
+                >
+                  <div @click="dialog = false" class="exit-container">
+                    <v-icon dense class="icons-item exit">fa-x</v-icon>
+                  </div>
 
-              <v-card-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est
-                laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad
+                  <div class="search-frame">
+                    <div class="col-3 input-effect">
+                      <input class="effect-20" type="text" placeholder="" />
+                      <label>Search</label>
+                    </div>
+                    <v-icon dense color="white" class="icons-item search"
+                      >fa-magnifying-glass</v-icon
+                    >
+                  </div>
+                  <ul class="links">
+                    <div @click="dialog = false">
+                      <router-link to="/"><li>PLA.SOCKS</li></router-link>
+                    </div>
+                    <li @click="dropdown = !dropdown">
+                      <router-link to="/product">
+                        SHOP
+                        <i class="fa-solid fa-angle-down"></i>
+                      </router-link>
+                    </li>
+                    <v-list v-show="dropdown">
+                      <v-list-item
+                        style="cursor: pointer"
+                        v-for="(item, index) in items"
+                        :key="index"
+                      >
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                    <div @click="dialog = false">
+                      <router-link to="/about"><li>CUSTOM</li></router-link>
+                    </div>
+                    <div @click="dialog = false">
+                      <router-link to="/product" @click="dialog = false"
+                        ><li>OUR STORY</li></router-link
+                      >
+                    </div>
+                    <div @click="dialog = false">
+                      <router-link to="/about" @click="dialog = false"
+                        ><li>REWARDS</li></router-link
+                      >
+                    </div>
+                    <div @click="dialog = false">
+                      <router-link to="/product" @click="dialog = false"
+                        ><li>BLOG</li></router-link
+                      >
+                    </div>
+                    <div @click="dialog = false">
+                      <router-link to="/about" @click="dialog = false"
+                        ><li>CONTACT US</li></router-link
+                      >
+                    </div>
+                  </ul>
+                </div>
               </v-card-text>
-
-              <v-divider></v-divider>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="dialog = false">
-                  I accept
-                </v-btn>
-              </v-card-actions>
             </v-card>
           </v-dialog>
         </div>
@@ -254,11 +225,13 @@
               </v-list-item>
             </v-list>
           </v-menu>
-          <li><router-link to="/product">CUSTOM</router-link></li>
+          <li>
+            <router-link to="/about">CUSTOM</router-link>
+          </li>
           <li><router-link to="/product">OUR STORY</router-link></li>
-          <li><router-link to="/product">REWARDS</router-link></li>
+          <li><router-link to="/about">REWARDS</router-link></li>
           <li><router-link to="/product">BLOG</router-link></li>
-          <li><router-link to="/product">CONTACT US</router-link></li>
+          <li><router-link to="/about">CONTACT US</router-link></li>
           <li><router-link to="/product">CONTACT US</router-link></li>
         </ul>
         <div class="icons">
@@ -269,8 +242,8 @@
           </div>
           <div @click="handleClickCart()" style="margin-right: 7px">
             <v-badge
-              :content="cartNumber"
-              :value="cartNumber"
+              :content="quantity"
+              :value="quantity"
               color="#f299c2"
               overlap
             >
@@ -284,6 +257,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   title: "Pla.Socks",
   name: "NavigationBar",
@@ -299,6 +274,8 @@ export default {
       drawer: false,
       overlay: false,
       responsive: false,
+      dropdown: false,
+      dialog: false,
     };
   },
   methods: {
@@ -312,12 +289,40 @@ export default {
     },
     onClickOutside() {
       this.overlay = false;
+      // this.dialog = false;
+    },
+    onClickClose() {
+      this.dialog = false;
+    },
+    formatOriginalPrice(value) {
+      let number = value;
+      return new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "VND",
+      }).format(number);
+    },
+    handleClickDelete(id) {
+      this.$store.commit("DELETE_CART_ITEM", id);
+      this.$toast.open({
+        message: "🙈 Delete item from cart successfully! 🙉",
+        type: "success",
+        duration: 2000,
+        dismissible: true,
+        position: "bottom",
+      });
     },
   },
   computed: {
-    cartNumber() {
-      return this.$store.getters.CART;
-    },
+    // ...mapState(["cartNumber"]),
+    // cartNumber() {
+    //   return this.$store.getters.CART;
+    // },
+    ...mapGetters({
+      quantity: "GET_CART_QUANTITY",
+      cartItems: "GET_CART_ITEMS",
+      totalPrice: "GET_CART_PRICE",
+    }),
+    ...mapMutations(["ADD_CART_ITEM", "DELETE_CART_ITEM"]),
   },
   watch: {
     drawer(value) {
@@ -340,68 +345,235 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.container::v-deep .v-overlay--absolute {
-  position: fixed !important;
+:global(.v-toast) {
+  z-index: 99999999 !important;
 }
-.container {
-  .responsive-container {
-    .v-overlay {
-      &__content {
-        .links {
-          list-style-type: none;
-          text-align: center;
-          width: 100%;
-          font-size: 1.5em;
+.responsive-container {
+  margin-top: 20px;
+  margin-right: 15px;
+  width: 100vw;
+  color: white;
 
-          li {
-            padding: 1rem 0;
-            border-radius: 10px;
-            &:hover {
-              background-color: rgba(0, 0, 0, 0.1);
-            }
-          }
-
-          a {
-            text-decoration: none;
-            color: white;
-          }
-        }
+  .exit-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    width: 100%;
+    .exit {
+      top: 0;
+      color: white;
+      padding: 15px;
+      cursor: pointer;
+      &:hover {
+        color: #4db7b3;
+        transition: 0.3 ease;
       }
     }
   }
+  .search-frame {
+    color: white;
+    display: flex;
+    max-width: 50vw;
+    margin: auto;
+    svg {
+      margin: auto;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      &:hover {
+        color: rgba(0, 0, 0, 0.915);
+      }
+    }
+    .col-3 {
+      float: left;
+      width: 50vw;
+      margin: 40px 3%;
+      position: relative;
+    }
+    /* necessary to give position: relative to parent. */
+    input[type="text"] {
+      font-size: 22px;
+      color: white;
+      border-radius: 20px;
+      background-color: #a0eae8bc;
+      width: 100%;
+      padding: 5px;
+      padding-left: 15px;
+      box-sizing: border-box;
+      letter-spacing: 1px;
+      z-index: 1;
+      outline: 2px solid transparent;
+    }
 
+    :focus {
+      outline: 2px solid #ffffff !important;
+      transition: 0.3s ease-out;
+    }
+    .effect-20 ~ label {
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      color: white;
+      transition: 0.3s;
+      z-index: 0;
+      letter-spacing: 0.5px;
+    }
+    .effect-20:focus ~ label,
+    .has-content.effect-20 ~ label {
+      top: -25px;
+      left: 0;
+      font-size: 12px;
+      color: white;
+      transition: 0.3s;
+    }
+  }
+  .links {
+    max-width: 50vw;
+    list-style-type: none;
+    text-align: center;
+    font-size: 1.5em;
+    padding: 0 !important;
+    margin: auto;
+
+    ::v-deep .v-list {
+      color: rgba(255, 255, 255, 0.797);
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    li {
+      padding: 2rem 0;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.064);
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+.container::v-deep .v-overlay--absolute {
+  position: fixed !important;
+}
+.v-dialog__content::v-deep .v-dialog {
+  max-height: 100vh !important;
+  overflow-y: scroll;
+  height: 100vh;
+  margin: 0 !important;
+  background-color: #4db7b47c;
+}
+
+.v-dialog__content::v-deep .v-card {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+.v-dialog__content::v-deep .v-dialog {
+  position: absolute !important;
+  top: 0 !important;
+}
+
+.v-list::v-deep .v-list-item {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+.container {
   .v-overlay {
     max-height: 100vh;
+    align-items: normal !important;
     position: fixed !important;
     &__content {
       width: 100vw;
-
-      .exit {
-        float: right;
-        margin-left: 30px;
-        cursor: pointer;
-        &:hover {
-          color: #4db7b3;
-          transition: 0.3 ease;
-        }
-      }
-      .search-frame {
+      .search-container {
+        width: 100vw;
+        height: 55vh;
         display: flex;
-        margin-top: 1vh;
-        .v-input {
-          width: 30vw;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
 
-          input {
-            max-height: 45px;
+        .col-3 {
+          float: left;
+          width: 50vw;
+          margin: 40px 3%;
+          position: relative;
+          label {
+            color: white;
           }
         }
-        .search {
-          margin: auto;
-          margin-left: 10px;
+        /* necessary to give position: relative to parent. */
+        input[type="text"] {
+          font-size: 22px;
+          color: white;
+          border-radius: 20px;
+          background-color: #4db7b483;
+          width: 100%;
+          padding: 5px;
+          padding-left: 15px;
+          box-sizing: border-box;
+          letter-spacing: 1px;
+          z-index: 1;
+          outline: 2px solid transparent;
+        }
+
+        :focus {
+          outline: 2px solid #4db7b3 !important;
+          transition: 0.3s ease-out;
+        }
+        .effect-20 ~ label {
+          position: absolute;
+          left: 14px;
+          top: 10px;
+          color: rgba(255, 255, 255, 0.4);
+          transition: 0.3s;
+          z-index: 0;
+          letter-spacing: 0.5px;
+        }
+        .effect-20:focus ~ label,
+        .has-content.effect-20 ~ label {
+          top: -18px;
+          left: 0;
+          font-size: 12px;
+          color: white;
+          transition: 0.3s;
+        }
+
+        .exit {
+          display: flex;
+          width: 100%;
+          top: 0;
+          justify-content: flex-end;
           cursor: pointer;
-          transition: 0.3s ease;
+          svg {
+            padding: 30px;
+          }
           &:hover {
-            color: rgba(0, 0, 0, 0.2);
+            color: #4db7b3;
+            transition: 0.3 ease;
+          }
+        }
+        .search-frame {
+          display: flex;
+          margin-top: 1vh;
+          max-width: 50vw;
+          margin-left: auto;
+          margin-right: auto;
+          .v-input {
+            width: 30vw;
+
+            input {
+              max-height: 45px;
+            }
+          }
+          .search {
+            margin: auto;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            &:hover {
+              color: rgba(0, 0, 0, 0.2);
+            }
           }
         }
       }
@@ -485,6 +657,7 @@ export default {
 
         p {
           margin: 0;
+          margin-right: 5px;
         }
         .variance {
           font-size: smaller;
@@ -512,6 +685,11 @@ export default {
       border-top: 2px solid #9a9a9a28;
       border-bottom: 2px solid #9a9a9a28;
       margin-bottom: 0.5rem;
+      p {
+        &:nth-child(2) {
+          font-weight: 700;
+        }
+      }
       * {
         margin: 0 5px;
       }
@@ -521,67 +699,70 @@ export default {
       box-shadow: none;
     }
   }
-  .topBar {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1080px;
-    height: 30px;
-    margin: 0 auto;
+  .topBar-container {
     background-color: white;
-    font-size: 12px;
-    z-index: 0;
-    .leftSection {
-      line-height: 30px;
-    }
-    .rightSection {
+    .topBar {
       display: flex;
-      svg {
-        margin: auto 5px;
-        font-size: 13px;
-      }
-      .time {
-        display: flex;
+      justify-content: space-between;
+      max-width: 1080px;
+      height: 30px;
+      margin: 0 auto;
+      background-color: white;
+      font-size: 12px;
+      z-index: 0;
+      .leftSection {
         line-height: 30px;
-        a {
-          color: #7d7d7d;
-          cursor: default;
+      }
+      .rightSection {
+        display: flex;
+        svg {
+          margin: auto 5px;
+          font-size: 13px;
         }
-        &:hover {
-          svg,
+        .time {
+          display: flex;
+          line-height: 30px;
           a {
-            color: black;
-            transition: 0.3s ease;
+            color: #7d7d7d;
+            cursor: default;
+          }
+          &:hover {
+            svg,
+            a {
+              color: black;
+              transition: 0.3s ease;
+            }
           }
         }
-      }
 
-      .divider {
-        height: 15px;
-        border-right: 1px solid rgba(0, 0, 0, 0.1);
-        margin: auto 10px;
-      }
-      .phone {
-        line-height: 30px;
-        svg {
-          margin-left: 0;
+        .divider {
+          height: 15px;
+          border-right: 1px solid rgba(0, 0, 0, 0.1);
+          margin: auto 10px;
         }
-        a {
-          text-decoration: none;
-          color: #7d7d7d;
-        }
-        &:hover {
-          svg,
+        .phone {
+          line-height: 30px;
+          svg {
+            margin-left: 0;
+          }
           a {
-            color: black;
-            transition: 0.3s ease;
+            text-decoration: none;
+            color: #7d7d7d;
+          }
+          &:hover {
+            svg,
+            a {
+              color: black;
+              transition: 0.3s ease;
+            }
           }
         }
       }
     }
   }
+
   .mainContainer {
     display: flex;
-    position: -webkit-sticky;
     width: 100vw;
     height: 72px;
     &:after {
@@ -627,6 +808,40 @@ export default {
         span {
           margin-left: 4px;
         }
+
+        .v-dialog__content {
+          ::v-deep .v-dialog {
+            max-height: 100vh !important;
+            margin: 0 !important;
+            background-color: #4db7b47c !important;
+          }
+        }
+        .responsive-container {
+          color: white;
+          .links {
+            list-style-type: none;
+            text-align: center;
+            width: 100%;
+            font-size: 1.5em;
+
+            ::v-deep .v-list {
+              background-color: rgba(0, 0, 0, 0.1);
+            }
+
+            li {
+              padding: 1rem 0;
+              border-radius: 10px;
+              &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+              }
+            }
+
+            a {
+              text-decoration: none;
+              color: white;
+            }
+          }
+        }
       }
 
       .logo {
@@ -658,17 +873,6 @@ export default {
           &:hover {
             border-bottom: 3px solid #4db7b3;
             color: black;
-          }
-        }
-        // Chỗ này k được
-        v-menu {
-          v-list {
-            v-list-item {
-              cursor: pointer;
-              &:hover {
-                background-color: red;
-              }
-            }
           }
         }
       }

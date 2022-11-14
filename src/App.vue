@@ -21,6 +21,10 @@ export default {
 </script>
 
 <style scoped>
+.v-toast {
+  z-index: 99999999999 !important;
+}
+
 #app {
   font-family: "Montserrat", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
