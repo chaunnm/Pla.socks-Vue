@@ -155,7 +155,7 @@
                       <router-link to="/"><li>PLA.SOCKS</li></router-link>
                     </div>
                     <li @click="dropdown = !dropdown">
-                      <router-link to="/product">
+                      <router-link to="/shop">
                         SHOP
                         <i class="fa-solid fa-angle-down"></i>
                       </router-link>
@@ -173,7 +173,7 @@
                       <router-link to="/about"><li>CUSTOM</li></router-link>
                     </div>
                     <div @click="dialog = false">
-                      <router-link to="/product" @click="dialog = false"
+                      <router-link to="/our-story" @click="dialog = false"
                         ><li>OUR STORY</li></router-link
                       >
                     </div>
@@ -205,11 +205,20 @@
           />
         </div>
         <ul class="links">
-          <li><router-link to="/">PLA.SOCKS</router-link></li>
+          <li>
+            <router-link
+              to="/"
+              :class="selectedLink === '' ? 'Active' : 'inActive'"
+              >PLA.SOCKS</router-link
+            >
+          </li>
           <v-menu offset-y bottom transition="slide-y-transition" open-on-hover>
             <template v-slot:activator="{ on, attrs }">
               <li v-bind="attrs" v-on="on">
-                <router-link to="/product">
+                <router-link
+                  to="/shop"
+                  :class="selectedLink === 'shop' ? 'Active' : 'inActive'"
+                >
                   SHOP
                   <i class="fa-solid fa-angle-down"></i>
                 </router-link>
@@ -226,13 +235,40 @@
             </v-list>
           </v-menu>
           <li>
-            <router-link to="/about">CUSTOM</router-link>
+            <router-link
+              to="/custom"
+              :class="selectedLink === 'custom' ? 'Active' : 'inActive'"
+              >CUSTOM</router-link
+            >
           </li>
-          <li><router-link to="/product">OUR STORY</router-link></li>
-          <li><router-link to="/about">REWARDS</router-link></li>
-          <li><router-link to="/product">BLOG</router-link></li>
-          <li><router-link to="/about">CONTACT US</router-link></li>
-          <li><router-link to="/product">CONTACT US</router-link></li>
+          <li>
+            <router-link
+              to="/our-story"
+              :class="selectedLink === 'our-story' ? 'Active' : 'inActive'"
+              >OUR STORY</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              to="/rewards"
+              :class="selectedLink === 'rewards' ? 'Active' : 'inActive'"
+              >REWARDS</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              to="/product"
+              :class="selectedLink === 'product' ? 'Active' : 'inActive'"
+              >BLOG</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              to="/contact-us"
+              :class="selectedLink === 'contact-us' ? 'Active' : 'inActive'"
+              >CONTACT US</router-link
+            >
+          </li>
         </ul>
         <div class="icons">
           <v-icon small class="icons-item user">fa-user-tie</v-icon>
@@ -276,6 +312,7 @@ export default {
       responsive: false,
       dropdown: false,
       dialog: false,
+      selectedLink: "",
     };
   },
   methods: {
@@ -296,6 +333,7 @@ export default {
     },
     formatOriginalPrice(value) {
       let number = value;
+      console.log(this.$router.currentRoute._value);
       return new Intl.NumberFormat("de-DE", {
         style: "currency",
         currency: "VND",
@@ -323,6 +361,10 @@ export default {
       totalPrice: "GET_CART_PRICE",
     }),
     ...mapMutations(["ADD_CART_ITEM", "DELETE_CART_ITEM"]),
+    getSelectedLink() {
+      console.log(this.$route.query.page);
+      return this.$route.query.page;
+    },
   },
   watch: {
     drawer(value) {
@@ -337,6 +379,16 @@ export default {
         document.documentElement.style.overflow = "hidden"; // firefox, chrome
       } else if (value === false) {
         document.documentElement.style.overflowY = "visible"; // firefox, chrome
+      }
+    },
+    $route(to) {
+      // this.selectedLink = "";
+      let a = to.path;
+      let temp = a.indexOf("/", 1);
+      if (temp > -1) {
+        this.selectedLink = a.slice(1, temp);
+      } else {
+        this.selectedLink = a.substring(1);
       }
     },
   },
@@ -866,13 +918,22 @@ export default {
           margin: auto;
           padding: 10px 0;
           transition: 0.3s ease;
+          text-decoration: none;
           border-bottom: 3px solid transparent;
           border-top: 3px solid transparent;
-          text-decoration: none;
           color: #7d7d7d;
           &:hover {
             border-bottom: 3px solid #4db7b3;
             color: black;
+          }
+          &.Active {
+            border-bottom: 3px solid #4db7b3;
+            color: black;
+          }
+          &.inActive {
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid transparent;
+            color: #7d7d7d;
           }
         }
       }
