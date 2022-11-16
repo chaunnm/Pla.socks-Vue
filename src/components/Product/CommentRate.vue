@@ -19,7 +19,7 @@
                         </div>
                     
                         <div class="comment-raw-content">
-                            <v-rating :value="comment.rating"  background-color="pink lighten-3" color="#f299c2"></v-rating>
+                            <v-rating :value="comment.rating" readonly  background-color="pink lighten-3" color="#f299c2"></v-rating>
                             <div class="info-comment">
                                 <strong>{{comment.name}}</strong> -
                                 <span>{{comment.time}}</span>
@@ -110,24 +110,36 @@ export default {
   methods:{
       submit() {
           this.$v.$touch()
-          if (this.rating && this.review && this.name && this.email) {
-              var today = new Date();
-              var tg = today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear() + "  " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-              console.log("Today: ", tg)
-              this.listReview.push({
-                  rating: this.rating,
-                  review: this.review,
-                  name: this.name,
-                  email: this.email,
-                  time: tg,
-              })
-              console.log(this.listReview)
-              this.haveReview = true
-              this.$v.$reset()
-              this.name = ''
-              this.email = ''
-              this.review = ""
-              this.rating = 0
+          if (!this.$v.$invalid ) {
+              if ( this.rating == 0){
+                  this.$toast.open({
+                      message: "Bạn chưa đáng giá sản phẳm !!",
+                      type: "warning",
+                      duration: 2000,
+                      dismissible: true,
+                      position: "bottom",
+                  });
+
+              }else{
+                  var today = new Date();
+                  var tg = today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear() + "  " + today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                  console.log("Today: ", tg)
+                  this.listReview.push({
+                      rating: this.rating,
+                      review: this.review,
+                      name: this.name,
+                      email: this.email,
+                      time: tg,
+                  })
+                  console.log(this.listReview)
+                  this.haveReview = true
+                  this.$v.$reset()
+                  this.name = ''
+                  this.email = ''
+                  this.review = ""
+                  this.rating = 0
+              }
+              
           }
           
           
@@ -395,6 +407,9 @@ export default {
 .v-text-field{
     padding: 0 !important;
     margin: 0 !important;
+}
+.form::v-deep .v-text-field__details{
+    padding: 0;
 }
 
 .v-text-field.v-text-field--enclosed .v-text-field__details {

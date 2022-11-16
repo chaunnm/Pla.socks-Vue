@@ -7,7 +7,7 @@
 
 <script>
 // @ is an alias to /src
-import CommentRate from "@/components/CommentRate.vue";
+
 import ProductItem from "@/components/Product/ProductItem.vue";
 import CommentRate from "@/components/Product/CommentRate.vue";
 

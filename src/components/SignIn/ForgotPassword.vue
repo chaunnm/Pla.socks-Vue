@@ -1,0 +1,253 @@
+<template>
+    <div class="forgot">
+        <div class="form glow-on-hover">
+            <h1>Forgot Password</h1>
+            <form>
+                
+                <v-text-field v-model="email" prepend-icon="fa-solid fa-envelope" :rules="[rules.required, rules.email]" label="E-mail"></v-text-field>
+                
+                <div class="raw">
+                    <span>Lost your password? Please enter exacly your email address.
+                    You will receive a link to create a new password via email.</span>
+        
+                </div>
+                <!-- <div class="btn-submit" @click="submit">
+                                SUBMIT
+                            </div> -->
+                <div class="text-box" @click="submit">
+                    <span class="btn btn-white btn-animated">SUBMIT</span>
+                    <!-- <a href="#" class="btn btn-white btn-animated">SUBMIT</a> -->
+                </div>
+            </form>
+        </div>
+        
+      
+    </div>
+</template>
+
+<script>
+import { validationMixin } from 'vuelidate'
+
+export default {
+    name: "ForgotPassword",
+    mixins: [validationMixin],
+
+    data: () => ({
+        email: '',
+
+        rules: {
+            required: value => !!value || 'Required.',
+            email: value => {
+                const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                return pattern.test(value) || 'Invalid e-mail.'
+            },
+
+
+        },
+    }),
+
+
+    methods: {
+        submit(e) {
+            e.preventDefault();
+            this.$v.$touch()
+        },
+        clear() {
+            this.$v.$reset()
+            this.name = ''
+            this.password = ""
+        },
+    },
+}
+
+</script>
+
+<style lang="scss" scoped>
+.forgot {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/bg-signIn.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    animation: moveInBottom 2s ease-out;
+    animation-fill-mode: backwards;
+
+    h1 {
+        font-size: 25px;
+        font-weight: 900;
+        color: #4DB7B3;
+        text-align: center;
+    }
+
+    .form {
+        border-radius: 10px;
+        width: 40%;
+        padding: 15px;
+        background-color: #FFFFFF;
+        box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 22%);
+
+        .raw {
+            margin: 20px 0;
+            text-align: center;
+            color: #9c9c9c;
+            font-size: 13px;
+        }
+
+        .btn-submit {
+            background-color: #4DB7B3;
+            border: 1px solid #FFFFFF;
+            padding: 5px 15px;
+            margin: 0 auto;
+            width: fit-content;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+    }
+    .text-box {
+        width: fit-content;
+    margin: 0 auto;
+    position: relative;
+    .btn:link,
+    .btn {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 5px 15px;
+        display: inline-block;
+        border-radius: 5px;
+        border: 1px solid #FFFFFF;
+        transition: all .2s;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    // .btn:active {
+    //     transform: translateY(-1px);
+    //     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    // }
+
+    .btn-white {
+        width: fit-content;
+        background-color: #4DB7B3;
+        color: #FFFFFF;
+        font-weight: bold;
+    }
+
+    .btn::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #FFFFFF;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s;
+    }
+
+    .btn-white::after {
+        background-color: #4DB7B3;
+    }
+
+    .btn:hover::after {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+    }
+
+    .btn-animated {
+        animation: moveInBottom 2s ease-out;
+        animation-fill-mode: backwards;
+    }
+}
+
+
+.glow-on-hover {
+
+    border: none;
+    outline: none;
+    // color: #fff;
+    // background: #111;
+    // cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(10px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: #FFFFFF;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+    
+    
+        }
+    
+        @keyframes moveInBottom {
+            0% {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+    
+            100% {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+</style>
