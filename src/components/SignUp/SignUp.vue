@@ -7,11 +7,6 @@
                     @input="$v.name.$touch()" @blur="$v.name.$touch()"></v-text-field>
                 <v-text-field v-model="email" prepend-icon="fa-solid fa-envelope" :error-messages="emailErrors"  label="E-mail" @input="$v.email.$touch()" @blur="$v.email.$touch()">
                 </v-text-field>
-                <!-- <v-text-field v-model="email" prepend-icon="fa-solid fa-envelope" :rules="[rules.required, rules.email]" label="E-mail"></v-text-field> -->
-                <!-- <v-text-field prepend-icon="fa-solid fa-key" v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1"
-                    label="Your password" hint="At least 8 characters" counter @click:append="show1 = !show1">
-                </v-text-field> -->
                 <v-text-field prepend-icon="fa-solid fa-key" v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                      :type="show1 ? 'text' : 'password'" name="input-10-1" label="Your password" :error-messages="passwordErrors" @input="$v.password.$touch()" @blur="$v.password.$touch()"
                     hint="At least 8 characters" counter @click:append="show1 = !show1">
@@ -21,12 +16,8 @@
                     @click:append="show2 = !show2">
                 </v-text-field>
                 <div class="raw">
-                    <router-link to="/signIn">Do you already have an account ?</router-link>
-                   
+                    <router-link to="/sign-in">Do you already have an account ?</router-link>    
                 </div>
-                <!-- <div class="btn-submit" @click="submit">
-                        SUBMIT
-                    </div> -->
                 <div class="text-box" @click="submit">
                     <span class="btn btn-white btn-animated">SUBMIT</span>
                 </div>
@@ -140,7 +131,7 @@ export default {
                 this.clear();
                 
                 setTimeout(() => {
-                    this.$router.push("/signIn")
+                    this.$router.push("/sign-in")
                 }, 2000);
                 
 

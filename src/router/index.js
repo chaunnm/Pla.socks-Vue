@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import ProductView from "../views/ProductView.vue";
 import SignInView from "../views/SignInView.vue";
 import SignUpView from "../views/SignUpView.vue";
 import ForgotPasswordView from "../views/ForgotPasswordView.vue";
@@ -19,6 +18,12 @@ const routes = [
       import("../views/ProductView.vue"),
   },
   {
+    path: "/shop",
+    name: "shop",
+    component: () =>
+      import("../views/ShopView.vue"),
+  },
+  {
     path: "/",
     name: "home",
     component: HomeView,
@@ -34,28 +39,28 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/OurStoryView.vue"),
   },
   {
-    path: "/signIn",
+    path: "/sign-in",
     name: "signIn",
     component: SignInView,
   },
   {
-    path: "/signUp",
+    path: "/sign-up",
     name: "signUp",
     component: SignUpView,
   },
   {
-    path: "/forgotPassword",
+    path: "/forgot-password",
     name: "forgotPassword",
     component: ForgotPasswordView,
   },
   {
-    path: "/changePassword",
+    path: "/change-password",
     name: "changePassword",
     component: changePasswordView,
   },
   {
-    path: "/contactUs",
-    name: "contactUs",
+    path: "/contact-us",
+    name: "contact-us",
     component: ContactUsView,
   },
 ];
@@ -69,6 +74,6 @@ const router = new VueRouter({
   }
 });
 
-router.replace({ path: '*', redirect: '/' })
+// router.replace({ path: '*', redirect: '/' })
 
 export default router;

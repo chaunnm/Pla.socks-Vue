@@ -395,7 +395,5 @@ export default new Vuex.Store({
     }
   },
   actions: {},
-  modules: {},
+  modules: {auth},
 });
-
-export default store;

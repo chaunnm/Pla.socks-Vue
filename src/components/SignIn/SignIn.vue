@@ -14,8 +14,8 @@
                     @click:append="show1 = !show1">
                 </v-text-field>
                     <div class="raw">
-                    <router-link to="/signUp" >Don’t have an account?</router-link>
-                    <router-link to="/forgotPassword">Forgot password?</router-link>
+                    <router-link to="/sign-up" >Don’t have an account?</router-link>
+                    <router-link to="/forgot-password">Forgot password?</router-link>
 
                 </div>
                 <!-- <div class="btn-submit" @click="submit">
