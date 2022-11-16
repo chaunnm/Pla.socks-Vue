@@ -1,0 +1,18 @@
+<template>
+    <div>
+        <ContactUs/>
+    </div>
+</template>
+
+<script>
+import ContactUs from '@/components/contact/ContactUs.vue';
+
+export default {
+    name: "ContactUsView",
+    components: { ContactUs }
+}
+</script>
+
+<style lang="scss" scoped>
+
+</style>
