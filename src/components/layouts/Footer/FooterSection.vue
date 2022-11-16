@@ -7,7 +7,7 @@
         <div class="line-big"></div>
   
         <div class="items">
-          <a href="#" class="social">
+          <a href="https://www.youtube.com/channel/UC7C-RBP3i_jmLl_vUfU59kQ" class="social">
             <div class="icon">
               <svg width="30" height="30" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true" focusable="false">
@@ -19,7 +19,7 @@
             <span>YouTube</span>
           </a>
     
-          <a href="#" class="social">
+          <a href="https://www.facebook.com/profile.php?id=100086238443312" class="social">
             <div class="icon">
               <svg width="30" height="30" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true" focusable="false">
@@ -31,7 +31,7 @@
             <span>Facebook</span>
           </a>
     
-          <a href="#" class="social">
+          <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fpla.sockss%3Ffbclid%3DIwAR2Kw0NFvOgNjYTvtIe2uuMhnxUoQAdkQxaOM6a0c4scGRXD5bzX47qzfbQ&h=AT3eWeUSKWVNpWGuYFMn6W38OI0d7ReceQdG8Csu6gHGCU216yGK_Y1bsZiRflBsY62tvBUlQ9uqEWimtGygHBu4PaLQpEoYujkAIWqBYjJZp80wdFtgLnhT83SjtiPF7DpB" class="social">
             <div class="icon">
               <svg width="30" height="30" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true" focusable="false">

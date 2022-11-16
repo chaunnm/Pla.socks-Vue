@@ -98,7 +98,7 @@
           <div class="divider"></div>
           <div class="phone">
             <i class="fa-solid fa-phone"></i>
-            <a href="tel:0388103967">0388.103.967</a>
+            <a href="tel:0834577251">0834577251</a>
           </div>
         </div>
       </div>
