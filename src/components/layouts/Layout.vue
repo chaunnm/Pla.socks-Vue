@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavigationBar style="position: sticky; top: 0; z-index: 99999999" />
+    <NavigationBar style="position: sticky; top: 0; z-index: 99999" />
     <main class="main-slot" style="z-index: -1">
       <slot></slot>
     </main>
