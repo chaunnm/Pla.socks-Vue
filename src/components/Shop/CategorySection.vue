@@ -4,14 +4,14 @@
     <hr />
     <div class="categoryList-container">
       <ul class="level-1">
-        <li>
+        <li @click="selectedCategory = 'Boxes Of Love'">
           <img
             src="https://drive.google.com/uc?id=10Xz6m5wn_sT6NKTrNetyW_ckcuDeK2SK"
             alt=""
           />
           <p>Boxes Of Love (1)</p>
         </li>
-        <li>
+        <li @click="selectedCategory = 'Customized Socks'">
           <img
             src="https://drive.google.com/uc?id=1q_cr9tB0MYyNacHq16_DvkQQcIIg-nkn"
             alt=""
@@ -41,7 +41,7 @@
             <p>Standard & Athlete Socks (5)</p>
           </li>
         </ul>
-        <li>
+        <li @click="selectedCategory = 'Socks For Kids'">
           <img
             src="https://drive.google.com/uc?id=18emIX5Asf8BTTyAaYWEBD2s2bRTkjLQm"
             alt=""
@@ -64,21 +64,21 @@
             <p>Knee-High Socks (8)</p>
           </li>
         </ul>
-        <li>
+        <li @click="selectedCategory = 'Socks For Men'">
           <img
             src="https://drive.google.com/uc?id=1Ni0lGCZ-tbYy_B10xSy82KC66Lm6qObj"
             alt=""
           />
           <p>Socks For Men (9)</p>
         </li>
-        <li>
+        <li @click="selectedCategory = 'Socks For Women'">
           <img
             src="https://drive.google.com/uc?id=1SZK0QWvp7NY_VdyA5Z3hfK70a2RYvt8C"
             alt=""
           />
           <p>Socks For Women (10)</p>
         </li>
-        <li>
+        <li @click="selectedCategory = 'Socks For Summer'">
           <img
             src="https://drive.google.com/uc?id=1W184eml-Lj6FyonVwC6nIfxPrHdvKanb"
             alt=""
@@ -94,16 +94,21 @@
 export default {
   name: "CategorySection",
   data: () => ({
-    filters: [
-      { title: "Sort by popularity" },
-      { title: "Sort by average rating" },
-      { title: "Sort by lastest" },
-      { title: "Sort by price: low to high" },
-      { title: "Sort by price: high to low" },
-    ],
+    selectedCategory: "",
   }),
 
-  watch: {},
+  watch: {
+    selectedCategory(value) {
+      this.$emit("changeCategory", value);
+      // this.$root.$emit("changeCategory", value);
+      // console.log(value);
+    },
+  },
+  methods: {
+    // updateTitle() {
+    //   this.$emit("changeTitle", this.selectedCategory);
+    // },
+  },
 };
 </script>
 

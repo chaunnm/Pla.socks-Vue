@@ -45,15 +45,27 @@
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <div class="filter-btn" v-bind="attrs" v-on="on">
-              <div class="text">Sort by price: low to high</div>
+              <div class="text">{{ filter }}</div>
               <v-icon x-small color="white" class="icon">
                 fa-chevron-down
               </v-icon>
             </div>
           </template>
           <v-list>
-            <v-list-item v-for="(item, index) in filters" :key="index">
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item @click="selectedFilter = 1">
+              <v-list-item-title>Sort by popularity</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="selectedFilter = 2">
+              <v-list-item-title>Sort by average rating</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="selectedFilter = 3">
+              <v-list-item-title>Sort by lastest</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="selectedFilter = 4">
+              <v-list-item-title>Sort by price: low to high</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="selectedFilter = 5">
+              <v-list-item-title>Sort by price: high to low</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -66,17 +78,33 @@
 export default {
   name: "FilterComponent",
   data: () => ({
-    filters: [
-      { title: "Sort by popularity" },
-      { title: "Sort by average rating" },
-      { title: "Sort by lastest" },
-      { title: "Sort by price: low to high" },
-      { title: "Sort by price: high to low" },
-    ],
+    selectedFilter: 4,
+    filter: "Sort by price: low to high",
     drawer: false,
   }),
-
-  watch: {},
+  methods: {},
+  watch: {
+    selectedFilter(value) {
+      this.$emit("changeFilter", value);
+      switch (value) {
+        case 1:
+          this.filter = "Sort by popularity";
+          break;
+        case 2:
+          this.filter = "Sort by average rating";
+          break;
+        case 3:
+          this.filter = "Sort by lastest";
+          break;
+        case 4:
+          this.filter = "Sort by price: low to high";
+          break;
+        case 5:
+          this.filter = "Sort by price: high to low";
+          break;
+      }
+    },
+  },
 };
 </script>
 

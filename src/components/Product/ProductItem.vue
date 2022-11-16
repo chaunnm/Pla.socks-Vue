@@ -115,6 +115,7 @@ import { mapGetters, mapMutations } from "vuex";
 
 export default {
   title: "Pla.Socks",
+  props: ["name", "variance"],
   data() {
     return {
       fullscreen: false,
@@ -160,9 +161,6 @@ export default {
     };
   },
   name: "ProductItem",
-  props: {
-    msg: String,
-  },
   methods: {
     zoom(event) {
       let zoomer = event.currentTarget;
@@ -257,7 +255,7 @@ export default {
       return b;
     },
     getProductsSameName() {
-      return this.productItemsName("Happy High");
+      return this.productItemsName(this.name);
     },
     ...mapGetters({
       cartQuantity: "GET_CART_ITEMS",

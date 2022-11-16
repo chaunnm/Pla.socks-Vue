@@ -188,7 +188,7 @@ export default {
       font-weight: 600;
       background-color: #4db7b3;
       position: absolute;
-      top: 45.5%;
+      top: 43%;
       z-index: 10;
       transition: 0.5s ease;
     }

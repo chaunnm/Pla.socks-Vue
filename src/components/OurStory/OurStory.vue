@@ -114,7 +114,6 @@
         </div>
       </div>
     </div>
-
     <div class="modal">
       <div class="modal__icon">
         <img
@@ -443,46 +442,47 @@ export default {
       font-size: 1rem;
       margin-bottom: 0;
     }
-  }
+    .email-box {
+      margin: auto;
+      margin-top: 20px;
+      width: 50%;
+      position: relative;
 
-  .email-box {
-    margin: auto;
-    margin-top: 20px;
-    width: 50%;
-    position: relative;
-
-    &__input {
-      color: lighten(black, 20%);
-      display: block;
-      width: 100%;
-      height: 3rem;
-      border-radius: 4px;
-      border: 1px solid #fff;
-      font-size: 1rem;
-      padding: 1rem;
-      outline: none;
-      &::placeholder {
-        color: white;
-        transition: 0.3s ease;
-      }
-      &:focus {
+      &__input {
+        color: lighten(black, 20%);
+        display: block;
+        width: 100%;
+        height: 3rem;
+        border-radius: 4px;
+        border: 1px solid darken(white, 20%);
+        font-size: 1rem;
+        padding: 1rem;
+        outline: none;
+        transition: 0.3s linear;
         &::placeholder {
-          opacity: 0.3;
+          color: white;
+          transition: 0.3s ease;
+        }
+        &:focus {
+          border: 2.5px solid white;
+          &::placeholder {
+            opacity: 0.3;
+          }
         }
       }
-    }
 
-    &__button {
-      border: none;
-      position: absolute;
-      font-size: 20px;
-      right: 5%;
-      top: 22%;
-      transition: 0.3s ease;
+      &__button {
+        border: none;
+        position: absolute;
+        font-size: 20px;
+        right: 5%;
+        top: 22%;
+        transition: 0.3s ease;
 
-      &:hover,
-      &:focus {
-        color: darken(#4db7b3, 20%);
+        &:hover,
+        &:focus {
+          color: darken(#4db7b3, 20%);
+        }
       }
     }
   }
