@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <ProductItem />
+    <ProductItem :name="name" :variance="variance" />
     <CommentRate />
   </div>
 </template>
@@ -12,9 +12,10 @@ import CommentRate from "@/components/Product/CommentRate.vue";
 
 export default {
   name: "ProductView",
+  props: ["name", "variance"],
   components: {
     ProductItem,
-    CommentRate
+    CommentRate,
   },
 };
 </script>

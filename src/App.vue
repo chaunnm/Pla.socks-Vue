@@ -36,7 +36,7 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
-    handleScroll: function () {
+    handleScroll() {
       if (this.scTimer) return;
       this.scTimer = setTimeout(() => {
         this.scY = window.scrollY;
@@ -44,7 +44,7 @@ export default {
         this.scTimer = 0;
       }, 100);
     },
-    toTop: function () {
+    toTop() {
       window.scrollTo({
         top: 0,
         behavior: "smooth",

@@ -1,8 +1,11 @@
 <template>
   <div class="shop">
-    <FilterSection />
+    <FilterSection @changeFilter="updateFilter($event)" />
     <div class="shop-container">
-      <CategorySection id="categorySection" />
+      <CategorySection
+        id="categorySection"
+        @changeCategory="updateCategory($event)"
+      />
       <div class="really-main-content">
         <div class="main-content">
           <ShopItem
@@ -15,7 +18,7 @@
         <div class="pagination">
           <v-pagination
             v-model="page"
-            :length="Math.ceil(products.length / perPage)"
+            :length="Math.ceil(productList.length / perPage)"
             :total-visible="6"
             color="#4DB7B3"
             circle
@@ -34,11 +37,14 @@ import ShopItem from "@/components/Shop/ShopItem.vue";
 export default {
   title: "Pla.Socks - Shop",
   name: "ShopView",
+  // props: ["temp"],
   data: () => ({
+    selectedCategory: "",
+    selectedFilter: 4,
+    productList: [],
     page: 1,
-    perPage: 4,
+    perPage: 12,
   }),
-  watch: {},
   components: {
     FilterSection,
     CategorySection,
@@ -47,15 +53,75 @@ export default {
   computed: {
     ...mapGetters({
       products: "GET_PRODUCT_ITEMS",
+      productItemsId: "GET_PRODUCT_ITEM_BY_ID",
+      productItemsName: "GET_PRODUCT_ITEM_BY_NAME",
+      productItemsCategory: "GET_PRODUCT_ITEM_BY_CATEGORY",
     }),
     visibleProducts() {
-      return this.products.slice(
+      var [...temp] = this.productList;
+      switch (this.selectedFilter) {
+        case 1:
+          temp.sort(this.popularSort);
+          break;
+        case 3:
+          temp.sort(this.dateSort);
+          break;
+        case 4:
+          temp.sort(this.ascendingSort);
+          break;
+        case 5:
+          temp.sort(this.descendingSort);
+          break;
+        default:
+          break;
+      }
+      return temp.slice(
         (this.page - 1) * this.perPage,
         this.page * this.perPage
       );
     },
   },
-  methods: {},
+  created() {
+    this.productList = this.products;
+  },
+  methods: {
+    updateCategory(value) {
+      this.selectedCategory = value;
+    },
+    updateFilter(value) {
+      this.selectedFilter = value;
+    },
+    calculateSalePrice(value, sale) {
+      let number = value - (value * sale) / 100;
+      return number;
+    },
+    ascendingSort(a, b) {
+      let left = this.calculateSalePrice(a.price, a.sale);
+      let right = this.calculateSalePrice(b.price, b.sale);
+      return parseInt(left, 10) - parseInt(right, 10);
+    },
+    descendingSort(a, b) {
+      let left = this.calculateSalePrice(b.price, b.sale);
+      let right = this.calculateSalePrice(a.price, a.sale);
+      return parseInt(left, 10) - parseInt(right, 10);
+    },
+    popularSort(a, b) {
+      return parseInt(b.sold, 10) - parseInt(a.sold, 10);
+    },
+    dateSort(a, b) {
+      var dateA = new Date(a.createdAt);
+      var dateB = new Date(b.createdAt);
+      return dateB - dateA;
+    },
+  },
+  watch: {
+    $route() {
+      this.selectedFilter = 4;
+    },
+    selectedCategory(value) {
+      this.productList = this.productItemsCategory(value);
+    },
+  },
 };
 </script>
 

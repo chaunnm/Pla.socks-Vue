@@ -1,15 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import ProductView from "../views/ProductView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/product",
+    path: "/product/:name/:variance?",
     name: "product",
-    component: ProductView,
+    props: true,
+    component: () =>
+      import("../views/ProductView.vue"),
   },
   {
     path: "/",
@@ -41,5 +42,7 @@ const router = new VueRouter({
     document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
   }
 });
+
+router.replace({ path: '*', redirect: '/' })
 
 export default router;

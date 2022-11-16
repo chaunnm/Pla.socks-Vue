@@ -217,7 +217,11 @@
               <li v-bind="attrs" v-on="on">
                 <router-link
                   to="/shop"
-                  :class="selectedLink === 'shop' ? 'Active' : 'inActive'"
+                  :class="
+                    ['shop', 'product'].includes(selectedLink)
+                      ? 'Active'
+                      : 'inActive'
+                  "
                 >
                   SHOP
                   <i class="fa-solid fa-angle-down"></i>
@@ -258,7 +262,7 @@
           <li>
             <router-link
               to="/product"
-              :class="selectedLink === 'product' ? 'Active' : 'inActive'"
+              :class="selectedLink === 'blog' ? 'Active' : 'inActive'"
               >BLOG</router-link
             >
           </li>
@@ -333,7 +337,6 @@ export default {
     },
     formatOriginalPrice(value) {
       let number = value;
-      console.log(this.$router.currentRoute._value);
       return new Intl.NumberFormat("de-DE", {
         style: "currency",
         currency: "VND",
@@ -350,6 +353,7 @@ export default {
       });
     },
   },
+
   computed: {
     // ...mapState(["cartNumber"]),
     // cartNumber() {
@@ -361,10 +365,6 @@ export default {
       totalPrice: "GET_CART_PRICE",
     }),
     ...mapMutations(["ADD_CART_ITEM", "DELETE_CART_ITEM"]),
-    getSelectedLink() {
-      console.log(this.$route.query.page);
-      return this.$route.query.page;
-    },
   },
   watch: {
     drawer(value) {
@@ -382,6 +382,7 @@ export default {
       }
     },
     $route(to) {
+      console.log(to);
       // this.selectedLink = "";
       let a = to.path;
       let temp = a.indexOf("/", 1);
