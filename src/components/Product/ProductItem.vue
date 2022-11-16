@@ -27,7 +27,7 @@
           </figure>
           <div class="img-variances">
             <figure
-              v-for="(item, index) in productListDetail"
+              v-for="(item, index) in getProductsSameName"
               :key="index"
               @click="handleClickItem(index)"
               :class="classActive(index)"
@@ -39,9 +39,9 @@
       </div>
 
       <div class="description-container">
-        <h2>{{ title }}</h2>
+        <h2>{{ getClickedProduct.itemTitle }}</h2>
         <hr />
-        <p class="product-price"><span>₫</span>{{ formatOriginalPrice }}</p>
+        <p class="product-price">{{ formatOriginalPrice }}</p>
         <p>{{ description }}</p>
         <p>One size: 35-40</p>
         <p>Height: 15cm</p>
@@ -111,42 +111,50 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   title: "Pla.Socks",
   data() {
     return {
       fullscreen: false,
-      title: "Happy High",
       originalPrice: 51000,
       description:
         "The Socks only have one size, and are stretchy, suitable for shoes in the size range above according to EU size standards.",
       sale: 0.1,
       selectedItem: 0,
-      cartNumber: 0,
       productListDetail: [
         {
+          itemTitle: "Happy High",
           variance: "Type 1",
           image:
             "https://plasocks.com/wp-content/uploads/2022/07/z3571975991764_6c5aac385ee991d1f32ba5405d596470-768x768.jpg",
           stock: "0",
+          price: 100000,
         },
         {
+          itemTitle: "Happy High",
           variance: "Type 2",
           image:
             "https://plasocks.com/wp-content/uploads/2022/07/z3571975989496_320be5d4342a3a90a48516b143ba6885.jpg",
           stock: "2",
+          price: 78500,
         },
         {
+          itemTitle: "Happy High",
           variance: "Type 3",
           image:
             "https://plasocks.com/wp-content/uploads/2022/07/z3571976000984_b32c5ed8c85e787edb59281f6d7da799-768x768.jpg",
           stock: "5",
+          price: 85000,
         },
         {
+          itemTitle: "Happy High",
           variance: "Type 4",
           image:
             "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
           stock: "10",
+          price: 105500,
         },
       ],
     };
@@ -190,24 +198,27 @@ export default {
       this.selectedItem = index;
     },
     handleAddToCart() {
+      var item = this.manipulateItemSelect;
       var value = parseInt(document.getElementById("quantity").value, 10);
       if (
         this.getClickedProduct.stock == 0 ||
         this.getClickedProduct.stock < value
       ) {
         this.$toast.open({
-          message: "Không đủ sản phẩm để thêm vào giỏ hàng",
+          message: "Not enough product items to add to cart! 😿",
           type: "error",
           duration: 2000,
           dismissible: true,
           position: "bottom",
         });
       } else {
-        this.$store.commit("SET_CART", value);
-        this.cartNumber += value;
+        for (let index = 1; index <= value; index++) {
+          this.$store.commit("ADD_CART_ITEM", item);
+        }
+        // this.ADD_CART_ITEM(item);
         this.getClickedProduct.stock -= value;
         this.$toast.open({
-          message: "Đã thêm thành công vào giỏ hàng",
+          message: "Product items added to cart successfully! 🐧",
           type: "success",
           duration: 2000,
           dismissible: true,
@@ -231,8 +242,30 @@ export default {
     },
     getClickedProduct() {
       let index = this.selectedItem;
-      return this.productListDetail[index];
+      return this.getProductsSameName[index];
     },
+    manipulateItemSelect() {
+      var id = this.cartQuantity + 1;
+      var itemSelect = {
+        cardId: id,
+        quantity: 1,
+      };
+      var { stock, height, thickness, ...newObj } = this.getClickedProduct;
+      var b = { ...itemSelect, ...newObj };
+      console.log(b);
+      console.log("Here is " + stock + " " + height + " " + thickness);
+      return b;
+    },
+    getProductsSameName() {
+      return this.productItemsName("Happy High");
+    },
+    ...mapGetters({
+      cartQuantity: "GET_CART_ITEMS",
+      productItems: "GET_PRODUCT_ITEMS",
+      productItemsId: "GET_PRODUCT_ITEM_BY_ID",
+      productItemsName: "GET_PRODUCT_ITEM_BY_NAME",
+    }),
+    ...mapMutations(["ADD_CART_ITEM,"]),
   },
   watch: {
     overlay(val) {
@@ -303,12 +336,15 @@ $btn_grey: #f9f9f9; /* Contrast : 7.2:1 */
     z-index: 9999999999;
     cursor: zoom-out;
   }
-  .breadcrumb a {
-    font-size: 18px;
-    text-decoration: none;
-    color: #777777;
-    &:hover {
-      color: #111;
+  .breadcrumb {
+    margin-top: 16px;
+    a {
+      font-size: 18px;
+      text-decoration: none;
+      color: #777777;
+      &:hover {
+        color: #111;
+      }
     }
   }
   .content-container {
