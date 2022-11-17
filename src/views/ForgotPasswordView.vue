@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ForgotPassword from '@/components/SignIn/ForgotPassword.vue';
+import ForgotPassword from '@/components/ForgotPassword/ForgotPassword.vue';
 
 export default {
     name: "ForgotPasswordView",

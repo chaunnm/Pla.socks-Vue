@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import './Sustainability.scss'
+
 export default {
   name: "SustainablilitySection",
   data: () => ({}),
@@ -13,5 +15,3 @@ export default {
   watch: {},
 };
 </script>
-
-<style lang="scss" scoped></style>

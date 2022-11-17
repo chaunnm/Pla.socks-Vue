@@ -29,9 +29,10 @@
 </template>
 
 <script>
-import OurStoryVue from "@/components/OurStory/OurStory.vue";
-import AboutUsVue from "@/components/OurStory/AboutUs.vue";
-import SustainabilityVue from "@/components/OurStory/Sustainability.vue";
+import OurStoryVue from "@/components/OurStory/OurStoryTab/OurStory.vue";
+import AboutUsVue from "@/components/OurStory/AboutUsTab/AboutUs.vue";
+import SustainabilityVue from "@/components/OurStory/SustainabilityTab/Sustainability.vue";
+
 export default {
   title: "Pla.Socks - Our Story",
   data: () => ({

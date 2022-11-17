@@ -78,12 +78,12 @@
           />
           <p>Socks For Women (10)</p>
         </li>
-        <li @click="selectedCategory = 'Socks For Summer'">
+        <li @click="selectedCategory = 'Socks For Winter'">
           <img
             src="https://drive.google.com/uc?id=1W184eml-Lj6FyonVwC6nIfxPrHdvKanb"
             alt=""
           />
-          <p>Socks For Summer (11)</p>
+          <p>Socks For Winter (11)</p>
         </li>
       </ul>
     </div>
@@ -91,6 +91,7 @@
 </template>
 
 <script>
+
 export default {
   name: "CategorySection",
   data: () => ({

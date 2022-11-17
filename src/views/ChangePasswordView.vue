@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ChangePassword from '@/components/SignIn/ChangePassword.vue';
+import ChangePassword from '@/components/ChangePassword/ChangePassword.vue';
 
 export default {
     name: "ChangePasswordVue",

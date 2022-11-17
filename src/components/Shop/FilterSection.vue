@@ -22,7 +22,7 @@
           </ul>
           <li>Socks For Men (9)</li>
           <li>Socks For Women (10)</li>
-          <li>Socks For Summer (11)</li>
+          <li>Socks For Winter (11)</li>
         </ul>
       </div>
     </v-navigation-drawer>
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+
 export default {
   name: "FilterComponent",
   data: () => ({
