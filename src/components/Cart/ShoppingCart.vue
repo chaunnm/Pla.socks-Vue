@@ -38,7 +38,7 @@
             <div class="shipment-fee-container price-container">
               <div class="shipment-fee-title left">Shipment fee:</div>
               <div class="shipment-fee-price right">
-                {{ formatOriginalPrice(30000) }}
+                {{ formatOriginalPrice(fee) }}
               </div>
             </div>
             <div class="coupon-title">
@@ -47,21 +47,31 @@
             </div>
             <input
               type="text"
+              v-model.lazy="enteredCoupon"
               class="coupon-enter"
               placeholder="Enter coupon 🎫 (optional)"
             />
-
-            <v-btn tile class="coupon-apply">Apply</v-btn>
+            <v-btn tile class="coupon-apply" @click="handleApplyCoupon()"
+              >Apply</v-btn
+            >
             <div class="minus-container price-container">
               <div class="minus-title left">Minus</div>
               <div class="minus-price right">
-                -{{ formatOriginalPrice(sale) }}
+                -{{
+                  formatOriginalPrice(totalPrice * sale + totalPrice * shipping)
+                }}
               </div>
             </div>
             <div class="total-price-container price-container">
               <div class="total-price-title left">Total fee:</div>
               <div class="total-price-price right">
-                {{ formatOriginalPrice(totalPrice - sale + shipping) }}
+                {{
+                  formatOriginalPrice(
+                    totalPrice -
+                      (totalPrice * sale + totalPrice * shipping) +
+                      fee
+                  )
+                }}
               </div>
             </div>
             <div class="proceed-btn-container" @click="handleClickContinue()">
@@ -91,7 +101,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import ShoppingCartItemVue from "./ShoppingCartItem.vue";
 
 export default {
@@ -100,8 +110,14 @@ export default {
     ShoppingCartItemVue,
   },
   data: () => ({
-    sale: 2000,
-    shipping: 30000,
+    sale: 0,
+    shipping: 0,
+    fee: 30000,
+    subtotal: 0,
+    total: 0,
+    isValid: false,
+    enteredCoupon: "",
+    temp: "",
   }),
   methods: {
     formatOriginalPrice(value) {
@@ -114,19 +130,70 @@ export default {
     handleClickContinue() {
       this.$emit("changeToDetail", 2);
     },
+    handleApplyCoupon() {
+      if (this.checkCoupon(this.enteredCoupon).length === 0) {
+        this.$toast.open({
+          message:
+            "🤔 Hmm. Seems like your coupon is not available in Pla.Socks 😶",
+          type: "error",
+          duration: 2000,
+          dismissible: true,
+          position: "bottom",
+        });
+      } else {
+        const temp = this.checkCoupon(this.enteredCoupon)[0];
+        const timeElapsed = Date.now();
+        const temp1 = new Date(timeElapsed);
+        const temp2 = new Date(temp.expiredAt);
+        if (temp2 - temp1 >= 0) {
+          this.shipping = temp.ship;
+          this.sale = temp.sale;
+          this.isValid = true;
+          this.$toast.open({
+            message: "🎉 Yay, you applied sale coupon successfully 🎆",
+            type: "success",
+            duration: 2000,
+            dismissible: true,
+            position: "bottom",
+          });
+        } else {
+          this.$toast.open({
+            message: "🥺 Sorry. Your coupon is invalid at the moment 🤒",
+            type: "error",
+            duration: 2000,
+            dismissible: true,
+            position: "bottom",
+          });
+        }
+      }
+    },
+  },
+  watch: {
+    isValid(value) {
+      if (value === true) {
+        this.$store.commit(
+          "SET_CURRENT_COUPON",
+          this.checkCoupon(this.enteredCoupon)[0]
+        );
+      }
+    },
   },
   computed: {
     ...mapGetters({
       quantity: "GET_CART_QUANTITY",
       cartItems: "GET_CART_ITEMS",
       totalPrice: "GET_CART_PRICE",
+      checkCoupon: "GET_COUPON_ITEM_BY_CODE",
     }),
+    ...mapMutations(["SET_CURRENT_COUPON"]),
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .shopping-cart-main-container {
+  animation: moveInright 1s ease-out;
+  animation-fill-mode: backwards;
   .shopping-cart-container {
     max-width: 1080px;
     padding: 15px;
@@ -213,20 +280,10 @@ export default {
             padding: 10px 0;
             margin-top: 10px;
             border-bottom: 1px dashed black;
-            .left {
-            }
             .right {
               color: rgb(8, 8, 8);
               font-weight: 500;
             }
-          }
-          .sub-total-container {
-            .sub-total-title {
-            }
-            .sub-total-price {
-            }
-          }
-          .shipment-fee-container {
           }
           .coupon-title {
             padding: 0.2rem 0;
@@ -362,15 +419,24 @@ export default {
     }
   }
 }
+
+@keyframes moveInright {
+  0% {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
 @media screen and (max-width: 825px) {
   .shopping-cart-main-container {
     .shopping-cart-container {
-      .breadscrumb-container {
-      }
-
       .cart-container {
         display: block;
-
         .cart-total-container {
           margin-left: 0;
           .total-container {

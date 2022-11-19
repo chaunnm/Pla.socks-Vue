@@ -2,11 +2,26 @@
   <div class="cart-container">
     <div class="breadscrumb-container">
       <div class="text-breadscrumb-container">
-        <h2 class="shopping-cart">Shopping Cart</h2>
+        <h2
+          class="shopping-cart"
+          :class="currentPage === 1 ? 'here' : 'nothere'"
+        >
+          Shopping Cart
+        </h2>
         <i class="fa-solid fa-angles-right"></i>
-        <h2 class="checkout-details">Checkout Details</h2>
+        <h2
+          class="checkout-details"
+          :class="currentPage === 2 ? 'here' : 'nothere'"
+        >
+          Checkout Details
+        </h2>
         <i class="fa-solid fa-angles-right"></i>
-        <h2 class="order-complete">Order Complete</h2>
+        <h2
+          class="order-complete"
+          :class="currentPage === 3 ? 'here' : 'nothere'"
+        >
+          Order Complete
+        </h2>
       </div>
       <div class="step-progress-bar-container">
         <div id="progress"></div>
@@ -112,7 +127,7 @@ export default {
         document.getElementById("cart-status").style.filter = "grayscale(0%)";
       } else {
         document.querySelectorAll(".circle")[0].classList.remove("active");
-        document.getElementById("cart-status").style.filter = "grayscale(80%)";
+        document.getElementById("cart-status").style.filter = "grayscale(100%)";
       }
     },
     detail(value) {
@@ -124,7 +139,7 @@ export default {
         document.querySelectorAll(".circle")[1].classList.remove("active");
         document.getElementById("progress").style.width = "10%";
         document.getElementById("detail-status").style.filter =
-          "grayscale(80%)";
+          "grayscale(100%)";
       }
     },
     complete(value) {
@@ -137,7 +152,7 @@ export default {
         document.getElementById("progress").style.width = "50%";
         document.querySelectorAll(".circle")[2].classList.remove("active");
         document.getElementById("complete-status").style.filter =
-          "grayscale(80%)";
+          "grayscale(100%)";
       }
     },
     $route(to) {
@@ -169,9 +184,16 @@ export default {
         font-weight: 400;
         font-size: 22px;
       }
+      .here {
+        color: black !important;
+        font-weight: 600;
+      }
+      .nothere {
+        color: #777;
+        font-weight: 400;
+      }
       .shopping-cart {
-        color: black;
-        font-weight: 500;
+        color: #777;
       }
       .checkout-details {
         color: #777;
@@ -193,7 +215,7 @@ export default {
       img {
         width: 50px;
         transition: 0.4s ease;
-        filter: grayscale(80%);
+        filter: grayscale(100%);
       }
       &::before {
         content: "";
@@ -236,6 +258,20 @@ export default {
           border-color: #4db7b3;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .breadscrumb-container {
+    zoom: 0.8;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .breadscrumb-container {
+    .step-progress-bar-container {
+      zoom: 0.5;
     }
   }
 }

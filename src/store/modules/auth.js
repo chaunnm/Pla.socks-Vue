@@ -22,6 +22,8 @@ const auth = {
   },
   getters: {
     getUserAll: (state) => state.auth.user,
+    getUserQuantity: (state) => state.auth.user.length,
+    getCurrentUser: (state) => state.auth.userCurent,
   },
   setters: {},
   mutations: {

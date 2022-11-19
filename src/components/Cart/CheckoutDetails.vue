@@ -1,9 +1,9 @@
 <template>
   <div class="checkout-details-main-container">
-    <div class="checkout-details-container">
-      <div class="checkout-container">
-        <div class="shipping-container">
-          <form action="" method="post" target="temp">
+    <form id="form" action="javascript:0">
+      <div class="checkout-details-container">
+        <div class="checkout-container">
+          <div class="shipping-container">
             <div class="shipping-title">
               <h3>SHIPPING DETAILS</h3>
             </div>
@@ -12,6 +12,7 @@
                 <label for="first-name">First name <span>*</span></label>
                 <input
                   type="text"
+                  v-model.lazy="firstName"
                   name="first-name"
                   class="first-name-input"
                   placeholder="😎"
@@ -22,6 +23,7 @@
                 <label for="last-name">Last name <span>*</span></label>
                 <input
                   type="text"
+                  v-model.lazy="lastName"
                   name="last-name"
                   class="first-name-input"
                   placeholder="😎"
@@ -34,6 +36,7 @@
                 <label for="company-name">Company name (optional)</label>
                 <input
                   type="text"
+                  v-model.lazy="corpName"
                   name="first-name"
                   class="first-name-input"
                   placeholder="🏫"
@@ -45,6 +48,7 @@
                 <label for="phone-number">Phone number <span>*</span></label>
                 <input
                   type="phone"
+                  v-model.lazy="phoneNo"
                   name="phone-number"
                   class="phone-number-input"
                   placeholder="📲"
@@ -54,8 +58,9 @@
             </div>
             <div class="email">
               <div class="email-container">
-                <label for="email">Email</label>
+                <label for="email">Email <span>*</span></label>
                 <input
+                  v-model.lazy="email"
                   type="email"
                   name="email"
                   class="email-input"
@@ -69,6 +74,7 @@
                 <label for="home-name">Apartment number <span>*</span></label>
                 <input
                   type="text"
+                  v-model.lazy="apartmentNo"
                   name="home-name"
                   class="home-name-input"
                   placeholder="🏠"
@@ -79,6 +85,7 @@
                 <label for="street-name">Street name <span>*</span></label>
                 <input
                   type="text"
+                  v-model.lazy="street"
                   name="street-name"
                   class="street-name-input"
                   placeholder="🚵‍♀️"
@@ -91,6 +98,7 @@
                 <label for="district-name">District <span>*</span></label>
                 <input
                   type="text"
+                  v-model.lazy="district"
                   name="district-name"
                   class="streedistrictt-name-input"
                   placeholder="🏇"
@@ -101,6 +109,7 @@
                 <label for="ward-name">Ward / Commune <span>*</span></label>
                 <input
                   type="text"
+                  v-model.lazy="ward"
                   name="ward-name"
                   class="ward-name-input"
                   placeholder="🚣"
@@ -113,6 +122,7 @@
                 <label for="city-name">City / Province <span>*</span></label>
                 <input
                   type="text"
+                  v-model.lazy="city"
                   name="city-name"
                   class="city-name-input"
                   placeholder="🏙️"
@@ -127,6 +137,7 @@
               <div class="note-container">
                 <label for="order-note">Order notes (optional) </label>
                 <textarea
+                  v-model.lazy="note"
                   placeholder="Notes about your order, e.g. special notes for delivery"
                   rows="4"
                   name="order-note"
@@ -135,155 +146,278 @@
                 </textarea>
               </div>
             </div>
-          </form>
-        </div>
-        <div class="order-container">
-          <div class="order-title">
-            <h3>ORDER DETAILS</h3>
           </div>
-          <div class="table-header">
-            <h4>PRODUCT</h4>
-            <h4>SUBTOTAL</h4>
-          </div>
-          <div class="table-content">
-            <div class="table-item">
-              <div class="left">
-                <p>Great Horns Think Alike Junior Socks <span>x 1</span></p>
+          <div class="order-container">
+            <div class="order-title">
+              <h3>ORDER DETAILS</h3>
+            </div>
+            <div class="table-header">
+              <h4>PRODUCT</h4>
+              <h4>SUBTOTAL</h4>
+            </div>
+            <div class="table-content">
+              <div
+                class="table-item"
+                v-for="(item, index) in cartItems"
+                :key="index"
+              >
+                <div class="left">
+                  <p>
+                    {{ item.itemTitle }} <span>x {{ item.quantity }}</span>
+                  </p>
+                </div>
+                <div class="right">
+                  <h5>{{ formatOriginalPrice(item.price) }}</h5>
+                </div>
               </div>
-              <div class="right">
-                <h5>39.000đ</h5>
+              <div class="subtotal">
+                <p>SUBTOTAL</p>
+                <h5>{{ formatOriginalPrice(totalPrice) }}</h5>
+              </div>
+              <div class="total">
+                <p>TOTAL</p>
+                <h5>
+                  <mark>{{
+                    formatOriginalPrice(
+                      totalPrice -
+                        totalPrice * currentCoupon.ship -
+                        totalPrice * currentCoupon.sale +
+                        30000
+                    )
+                  }}</mark>
+                </h5>
               </div>
             </div>
-            <div class="table-item">
-              <div class="left">
-                <p>Happy Hight <span>x 1</span></p>
+            <div class="payment-title">
+              <h4>PAYMENT METHOD</h4>
+            </div>
+            <div class="payment-radio">
+              <div class="bank-container">
+                <input
+                  type="radio"
+                  id="bank"
+                  name="payment"
+                  value="Direct bank transfer"
+                  required
+                  v-model="method"
+                />
+                <label for="bank">Direct bank transfer</label><br />
+                <img
+                  src="https://drive.google.com/uc?id=1Us6lCgDx_bNgo06jOaJ7xN-R38c3OAjW"
+                  alt=""
+                />
               </div>
-              <div class="right">
-                <h5>339.000đ</h5>
+              <p class="description">
+                Make your payment directly into our bank account
+              </p>
+              <div class="cod-container">
+                <input
+                  type="radio"
+                  required
+                  id="cod"
+                  name="payment"
+                  value="Cash on delivery"
+                  v-model="method"
+                />
+                <label for="cod">Cash on delivery</label><br />
+                <img
+                  src="https://drive.google.com/uc?id=1XnauZFLB37vuTW-UEMimvQh6Pq_pk0V5"
+                  alt=""
+                />
               </div>
+              <p class="description">
+                Make your payment just after you received package
+              </p>
+              <div class="momo-container">
+                <input
+                  type="radio"
+                  required
+                  v-model="method"
+                  id="momo"
+                  name="payment"
+                  value="Scan QR MoMo"
+                />
+                <label for="momo">Scan QR MoMo</label>
+                <img
+                  src="https://drive.google.com/uc?id=1EfaY77upAgQgRKcxk76k1x7ZN-621kbZ"
+                  alt=""
+                />
+              </div>
+              <p class="description">
+                Using Momo Mobile App to make your payment
+              </p>
+              <div class="shopee-container">
+                <input
+                  type="radio"
+                  required
+                  v-model="method"
+                  id="shopeepay"
+                  name="payment"
+                  value="Scan QR ShopeePay"
+                />
+                <label for="shopeepay">Scan QR ShopeePay</label>
+                <img
+                  src="https://drive.google.com/uc?id=1HudiwSOX62x39o0d6mhPdNpPA0IeUbF7"
+                  alt=""
+                />
+              </div>
+              <p class="description">
+                Using Momo Mobile App to make your payment
+              </p>
             </div>
-            <div class="subtotal">
-              <p>SUBTOTAL</p>
-              <h5>339.000đ</h5>
+            <div class="policy-title">
+              <h4>POLICY</h4>
             </div>
-            <div class="total">
-              <p>TOTAL</p>
-              <h5><mark>339.000đ</mark></h5>
+            <div class="policy">
+              <ul>
+                <li>
+                  <router-link to="/"> Private Policy </router-link>
+                </li>
+                <li>
+                  <router-link to="/"> Return Policy </router-link>
+                </li>
+              </ul>
             </div>
-          </div>
-          <div class="payment-title">
-            <h4>PAYMENT METHOD</h4>
-          </div>
-          <div class="payment-radio">
-            <div class="bank-container">
+            <div class="accept-policy">
               <input
-                type="radio"
-                id="bank"
-                name="payment"
-                value="Direct bank transfer"
+                type="checkbox"
+                id="accept"
+                name="accept"
+                v-model.lazy="isChecked"
+                value="true"
               />
-              <label for="bank">Direct bank transfer</label><br />
-              <img
-                src="https://drive.google.com/uc?id=1Us6lCgDx_bNgo06jOaJ7xN-R38c3OAjW"
-                alt=""
-              />
+              <label for="accept">
+                I have read those policies and accept them</label
+              >
             </div>
-            <p class="description">
-              Make your payment directly into our bank account
-            </p>
-            <div class="cod-container">
-              <input
-                type="radio"
-                id="cod"
-                name="payment"
-                value="Cash on delivery"
-              />
-              <label for="cod">Cash on delivery</label><br />
-              <img
-                src="https://drive.google.com/uc?id=1XnauZFLB37vuTW-UEMimvQh6Pq_pk0V5"
-                alt=""
-              />
+            <div class="place-order" @click="handleClickContinue()">
+              <button type="submit">PLACE ORDER</button>
             </div>
-            <p class="description">
-              Make your payment just after you received package
-            </p>
-            <div class="momo-container">
-              <input
-                type="radio"
-                id="momo"
-                name="payment"
-                value="Scan QR MoMo"
-              />
-              <label for="momo">Scan QR MoMo</label>
-              <img
-                src="https://drive.google.com/uc?id=1EfaY77upAgQgRKcxk76k1x7ZN-621kbZ"
-                alt=""
-              />
-            </div>
-            <p class="description">
-              Using Momo Mobile App to make your payment
-            </p>
-            <div class="shopee-container">
-              <input
-                type="radio"
-                id="shopeepay"
-                name="payment"
-                value="Scan QR ShopeePay"
-              />
-              <label for="shopeepay">Scan QR ShopeePay</label>
-              <img
-                src="https://drive.google.com/uc?id=1HudiwSOX62x39o0d6mhPdNpPA0IeUbF7"
-                alt=""
-              />
-            </div>
-            <p class="description">
-              Using Momo Mobile App to make your payment
-            </p>
-          </div>
-          <div class="policy-title">
-            <h4>POLICY</h4>
-          </div>
-          <div class="policy">
-            <ul>
-              <li>
-                <router-link to="/"> Private Policy </router-link>
-              </li>
-              <li>
-                <router-link to="/"> Return Policy </router-link>
-              </li>
-            </ul>
-          </div>
-          <div class="accept-policy">
-            <input type="checkbox" id="accept" name="accept" value="true" />
-            <label for="accept">
-              I have read those policies and accept them</label
-            >
-          </div>
-          <div class="place-order" @click="handleClickContinue()">
-            <button type="submit">PLACE ORDER</button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "CheckoutDetails",
-  data: () => ({}),
-
+  data: () => ({
+    firstName: "",
+    lastName: "",
+    corpName: "",
+    phoneNo: "",
+    email: "",
+    apartmentNo: "",
+    street: "",
+    district: "",
+    ward: "",
+    city: "",
+    note: "",
+    method: "",
+    isChecked: false,
+  }),
   watch: {},
   methods: {
     handleClickContinue() {
-      this.$emit("changeToComplete", 3);
+      if (!this.isChecked) {
+        this.$toast.open({
+          message:
+            "😣 Sorry. You have to read our policies and accept to continue 😔",
+          type: "error",
+          duration: 2000,
+          dismissible: true,
+          position: "bottom",
+        });
+      } else {
+        if (
+          confirm(
+            "Are you sure about the information of shipping and order items?"
+          )
+        ) {
+          const timeElapsed = Date.now();
+          const today = new Date(timeElapsed);
+          const temp = today.toISOString();
+          const temp2 = [...this.cartItems];
+          const order = {
+            orderId: this.orderQuantity,
+            userId: this.getCurrentUser.id,
+            itemList: temp2,
+            totalPrice:
+              this.totalPrice -
+              this.totalPrice * this.currentCoupon.ship -
+              this.totalPrice * this.currentCoupon.sale +
+              30000,
+            orderInfo: {
+              fullname: this.firstName + " " + this.lastName,
+              companyName: this.corpName,
+              phoneNo: this.phoneNo,
+              email: this.email,
+              apartmentNo: this.apartmentNo,
+              street: this.street,
+              district: this.district,
+              ward: this.ward,
+              city: this.city,
+              note: this.note,
+            },
+            couponCodes: this.currentCoupon.couponCode,
+            createdAt: temp,
+            paidAt: "",
+            paidMethod: this.method,
+            isPaid: false,
+            status: "Processing",
+            completedAt: "",
+          };
+          this.$store.commit("ADD_ORDER_ITEM", order);
+          this.$emit("changeToComplete", 3);
+          this.$toast.open({
+            message:
+              "📦You have ordered successfully! Waiting for us to proccess your package ♥️",
+            type: "success",
+            duration: 2000,
+            dismissible: true,
+            position: "bottom",
+          });
+          this.$store.commit("DELETE_ALL_CART_ITEM");
+        } else {
+          this.$toast.open({
+            message:
+              "😜 Slow down..and check your information carefully before placing order 🐥",
+            type: "info",
+            duration: 2000,
+            dismissible: true,
+            position: "bottom",
+          });
+        }
+      }
     },
+    formatOriginalPrice(value) {
+      let number = value;
+      return new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "VND",
+      }).format(number);
+    },
+  },
+  computed: {
+    ...mapGetters({
+      cartItems: "GET_CART_ITEMS",
+      totalPrice: "GET_CART_PRICE",
+      currentCoupon: "GET_CURRENT_COUPON",
+      orderQuantity: "GET_ORDERS_QUANTITY",
+      getCurrentUser: "getCurrentUser",
+    }),
+    ...mapMutations(["ADD_ORDER_ITEM", "DELETE_ALL_CART_ITEM"]),
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .checkout-details-main-container {
+  animation: moveInright 1s ease-out;
+  animation-fill-mode: backwards;
   .checkout-details-container {
     max-width: 1080px;
     padding: 15px;
@@ -820,6 +954,18 @@ export default {
         }
       }
     }
+  }
+}
+
+@keyframes moveInright {
+  0% {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
   }
 }
 

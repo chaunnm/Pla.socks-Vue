@@ -4,24 +4,60 @@
       <div class="complete-container">
         <div class="payment-section">
           <div class="payment-title">
-            <h3>Scan QR to make payment</h3>
+            <h3>{{ getOrderById(orderQuantity - 1).paidMethod }}</h3>
           </div>
           <div class="payment-img">
             <img
+              v-if="method === 'Direct bank transfer'"
+              src="https://drive.google.com/uc?id=1Us6lCgDx_bNgo06jOaJ7xN-R38c3OAjW"
+              alt=""
+            />
+            <img
+              v-else-if="method === 'Cash on delivery'"
+              src="https://drive.google.com/uc?id=1XnauZFLB37vuTW-UEMimvQh6Pq_pk0V5"
+              alt=""
+            />
+            <img
+              v-else-if="method === 'Scan QR MoMo'"
               src="https://drive.google.com/uc?id=1EfaY77upAgQgRKcxk76k1x7ZN-621kbZ"
+              alt=""
+            />
+            <img
+              v-else-if="method === 'Scan QR ShopeePay'"
+              src="https://drive.google.com/uc?id=1HudiwSOX62x39o0d6mhPdNpPA0IeUbF7"
               alt=""
             />
           </div>
           <div class="receiver-infor">
-            <p>Receiver: <span>Nguyen Van An</span></p>
-            <p>Phone number: <span>0123456789</span></p>
-            <p>Payment amount: <span class="price">51.000đ</span></p>
+            <p v-if="method === 'Cash on delivery'">
+              Sender: <span>Nguyen Van An</span>
+            </p>
+            <p v-else-if="method === 'Direct bank transfer'">
+              Account owner: <span>Nguyen Van An</span>
+            </p>
+            <p v-else>Receiver: <span>Nguyen Van An</span></p>
+            <p v-if="method === 'Direct bank transfer'">
+              Bank account: <span>ACB 5102897</span>
+            </p>
+            <p v-else>Phone number: <span>0123456789</span></p>
             <p>
+              Payment amount:
+              <span class="price">{{
+                formatOriginalPrice(getOrderById(orderQuantity - 1).totalPrice)
+              }}</span>
+            </p>
+            <p v-if="method === 'Cash on delivery'">
+              Please check your phone usually after 2-3 days
+            </p>
+            <p v-else>
               Money transfer notes (order number):
-              <span class="order-no">1346</span>
+              <span class="order-no">{{ orderQuantity - 1 }}</span>
             </p>
           </div>
-          <div class="qr-code">
+          <div
+            class="qr-code"
+            v-if="method in ['Scan QR MoMo', 'Scan QR ShopeePay']"
+          >
             <img
               src="https://drive.google.com/uc?id=1jhliXs8dGwyHzCbbVddQUHlpYfgA3nix"
               alt=""
@@ -32,7 +68,13 @@
               <div class="qr-icon">
                 <i class="fa-solid fa-qrcode"></i>
               </div>
-              <p>Using <span>Momo</span> App to scan this above QR</p>
+              <p>
+                Using <span v-if="method === 'Scan QR MoMo'">Momo</span>
+                <span v-else-if="(method = 'Scan QR ShopeePay')"
+                  >ShopeePay</span
+                >
+                App to scan this above QR
+              </p>
             </div>
             <div>
               <div class="qr-icon">
@@ -49,12 +91,18 @@
             <h4>SUBTOTAL</h4>
           </div>
           <div class="table-content">
-            <div class="table-item">
+            <div
+              class="table-item"
+              v-for="(item, index) in getOrderById(orderQuantity - 1).itemList"
+              :key="index"
+            >
               <div class="left">
-                <p>Great Horns Think Alike Junior Socks <span>x 1</span></p>
+                <p>
+                  {{ item.itemTitle }} <span>x {{ item.quantity }}</span>
+                </p>
               </div>
               <div class="right">
-                <h5>39.000đ</h5>
+                <h5>{{ formatOriginalPrice(item.price) }}</h5>
               </div>
             </div>
             <div class="table-item">
@@ -67,15 +115,27 @@
             </div>
             <div class="total">
               <p>Subtotal</p>
-              <h5>339.000đ</h5>
+              <h5>
+                {{
+                  formatOriginalPrice(
+                    getOrderById(orderQuantity - 1).totalPrice + 30000
+                  )
+                }}
+              </h5>
             </div>
             <div class="total">
               <p>Total</p>
-              <h5><mark>339.000đ</mark></h5>
+              <h5>
+                <mark>{{
+                  formatOriginalPrice(
+                    getOrderById(orderQuantity - 1).totalPrice
+                  )
+                }}</mark>
+              </h5>
             </div>
             <div class="total">
               <p>Payment method:</p>
-              <h5>Scan QR MoMo</h5>
+              <h5>{{ getOrderById(orderQuantity - 1).paidMethod }}</h5>
             </div>
           </div>
           <div class="details-title">
@@ -83,14 +143,25 @@
           </div>
           <div class="ship-content">
             <div class="ship-item">
-              <p>Chau Dien</p>
-              <p>0987654321</p>
-              <p>chaudien@gmail.com</p>
-              <p>KTX khu A DHQG, Linh Trung, Thu Duc</p>
-              <p>TP.HCM</p>
+              <p>{{ getOrderById(orderQuantity - 1).orderInfo.fullname }}</p>
+              <p>{{ getOrderById(orderQuantity - 1).orderInfo.phoneNo }}</p>
+              <p>{{ getOrderById(orderQuantity - 1).orderInfo.email }}</p>
               <p>
-                <span>Order notes:</span> Lam on giao hang dung co hoi ra lay
-                hang!
+                {{
+                  getOrderById(orderQuantity - 1).orderInfo.apartmentNo +
+                  ", " +
+                  getOrderById(orderQuantity - 1).orderInfo.street +
+                  ", " +
+                  getOrderById(orderQuantity - 1).orderInfo.district +
+                  ", " +
+                  getOrderById(orderQuantity - 1).orderInfo.ward +
+                  ","
+                }}
+              </p>
+              <p>{{ getOrderById(orderQuantity - 1).orderInfo.city }}</p>
+              <p>
+                <span>Order notes: </span>
+                {{ getOrderById(orderQuantity - 1).orderInfo.note }}
               </p>
             </div>
           </div>
@@ -107,11 +178,34 @@
             ></video>
             <h4>Thank you. Your order has been received</h4>
             <ul>
-              <li>Order number: <span>1346</span></li>
-              <li>Date: <span>November 30, 2022</span></li>
-              <li>Email: <span>19521185@gm.uit.edu.vn</span></li>
-              <li>Total: <span>51.000đ</span></li>
-              <li>Payment method: <span>Scan QR MoMo</span></li>
+              <li>
+                Order number:
+                <span>{{ orderQuantity - 1 }}</span>
+              </li>
+              <li>
+                Date:
+                <span>{{
+                  formatISODate(getOrderById(orderQuantity - 1).createdAt)
+                }}</span>
+              </li>
+              <li>
+                Email:
+                <span>{{
+                  getOrderById(orderQuantity - 1).orderInfo.email
+                }}</span>
+              </li>
+              <li>
+                Total:
+                <span>{{
+                  formatOriginalPrice(
+                    getOrderById(orderQuantity - 1).totalPrice
+                  )
+                }}</span>
+              </li>
+              <li>
+                Payment method:
+                <span>{{ getOrderById(orderQuantity - 1).paidMethod }}</span>
+              </li>
             </ul>
             <router-link to="/">
               <button>BACK TO HOME</button>
@@ -127,17 +221,43 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "OrderComplete",
-  data: () => ({}),
-
+  data: () => ({
+    method: "",
+  }),
+  computed: {
+    ...mapGetters({
+      orderQuantity: "GET_ORDERS_QUANTITY",
+      getOrderById: "GET_ORDER_ITEM_BY_ID",
+      getCurrentUser: "getCurrentUser",
+    }),
+  },
+  mounted() {
+    this.method = this.getOrderById(this.orderQuantity - 1).paidMethod;
+  },
   watch: {},
-  methods: {},
+  methods: {
+    formatOriginalPrice(value) {
+      let number = value;
+      return new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "VND",
+      }).format(number);
+    },
+    formatISODate(value) {
+      var d = new Date(value);
+      return d.toLocaleDateString("en-GB");
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .order-complete-main-container {
+  animation: fadeIn 1s ease-out;
+  animation-fill-mode: backwards;
   .order-complete-container {
     max-width: 1080px;
     padding: 15px;
@@ -372,6 +492,18 @@ export default {
         }
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    // transform: translateX(-150px);
+  }
+
+  100% {
+    opacity: 1;
+    // transform: translateX(0px);
   }
 }
 

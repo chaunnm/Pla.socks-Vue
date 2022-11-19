@@ -3,7 +3,7 @@ const orders = {
     orderData: [
       // Example of data
       {
-        orderId: 1,
+        orderId: 0,
         userId: "26",
         itemList: [],
         totalPrice: 950000,
@@ -27,8 +27,9 @@ const orders = {
         status: "Delivered",
         completedAt: "2022-11-20T18:50:48.113Z",
       },
+      
       {
-        orderId: 2,
+        orderId: 1,
         userId: "11",
         itemList: [
           {
@@ -76,40 +77,44 @@ const orders = {
     ],
   },
   getters: {
-    //ProductItems
-    GET_PRODUCT_NUMBER: (state) => {
-      return state.productData.length;
+    GET_ORDERS_QUANTITY: (state) => {
+      return state.orderData.length;
     },
-    GET_PRODUCT_ITEMS: (state) => {
-      return state.productData;
+    GET_ORDERS_ITEMS: (state) => {
+      return state.orderData;
     },
-    GET_PRODUCT_ITEM_BY_ID: (state) => (id) => {
-      return state.productData.find(
-        (productItem) => productItem.productId === id
+    GET_ORDER_ITEM_BY_ID: (state) => (id) => {
+      return state.orderData.find(
+        (orderItem) => orderItem.orderId === id
       );
     },
-    GET_PRODUCT_ITEM_BY_NAME: (state) => (name) => {
-      return state.productData.filter(
-        (productItem) => productItem.itemTitle === name
-      );
-    },
-    GET_PRODUCT_ITEM_BY_CATEGORY: (state) => (category) => {
-      return state.productData.filter(
-        (productItem) => productItem.category === category
+    GET_ORDER_ITEM_BY_USERID: (state) => (id) => {
+      return state.orderData.filter(
+        (orderItem) => orderItem.userId === id
       );
     },
   },
   setters: {},
   mutations: {
-    CHANGE_PRODUCT_STOCK: (state, payload) => {
-      const index = state.productData.findIndex((item) => {
-        return item.productId === payload.productId;
-      });
-      if (index !== -1) {
-        state.productData[index].stock += payload.quantity;
+    ADD_ORDER_ITEM: (state, data) => {
+        state.orderData.push(data);
       }
     },
-  },
-};
-
+    // CHANGE_ORDER_QUANTITY: (state, payload) => {
+    //   // console.log(state, payload);
+    //   const index = state.orderData.findIndex((item) => {
+    //     return item.orderId === payload.orderId;
+    //   });
+    //   const temp = state.orderData[index].quantity;
+    //   if (index !== -1) {
+    //     state.orderData[index].quantity = temp + payload.quantity;
+    //   }
+    // },
+    // DELETE_ORDER_ITEM: (state, id) => {
+    //   state.orderData.splice(
+    //     state.orderData.findIndex((item) => item.orderId === id),
+    //     1
+    //   );
+    // },
+}
 export default orders;

@@ -1,12 +1,12 @@
 const category = {
   state: {
-      categoryData: [
-        "Boxes Of Love",
-        "Customized Socks",
-        "Socks For Kids",
-        "Socks For Men",
-        "Socks For Winter",
-        "Socks For Women",
+    categoryData: [
+      "Boxes Of Love",
+      "Customized Socks",
+      "Socks For Kids",
+      "Socks For Men",
+      "Socks For Winter",
+      "Socks For Women",
     ],
   },
   getters: {
