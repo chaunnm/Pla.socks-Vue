@@ -142,8 +142,6 @@
 </template>
 
 <script>
-import './OurStory.scss'
-
 export default {
   name: "OurStory",
   data: () => ({}),
@@ -152,3 +150,5 @@ export default {
   watch: {},
 };
 </script>
+
+<style lang="scss" scoped src="./OurStory.scss"></style>

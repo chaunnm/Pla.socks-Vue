@@ -58,18 +58,21 @@
           <p>SUBTOTAL:</p>
           <p class="total-price">{{ formatOriginalPrice(totalPrice) }}</p>
         </div>
-        <v-btn
-          color="#4db7b3"
-          tile
-          style="
-            color: white;
-            width: 100%;
-            font-weight: 600;
-            font-size: 16px;
-            padding: 5px 0;
-          "
-          >VIEW CART</v-btn
-        >
+        <router-link to="/cart">
+          <v-btn
+            color="#4db7b3"
+            tile
+            style="
+              text-decoration: none;
+              color: white;
+              width: 100%;
+              font-weight: 600;
+              font-size: 16px;
+              padding: 5px 0;
+            "
+            >VIEW CART</v-btn
+          >
+        </router-link>
         <v-btn
           color="#F299C2"
           tile
@@ -298,7 +301,6 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import './NavigationBar.scss'
 
 export default {
   title: "Pla.Socks",
@@ -356,10 +358,6 @@ export default {
   },
 
   computed: {
-    // ...mapState(["cartNumber"]),
-    // cartNumber() {
-    //   return this.$store.getters.CART;
-    // },
     ...mapGetters({
       quantity: "GET_CART_QUANTITY",
       cartItems: "GET_CART_ITEMS",
@@ -396,3 +394,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped src="./NavigationBar.scss"></style>

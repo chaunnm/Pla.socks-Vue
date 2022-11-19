@@ -84,9 +84,9 @@ export default {
           color: #333;
           font-weight: 500;
         }
-        &:hover {
+        &:not(.active):hover {
           // color: rgba(0, 0, 0, 0.5);
-          background-color: rgba(0, 0, 0, 0.05);
+          background-color: rgba(0, 0, 0, 0.09);
         }
       }
     }

@@ -1,11 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import SignInView from "../views/SignInView.vue";
-import SignUpView from "../views/SignUpView.vue";
-import ForgotPasswordView from "../views/ForgotPasswordView.vue";
-import changePasswordView from "../views/ChangePasswordView.vue";
-import ContactUsView from "../views/ContactUsView.vue";
+import NProgress from "nprogress/nprogress.js";
+import "@/assets/styles/nprogress.scss";
 
 Vue.use(VueRouter);
 
@@ -14,21 +10,18 @@ const routes = [
     path: "/product/:name/:variance?",
     name: "product",
     props: true,
-    component: () =>
-      import("../views/ProductView.vue"),
+    component: () => import("../views/ProductView.vue"),
   },
   {
     path: "/shop",
     name: "shop",
-    component: () =>
-      import("../views/ShopView.vue"),
+    component: () => import("../views/ShopView.vue"),
   },
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () => import("../views/HomeView.vue"),
   },
-
   {
     path: "/our-story",
     name: "our story",
@@ -41,28 +34,38 @@ const routes = [
   {
     path: "/sign-in",
     name: "signIn",
-    component: SignInView,
+    component: () => import("@/views/SignInView.vue"),
   },
   {
     path: "/sign-up",
     name: "signUp",
-    component: SignUpView,
+    component: () => import("@/views/SignUpView.vue"),
   },
   {
     path: "/forgot-password",
     name: "forgotPassword",
-    component: ForgotPasswordView,
+    component: () => import("@/views/ForgotPasswordView.vue"),
   },
   {
     path: "/change-password",
     name: "changePassword",
-    component: changePasswordView,
+    component: () => import("@/views/ChangePasswordView.vue"),
   },
   {
     path: "/contact-us",
     name: "contact-us",
-    component: ContactUsView,
+    component: () => import("@/views/ContactUsView.vue"),
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: () => import("@/views/CartView.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "404",
+    component: () => import("@/views/404NotFound.vue"),
+  }
 ];
 
 const router = new VueRouter({
@@ -70,10 +73,24 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   scrollBehavior() {
-    document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
-  }
+    document.getElementById("app").scrollIntoView({ behavior: "smooth" });
+  },
 });
 
 // router.replace({ path: '*', redirect: '/' })
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+    // Start the route progress bar.
+    NProgress.start()
+  }
+  console.log(from);
+  next()
+})
+
+router.afterEach(() => {
+  // Complete the animation of the route progress bar.
+  NProgress.done()
+})
 
 export default router;

@@ -1,7 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-// import store from "./store";
 import store from "./store";
 import VueToast from "vue-toast-notification";
 // Import one of the available themes
@@ -14,6 +13,9 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import vuetify from "./plugins/vuetify";
 import Vuelidate from "vuelidate";
+import "@/assets/styles/scrollbar.scss";
+
+//Vuelidate
 Vue.use(Vuelidate);
 
 //FontAweSome

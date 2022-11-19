@@ -214,7 +214,7 @@
 </template>
 
 <script>
-import './AboutUs.scss'
+// import "./AboutUs.scss";
 
 export default {
   name: "AboutUs",
@@ -241,3 +241,5 @@ export default {
   watch: {},
 };
 </script>
+
+<style lang="scss" src="./AboutUs.scss" scoped></style>
