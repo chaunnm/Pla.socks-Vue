@@ -6,6 +6,12 @@ import SignUpView from "../views/SignUpView.vue";
 import ForgotPasswordView from "../views/ForgotPasswordView.vue";
 import changePasswordView from "../views/ChangePasswordView.vue";
 import ContactUsView from "../views/ContactUsView.vue";
+import Blog from "../components/Blog/Blog.vue";
+import PrivacyProvicy from "../components/GetHelp/PrivacyProvicy.vue";
+import FAQs from "../components/GetHelp/FAQs.vue";
+import ReturnPolicy from "../components/GetHelp/ReturnPolicy.vue";
+import ShippingInformation from "../components/GetHelp/ShippingInformation.vue";
+import SizingGuide from "../components/GetHelp/SizingGuide.vue";
 
 Vue.use(VueRouter);
 
@@ -14,14 +20,12 @@ const routes = [
     path: "/product/:name/:variance?",
     name: "product",
     props: true,
-    component: () =>
-      import("../views/ProductView.vue"),
+    component: () => import("../views/ProductView.vue"),
   },
   {
     path: "/shop",
     name: "shop",
-    component: () =>
-      import("../views/ShopView.vue"),
+    component: () => import("../views/ShopView.vue"),
   },
   {
     path: "/",
@@ -63,6 +67,36 @@ const routes = [
     name: "contact-us",
     component: ContactUsView,
   },
+  {
+    path: "/privacy-policy",
+    name: "privacy-provicy",
+    component: PrivacyProvicy,
+  },
+  {
+    path: "/FAQs",
+    name: "FAQs",
+    component: FAQs,
+  },
+  {
+    path: "/return-policy",
+    name: "return-policy",
+    component: ReturnPolicy,
+  },
+  {
+    path: "/shipping-information",
+    name: "shipping-information",
+    component: ShippingInformation,
+  },
+  {
+    path: "/sizing-guide",
+    name: "sizing-guide",
+    component: SizingGuide,
+  },
+  {
+    path: "/blog",
+    name: "blog",
+    component: Blog,
+  },
 ];
 
 const router = new VueRouter({
@@ -70,8 +104,8 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   scrollBehavior() {
-    document.getElementById('app').scrollIntoView({ behavior: 'smooth' });
-  }
+    document.getElementById("app").scrollIntoView({ behavior: "smooth" });
+  },
 });
 
 // router.replace({ path: '*', redirect: '/' })

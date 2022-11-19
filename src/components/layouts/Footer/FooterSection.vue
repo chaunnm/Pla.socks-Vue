@@ -80,17 +80,17 @@
         <h2 class="title">GET HELP</h2>
         <div class="line-big"></div>
   
-        <a class="link-page" href="#">Contact us</a>
+        <router-link class="link-page" to="/contact-us">Contact us</router-link>
         <div class="line-small"></div>
-        <a class="link-page" href="#">Privacy Policy</a>
+        <router-link class="link-page" to="/privacy-policy">Privacy Policy</router-link>
         <div class="line-small"></div>
-        <a class="link-page" href="#">FAQs</a>
+        <router-link class="link-page" to="/FAQs">FAQs</router-link>
         <div class="line-small"></div>
-        <a class="link-page" href="#">Return Policy</a>
+        <router-link class="link-page" to="/return-policy">Return Policy</router-link>
         <div class="line-small"></div>
-        <a class="link-page" href="#">Shipping Information</a>
+        <router-link class="link-page" to="/shipping-information">Shipping Information</router-link>
         <div class="line-small"></div>
-        <a class="link-page" href="#">Sizing Guide</a>
+        <router-link class="link-page" to="/sizing-guide">Sizing Guide</router-link>
         <div class="line-small"></div>
       </div>
     </div>
