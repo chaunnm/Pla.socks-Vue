@@ -137,7 +137,9 @@
                   class="responsive-container"
                   v-click-outside="onClickOutside"
                 >
+                
                   <div @click="dialog = false" class="exit-container">
+                    
                     <v-icon dense class="icons-item exit">fa-x</v-icon>
                   </div>
 
@@ -275,7 +277,12 @@
           </li>
         </ul>
         <div class="icons">
-          <v-icon small class="icons-item user">fa-user-tie</v-icon>
+          <router-link v-if="!isAuth" to="/sign-in">
+            <v-icon small class="icons-item user">fa-user-tie</v-icon>
+          </router-link>
+          <i v-else class="fa-solid fa-circle-user "></i>
+          
+          <!-- <v-icon  small class="icons-item user">fa-user-tie</v-icon> -->
 
           <div @click="overlay = !overlay">
             <v-icon small class="icons-item search">fa-magnifying-glass</v-icon>
@@ -364,6 +371,7 @@ export default {
       quantity: "GET_CART_QUANTITY",
       cartItems: "GET_CART_ITEMS",
       totalPrice: "GET_CART_PRICE",
+      isAuth: "getIsAuth",
     }),
     ...mapMutations(["ADD_CART_ITEM", "DELETE_CART_ITEM"]),
   },

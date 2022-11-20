@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import adminUi from "./modules/adminUi";
 import auth from "./modules/auth";
 
 Vue.use(Vuex);
@@ -19,7 +20,8 @@ export default new Vuex.Store({
         productId: 1,
         itemTitle: "Happy High",
         variance: "Type 1",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975991764_6c5aac385ee991d1f32ba5405d596470-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975991764_6c5aac385ee991d1f32ba5405d596470-768x768.jpg",
         stock: "0",
         sold: "0",
         price: 100000,
@@ -34,7 +36,8 @@ export default new Vuex.Store({
         productId: 2,
         itemTitle: "Happy High",
         variance: "Type 2",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975989496_320be5d4342a3a90a48516b143ba6885.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975989496_320be5d4342a3a90a48516b143ba6885.jpg",
         stock: "2",
         sold: "0",
         price: 78500,
@@ -49,7 +52,8 @@ export default new Vuex.Store({
         productId: 3,
         itemTitle: "Happy High",
         variance: "Type 3",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571976000984_b32c5ed8c85e787edb59281f6d7da799-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571976000984_b32c5ed8c85e787edb59281f6d7da799-768x768.jpg",
         stock: "5",
         sold: "0",
         price: 85000,
@@ -64,7 +68,8 @@ export default new Vuex.Store({
         productId: 4,
         itemTitle: "Happy High",
         variance: "Type 4",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 105500,
@@ -79,7 +84,8 @@ export default new Vuex.Store({
         productId: 5,
         itemTitle: "An Nguyen 1",
         variance: "Type 1",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 5000,
@@ -89,13 +95,13 @@ export default new Vuex.Store({
         sale: 30,
         review: [],
         createdAt: "2022-06-16T18:40:48.113Z",
-
       },
       {
         productId: 6,
         itemTitle: "An Nguyen 1",
         variance: "Type 2",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 4000,
@@ -110,7 +116,8 @@ export default new Vuex.Store({
         productId: 7,
         itemTitle: "An Nguyen 1",
         variance: "Type 3",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 1000,
@@ -125,7 +132,8 @@ export default new Vuex.Store({
         productId: 8,
         itemTitle: "An Nguyen 1",
         variance: "Type 4",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 99000,
@@ -140,7 +148,8 @@ export default new Vuex.Store({
         productId: 9,
         itemTitle: "An Nguyen 2",
         variance: "Type 1",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 85000,
@@ -155,7 +164,8 @@ export default new Vuex.Store({
         productId: 10,
         itemTitle: "An Nguyen 2",
         variance: "Type 2",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 50000,
@@ -170,7 +180,8 @@ export default new Vuex.Store({
         productId: 11,
         itemTitle: "An Nguyen 2",
         variance: "Type 3",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 105500,
@@ -185,7 +196,8 @@ export default new Vuex.Store({
         productId: 12,
         itemTitle: "An Nguyen 2",
         variance: "Type 4",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 200000,
@@ -200,7 +212,8 @@ export default new Vuex.Store({
         productId: 13,
         itemTitle: "An Nguyen 3",
         variance: "Type 1",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "5",
         price: 45000,
@@ -215,7 +228,8 @@ export default new Vuex.Store({
         productId: 14,
         itemTitle: "An Nguyen 3",
         variance: "Type 2",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "1000",
         price: 105500,
@@ -230,7 +244,8 @@ export default new Vuex.Store({
         productId: 15,
         itemTitle: "An Nguyen 3",
         variance: "Type 3",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 105500,
@@ -245,7 +260,8 @@ export default new Vuex.Store({
         productId: 16,
         itemTitle: "An Nguyen 3",
         variance: "Type 4",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 105500,
@@ -260,7 +276,8 @@ export default new Vuex.Store({
         productId: 17,
         itemTitle: "An Nguyen 4",
         variance: "Type 1",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 6000,
@@ -270,13 +287,13 @@ export default new Vuex.Store({
         sale: 25,
         review: [],
         createdAt: "2022-01-16T18:40:48.113Z",
-
       },
       {
         productId: 18,
         itemTitle: "An Nguyen 4",
         variance: "Type 2",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 180000,
@@ -286,13 +303,13 @@ export default new Vuex.Store({
         sale: 25,
         review: [],
         createdAt: "2022-01-16T18:40:48.113Z",
-
       },
       {
         productId: 19,
         itemTitle: "An Nguyen 4",
         variance: "Type 3",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 30000,
@@ -307,7 +324,8 @@ export default new Vuex.Store({
         productId: 20,
         itemTitle: "An Nguyen 4",
         variance: "Type 4",
-        image: "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
+        image:
+          "https://plasocks.com/wp-content/uploads/2022/07/z3571975985247_917b2be7dbea1cee4ce04094a34668ab-768x768.jpg",
         stock: "10",
         sold: "0",
         price: 800,
@@ -318,7 +336,6 @@ export default new Vuex.Store({
         review: [],
         createdAt: "2022-01-16T18:40:48.113Z",
       },
-      
     ],
     cartData: [
       // An example of cart item
@@ -351,13 +368,17 @@ export default new Vuex.Store({
       return state.productData;
     },
     GET_PRODUCT_ITEM_BY_ID: (state) => (id) => {
-      return state.productData.find(productItem => productItem._id === id);
+      return state.productData.find((productItem) => productItem._id === id);
     },
     GET_PRODUCT_ITEM_BY_NAME: (state) => (name) => {
-      return state.productData.filter(productItem => productItem.itemTitle === name);
+      return state.productData.filter(
+        (productItem) => productItem.itemTitle === name
+      );
     },
     GET_PRODUCT_ITEM_BY_CATEGORY: (state) => (category) => {
-      return state.productData.filter(productItem => productItem.category === category);
+      return state.productData.filter(
+        (productItem) => productItem.category === category
+      );
     },
 
     //CartItems
@@ -371,11 +392,13 @@ export default new Vuex.Store({
       return quanty;
     },
     GET_CART_PRICE: (state) => {
-      const total = state.cartData.reduce((acc, cartItem) => {
-        return (cartItem.quantity * cartItem.price) + acc;
-      }, 0).toFixed(2);
+      const total = state.cartData
+        .reduce((acc, cartItem) => {
+          return cartItem.quantity * cartItem.price + acc;
+        }, 0)
+        .toFixed(2);
       return total;
-    }
+    },
   },
   mutations: {
     ADD_CART_ITEM: (state, data) => {
@@ -391,9 +414,15 @@ export default new Vuex.Store({
       }
     },
     DELETE_CART_ITEM: (state, id) => {
-      state.cartData.splice(state.cartData.findIndex(item => item.cartId === id), 1);
-    }
+      state.cartData.splice(
+        state.cartData.findIndex((item) => item.cartId === id),
+        1
+      );
+    },
   },
   actions: {},
-  modules: {auth},
+  modules: {
+    auth: auth,
+    adminUI: adminUi,
+  },
 });
