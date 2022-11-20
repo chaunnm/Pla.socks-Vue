@@ -11,7 +11,7 @@
     <div class="breadcrumb">
       <p>
         <router-link to="/">Home</router-link> /
-        <router-link to="/about">Socks For Summer</router-link>
+        <router-link to="/">{{ getClickedProduct.category }}</router-link>
       </p>
     </div>
     <div class="content-container">
@@ -45,8 +45,8 @@
         <p>{{ description }}</p>
         <p>One size: 35-40</p>
         <p>Height: 15cm</p>
-        <p>Thickness: Medium</p>
-        <p>Variance: {{ getClickedProduct.variance }}</p>
+        <p>Thickness: {{ getClickedProduct.thickness }}</p>
+        <p>Variance: Type {{ getClickedProduct.variance }}</p>
         <p class="stock">
           <span>{{ getClickedProduct.stock }} </span> in stock
         </p>
@@ -112,7 +112,6 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import './ProductItem.scss'
 
 export default {
   title: "Pla.Socks",
@@ -217,7 +216,7 @@ export default {
         // this.ADD_CART_ITEM(item);
         this.getClickedProduct.stock -= value;
         this.$toast.open({
-          message: "Product items added to cart successfully! 🐧",
+          message: "Product items added to cart successfully ^.< 🐧",
           type: "success",
           duration: 2000,
           dismissible: true,
@@ -230,6 +229,16 @@ export default {
         active: this.selectedItem === index,
       };
     },
+  },
+  created() {
+    const temp = this.getProductsSameName.length - this.variance;
+    if (this.variance != 0 && this.variance && temp >= 0) {
+      this.selectedItem = this.variance - 1;
+    } else if (temp < 0) {
+      this.$router.push(`/404`);
+    } else {
+      this.selectedItem = 0;
+    }
   },
   computed: {
     formatOriginalPrice() {
@@ -246,7 +255,7 @@ export default {
     manipulateItemSelect() {
       var id = this.cartQuantity + 1;
       var itemSelect = {
-        cardId: id,
+        cartId: id,
         quantity: 1,
       };
       var { stock, height, thickness, ...newObj } = this.getClickedProduct;
@@ -259,7 +268,7 @@ export default {
       return this.productItemsName(this.name);
     },
     ...mapGetters({
-      cartQuantity: "GET_CART_ITEMS",
+      cartQuantity: "GET_CART_QUANTITY",
       productItems: "GET_PRODUCT_ITEMS",
       productItemsId: "GET_PRODUCT_ITEM_BY_ID",
       productItemsName: "GET_PRODUCT_ITEM_BY_NAME",
@@ -276,3 +285,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped src="./ProductItem.scss"></style>

@@ -131,6 +131,8 @@ const auth = {
     },
   },
   getters: {
+    getUserQuantity: (state) => state.auth.user.length,
+    getCurrentUser: (state) => state.auth.userCurent,
     getUserAll: (state) => {
       console.log("get");
       return state.auth.user;

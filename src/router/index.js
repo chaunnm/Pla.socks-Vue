@@ -8,6 +8,9 @@ import changePasswordView from "../views/ChangePasswordView.vue";
 import ContactUsView from "../views/ContactUsView.vue";
 import AdminUserView from "../views/AdminView/AdminUserView.vue";
 import AdminUserAddView from "../views/AdminView/AdminUserAddView.vue";
+import NProgress from "nprogress/nprogress.js";
+import "@/assets/styles/nprogress.scss";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -25,9 +28,8 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () => import("../views/HomeView.vue"),
   },
-
   {
     path: "/our-story",
     name: "our story",
@@ -40,27 +42,27 @@ const routes = [
   {
     path: "/sign-in",
     name: "signIn",
-    component: SignInView,
+    component: () => import("@/views/SignInView.vue"),
   },
   {
     path: "/sign-up",
     name: "signUp",
-    component: SignUpView,
+    component: () => import("@/views/SignUpView.vue"),
   },
   {
     path: "/forgot-password",
     name: "forgotPassword",
-    component: ForgotPasswordView,
+    component: () => import("@/views/ForgotPasswordView.vue"),
   },
   {
     path: "/change-password",
     name: "changePassword",
-    component: changePasswordView,
+    component: () => import("@/views/ChangePasswordView.vue"),
   },
   {
     path: "/contact-us",
     name: "contact-us",
-    component: ContactUsView,
+    component: () => import("@/views/ContactUsView.vue"),
   },
   {
     path: "/admin-users",
@@ -72,6 +74,16 @@ const routes = [
     name: "adminUsersAdd",
     component: AdminUserAddView,
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: () => import("@/views/CartView.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "404",
+    component: () => import("@/views/404NotFound.vue"),
+  }
 ];
 
 const router = new VueRouter({
@@ -84,5 +96,19 @@ const router = new VueRouter({
 });
 
 // router.replace({ path: '*', redirect: '/' })
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+    // Start the route progress bar.
+    NProgress.start()
+  }
+  console.log(from);
+  next()
+})
+
+router.afterEach(() => {
+  // Complete the animation of the route progress bar.
+  NProgress.done()
+})
 
 export default router;

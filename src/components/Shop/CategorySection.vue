@@ -4,14 +4,22 @@
     <hr />
     <div class="categoryList-container">
       <ul class="level-1">
-        <li @click="selectedCategory = 'Boxes Of Love'">
+        <li
+          :class="selectedCategory === 'Boxes Of Love' ? 'active' : 'inactive'"
+          @click="selectedCategory = 'Boxes Of Love'"
+        >
           <img
             src="https://drive.google.com/uc?id=10Xz6m5wn_sT6NKTrNetyW_ckcuDeK2SK"
             alt=""
           />
           <p>Boxes Of Love (1)</p>
         </li>
-        <li @click="selectedCategory = 'Customized Socks'">
+        <li
+          :class="
+            selectedCategory === 'Customized Socks' ? 'active' : 'inactive'
+          "
+          @click="selectedCategory = 'Customized Socks'"
+        >
           <img
             src="https://drive.google.com/uc?id=1q_cr9tB0MYyNacHq16_DvkQQcIIg-nkn"
             alt=""
@@ -41,7 +49,10 @@
             <p>Standard & Athlete Socks (5)</p>
           </li>
         </ul>
-        <li @click="selectedCategory = 'Socks For Kids'">
+        <li
+          :class="selectedCategory === 'Socks For Kids' ? 'active' : 'inactive'"
+          @click="selectedCategory = 'Socks For Kids'"
+        >
           <img
             src="https://drive.google.com/uc?id=18emIX5Asf8BTTyAaYWEBD2s2bRTkjLQm"
             alt=""
@@ -64,21 +75,34 @@
             <p>Knee-High Socks (8)</p>
           </li>
         </ul>
-        <li @click="selectedCategory = 'Socks For Men'">
+        <li
+          :class="selectedCategory === 'Socks For Men' ? 'active' : 'inactive'"
+          @click="selectedCategory = 'Socks For Men'"
+        >
           <img
             src="https://drive.google.com/uc?id=1Ni0lGCZ-tbYy_B10xSy82KC66Lm6qObj"
             alt=""
           />
           <p>Socks For Men (9)</p>
         </li>
-        <li @click="selectedCategory = 'Socks For Women'">
+        <li
+          :class="
+            selectedCategory === 'Socks For Women' ? 'active' : 'inactive'
+          "
+          @click="selectedCategory = 'Socks For Women'"
+        >
           <img
             src="https://drive.google.com/uc?id=1SZK0QWvp7NY_VdyA5Z3hfK70a2RYvt8C"
             alt=""
           />
           <p>Socks For Women (10)</p>
         </li>
-        <li @click="selectedCategory = 'Socks For Winter'">
+        <li
+          :class="
+            selectedCategory === 'Socks For Winter' ? 'active' : 'inactive'
+          "
+          @click="selectedCategory = 'Socks For Winter'"
+        >
           <img
             src="https://drive.google.com/uc?id=1W184eml-Lj6FyonVwC6nIfxPrHdvKanb"
             alt=""
@@ -91,7 +115,6 @@
 </template>
 
 <script>
-
 export default {
   name: "CategorySection",
   data: () => ({
@@ -113,63 +136,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.main-container {
-  max-width: 300px;
-  width: 100%;
-  min-height: 100%;
-  h3 {
-    font-weight: 500;
-    font-size: 20px;
-    color: black;
-  }
-  hr {
-    width: 40px;
-    border: none;
-    height: 2px;
-    margin: 7px 0;
-    background-color: rgb(91, 91, 91);
-  }
-  .categoryList-container {
-    ul {
-      list-style: none;
-      &.level-1 {
-        padding-left: 0;
-      }
-      li {
-        padding: 10px;
-        cursor: pointer;
-        transition: 0.3s ease;
-        border-radius: 3px;
-        display: flex;
-        p {
-          margin-bottom: 0;
-          margin: auto 0;
-        }
-        img {
-          width: 30px;
-          height: 30px;
-        }
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.09);
-        }
-      }
-      &.level-2 {
-        li {
-          img {
-            width: 25px;
-            height: 25px;
-            margin-top: auto;
-            margin-bottom: auto;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 850px) {
-  .main-container {
-  }
-}
-</style>
+<style lang="scss" src="./CategorySection.scss" scoped></style>

@@ -1,6 +1,9 @@
 <template>
   <div class="shop">
-    <FilterSection @changeFilter="updateFilter($event)" />
+    <FilterSection
+      @changeFilter="updateFilter($event)"
+      @changeCategory="updateCategory($event)"
+    />
     <div class="shop-container">
       <CategorySection
         id="categorySection"
@@ -146,7 +149,7 @@ export default {
         grid-template-columns: repeat(4, 1fr);
         transition: all 0.5s ease-in-out;
         column-gap: 7px;
-        row-gap: 10px;
+        row-gap: 2rem;
       }
       .pagination {
         padding: 10px 0;
