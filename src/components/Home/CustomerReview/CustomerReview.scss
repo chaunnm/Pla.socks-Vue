@@ -1,0 +1,14 @@
+.review-container {
+    // margin-left: 40px;
+
+    .carousel-container {
+        max-width: 100vw;
+        display: flex;
+
+        .carousel-main {
+            position: relative;
+            width: 100%;
+            flex: 0 1 auto;
+        }
+    }
+}

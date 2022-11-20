@@ -86,6 +86,19 @@ export default {
                     password: this.password,
                 }
                 this.$store.commit("SIGNIN", newUser)
+                this.$toast.open({
+                    message: "Bạn đã đăng nhập thành công hãy tiếp tục mua sắm nào",
+                    type: "success",
+                    duration: 2000,
+                    dismissible: true,
+                    position: "bottom",
+                });
+                setTimeout(()=>{
+                    this.$router.push("/")
+                }, 2000)
+                
+
+               
                 this.clear();
             }
         },

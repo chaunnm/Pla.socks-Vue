@@ -17,7 +17,7 @@
 
         h3 {
             color: white;
-            margin-top: 40%;
+            margin-top: 30%;
             animation: moveRightLeft 2s ease-out;
             animation-delay: .5s;
             animation-fill-mode: backwards;
@@ -253,6 +253,33 @@
                 opacity: 1;
                 transform: translateX(0px);
             }
+        }
+    }
+    @media screen and (max-width: 900px){
+        .banner{
+            justify-content: flex-start;
+            
+            h3{
+                margin-top: 30%;
+                margin-left: 20px;
+                font-size: 13px;
+            }
+        }
+        .main{
+            width: 100%;
+        }
+        .map{
+            padding: 10px;
+        }
+    }
+    @media screen and (max-width: 750px){
+        .main{
+            .section{
+                display: block;
+            }
+        }
+        .map{
+            padding: 10px;
         }
     }
 }

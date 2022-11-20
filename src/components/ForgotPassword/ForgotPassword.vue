@@ -11,12 +11,9 @@
                     You will receive a link to create a new password via email.</span>
         
                 </div>
-                <!-- <div class="btn-submit" @click="submit">
-                                SUBMIT
-                            </div> -->
+                
                 <div class="text-box" @click="submit">
                     <span class="btn btn-white btn-animated">SUBMIT</span>
-                    <!-- <a href="#" class="btn btn-white btn-animated">SUBMIT</a> -->
                 </div>
             </form>
         </div>
