@@ -188,7 +188,7 @@
                       >
                     </div>
                     <div @click="dialog = false">
-                      <router-link to="/product" @click="dialog = false"
+                      <router-link to="/blog" @click="dialog = false"
                         ><li>BLOG</li></router-link
                       >
                     </div>
@@ -266,7 +266,7 @@
           </li>
           <li>
             <router-link
-              to="/product"
+              to="/blog"
               :class="selectedLink === 'blog' ? 'Active' : 'inActive'"
               >BLOG</router-link
             >

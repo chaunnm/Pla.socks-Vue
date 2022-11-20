@@ -10,6 +10,12 @@ import AdminUserView from "../views/AdminView/AdminUserView.vue";
 import AdminUserAddView from "../views/AdminView/AdminUserAddView.vue";
 import NProgress from "nprogress/nprogress.js";
 import "@/assets/styles/nprogress.scss";
+import Blog from "../components/Blog/Blog.vue";
+import PrivacyProvicy from "../components/GetHelp/PrivacyProvicy.vue";
+import FAQs from "../components/GetHelp/FAQs.vue";
+import ReturnPolicy from "../components/GetHelp/ReturnPolicy.vue";
+import ShippingInformation from "../components/GetHelp/ShippingInformation.vue";
+import SizingGuide from "../components/GetHelp/SizingGuide.vue";
 
 Vue.use(VueRouter);
 
@@ -84,6 +90,36 @@ const routes = [
     name: "404",
     component: () => import("@/views/404NotFound.vue"),
   }
+  {
+    path: "/privacy-policy",
+    name: "privacy-provicy",
+    component: PrivacyProvicy,
+  },
+  {
+    path: "/FAQs",
+    name: "FAQs",
+    component: FAQs,
+  },
+  {
+    path: "/return-policy",
+    name: "return-policy",
+    component: ReturnPolicy,
+  },
+  {
+    path: "/shipping-information",
+    name: "shipping-information",
+    component: ShippingInformation,
+  },
+  {
+    path: "/sizing-guide",
+    name: "sizing-guide",
+    component: SizingGuide,
+  },
+  {
+    path: "/blog",
+    name: "blog",
+    component: Blog,
+  },
 ];
 
 const router = new VueRouter({
