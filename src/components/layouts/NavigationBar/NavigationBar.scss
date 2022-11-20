@@ -119,7 +119,7 @@
     }
 }
 
-.container::v-deep .v-overlay--absolute {
+.nav-container::v-deep .v-overlay--absolute {
     position: fixed !important;
 }
 
@@ -147,7 +147,7 @@
     }
 }
 
-.container {
+.nav-container {
     .v-overlay {
         max-height: 100vh;
         align-items: normal !important;
@@ -636,6 +636,10 @@
                         color: black;
                     }
                 }
+                .fa-circle-user{
+                    font-size: 30px;
+                    color: #4db7b3;
+                }
 
                 .search {
                     border: 1px solid #4db7b3;
@@ -667,7 +671,7 @@
 }
 
 @media screen and (max-width: 850px) {
-    .container {
+    .nav-container {
         .topBar {
             display: none;
         }
@@ -697,7 +701,7 @@
 }
 
 @media screen and (max-width: 850px) {
-    .container {
+    .nav-container {
         .topBar {
             display: none;
         }

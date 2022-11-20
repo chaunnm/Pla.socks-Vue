@@ -107,21 +107,15 @@
             </div>
             <div class="map">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9101190579645!2d106.68886101425673!3d10.81819016138096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529260f4f7081%3A0xc10d439da929a07c!2zQ1QgUGxhemEgTmd1ecOqbiBI4buTbmc!5e0!3m2!1svi!2s!4v1668631804820!5m2!1svi!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.898253528862!2d106.6906769139761!3d10.819097961365031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529a475566011%3A0x8f5b852463203cdf!2zNjQgTmd1ecOqbiBI4buTbmcsIFBoxrDhu51uZyAxLCBHw7IgVuG6pXAsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCA3MTAwMDQsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1668428690095!5m2!1sen!2s"
                 width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            
-            
+            </div>        
         </div>
-        
-
     </div>
 </template>
 
 <script>
-import './ContactUs.scss'
-
 export default {
     name: "ContactUs",
     data: () =>({
@@ -155,3 +149,6 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" src="./ContactUs.scss" scoped>
+</style>

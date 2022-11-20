@@ -1,11 +1,17 @@
 <template>
   <v-app>
     <v-main>
-      <LayoutDefault>
+      <AdminLayout v-if="isAdmin && getShowAdmin">
+        <template v-slot:default>
+          <router-view />
+        </template>
+      </AdminLayout>
+      <LayoutDefault v-else>
         <template v-slot:default>
           <router-view />
         </template>
       </LayoutDefault>
+
       <div
         id="pagetop"
         class="fixed right-0 bottom-0"
@@ -22,11 +28,14 @@
 </template>
 
 <script>
+import AdminLayout from "./components/Admin/AdminLayout/AdminLayout.vue";
 import LayoutDefault from "@/components/layouts/Layout.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "App",
   components: {
     LayoutDefault,
+    AdminLayout,
   },
   data: () => ({
     scTimer: 0,
@@ -49,6 +58,13 @@ export default {
         top: 0,
         behavior: "smooth",
       });
+    },
+  },
+  computed: {
+    ...mapGetters(["getShowAdmin"]),
+    isAdmin() {
+      // return true;
+      return this.$store.getters.getUserCurrent.admin;
     },
   },
 };
