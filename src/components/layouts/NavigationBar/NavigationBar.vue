@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="nav-container">
     <v-overlay
       v-model="overlay"
       :opacity="0.8"
