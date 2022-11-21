@@ -2,6 +2,7 @@
   <div id="container">
     <ProductItem :name="name" :variance="variance" />
     <CommentRate />
+    <Slides />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 
 import ProductItem from "@/components/Product/ProductItem/ProductItem.vue";
 import CommentRate from "@/components/Product/CommentRate/CommentRate.vue";
+import Slides from "@/components/Slider/SlidesRelatedProduct.vue";
 
 export default {
   name: "ProductView",
@@ -17,6 +19,7 @@ export default {
   components: {
     ProductItem,
     CommentRate,
+    Slides
   },
 };
 </script>
