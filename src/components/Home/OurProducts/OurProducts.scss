@@ -1,0 +1,35 @@
+.ourProduct-container {
+  font-family: "Montserrat", Avenir, Helvetica, Arial, sans-serif !important;
+  padding: 10px 100px;
+  background-color: rgb(236, 240, 245);
+
+  .title {
+    h3 {
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #555;
+    }
+  }
+
+  .categories-container {
+
+  }
+}
+
+@media screen and (min-width: 1600px) {
+    .ourProduct-container {
+        padding: 10px 200px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .ourProduct-container {
+        padding: 10px 40px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .ourProduct-container {
+        padding: 5px 10px;
+    }
+}

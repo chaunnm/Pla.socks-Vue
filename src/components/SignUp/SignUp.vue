@@ -120,6 +120,9 @@ export default {
                     email: this.email,
                     password: this.password,
                     admin: false,
+                    phone: "",
+                    img: "https://1.bp.blogspot.com/-ZpujRR4C2mE/U2WpXLpFETI/AAAAAAAAPSc/I2YshWDsjRA/s1600/Yondaime+Chibi.png",
+                    
                 }
                 this.$store.commit("SIGNUP",newUser)
                 this.$toast.open({

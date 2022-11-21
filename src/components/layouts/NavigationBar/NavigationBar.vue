@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="nav-container">
     <v-overlay
       v-model="overlay"
       :opacity="0.8"
@@ -58,18 +58,21 @@
           <p>SUBTOTAL:</p>
           <p class="total-price">{{ formatOriginalPrice(totalPrice) }}</p>
         </div>
-        <v-btn
-          color="#4db7b3"
-          tile
-          style="
-            color: white;
-            width: 100%;
-            font-weight: 600;
-            font-size: 16px;
-            padding: 5px 0;
-          "
-          >VIEW CART</v-btn
-        >
+        <router-link to="/cart">
+          <v-btn
+            color="#4db7b3"
+            tile
+            style="
+              text-decoration: none;
+              color: white;
+              width: 100%;
+              font-weight: 600;
+              font-size: 16px;
+              padding: 5px 0;
+            "
+            >VIEW CART</v-btn
+          >
+        </router-link>
         <v-btn
           color="#F299C2"
           tile
@@ -137,7 +140,9 @@
                   class="responsive-container"
                   v-click-outside="onClickOutside"
                 >
+                
                   <div @click="dialog = false" class="exit-container">
+                    
                     <v-icon dense class="icons-item exit">fa-x</v-icon>
                   </div>
 
@@ -275,7 +280,12 @@
           </li>
         </ul>
         <div class="icons">
-          <v-icon small class="icons-item user">fa-user-tie</v-icon>
+          <router-link v-if="!isAuth" to="/sign-in">
+            <v-icon small class="icons-item user">fa-user-tie</v-icon>
+          </router-link>
+          <i v-else class="fa-solid fa-circle-user "></i>
+          
+          <!-- <v-icon  small class="icons-item user">fa-user-tie</v-icon> -->
 
           <div @click="overlay = !overlay">
             <v-icon small class="icons-item search">fa-magnifying-glass</v-icon>
@@ -298,7 +308,6 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
-import './NavigationBar.scss'
 
 export default {
   title: "Pla.Socks",
@@ -356,14 +365,11 @@ export default {
   },
 
   computed: {
-    // ...mapState(["cartNumber"]),
-    // cartNumber() {
-    //   return this.$store.getters.CART;
-    // },
     ...mapGetters({
       quantity: "GET_CART_QUANTITY",
       cartItems: "GET_CART_ITEMS",
       totalPrice: "GET_CART_PRICE",
+      isAuth: "getIsAuth",
     }),
     ...mapMutations(["ADD_CART_ITEM", "DELETE_CART_ITEM"]),
   },
@@ -396,3 +402,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped src="./NavigationBar.scss"></style>
