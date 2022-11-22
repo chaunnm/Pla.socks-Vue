@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import adminUi from "./modules/adminUi";
+// import adminUi from "./modules/adminUi";
 import auth from "./modules/auth";
 import products from "./modules/products";
 import cart from "./modules/cart";
