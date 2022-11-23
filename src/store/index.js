@@ -22,5 +22,6 @@ export default new Vuex.Store({
     category: category,
     coupon: coupon,
     orders: orders,
+    adminUi: adminUi,
   },
 });

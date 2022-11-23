@@ -1,5 +1,5 @@
 <template>
-  <div class="AdminNavber-container">
+  <div class="AdminSidebar-container">
     <v-navigation-drawer
       app
       clipped
@@ -39,12 +39,12 @@
             link
           >
             <v-list-item-action>
-              <v-icon size="28" :color="item.color ? item.color : ''">{{
+              <v-icon size="23" :color="item.color ? item.color : ''">{{
                 item.icon
               }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title class="grey--text" link>
+              <v-list-item-title class="grey--text body-1" link>
                 {{ item.title }}
               </v-list-item-title>
             </v-list-item-content>
@@ -73,27 +73,35 @@ export default {
         },
         { divider: true },
         { heading: "ADMINISTRATION" },
-        { title: "User", icon: "fa-solid fa-users", link: "/admin-users" },
         {
-          title: "Product Categories",
-          icon: "fa-brands fa-slack",
-          link: "/AdminCategories",
+          title: "User",
+          icon: "fa-solid fa-user-astronaut",
+          link: "/admin/user",
         },
-        { title: "Products", icon: "fa-solid fa-socks", link: "/AdminProduct" },
-        { title: "Order", icon: "fa-solid fa-file", link: "/AdminOrder" },
-        { title: "Blogs", icon: "fa-solid fa-blog", link: "/AdminBlogs" },
+        {
+          title: "Product Category",
+          icon: "fa-brands fa-slack",
+          link: "/admin/category",
+        },
+        { title: "Product", icon: "fa-solid fa-socks", link: "/admin/product" },
+        {
+          title: "Order",
+          icon: "fa-solid fa-file-invoice-dollar",
+          link: "/admin/order",
+        },
+        { title: "Blog", icon: "fa-solid fa-blog", link: "/admin/blog" },
         { divider: true },
         { heading: "APPS" },
-        { title: "To do", icon: "fa-solid fa-list", link: "/AdminTodoo" },
+        { title: "To do", icon: "fa-solid fa-list", link: "/admin/todo" },
         {
           title: "Calendar",
           icon: "fa-solid fa-calendar-days",
-          link: "/AdminCalendar",
+          link: "/admin/calendar",
         },
         {
           title: "Color Picker",
           icon: "fa-solid fa-palette",
-          link: "/AdminColor",
+          link: "/admin/color",
         },
       ],
       sidebarWidth: 240,
@@ -111,7 +119,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.AdminNavber-container::v-deep .v-navigation-drawer {
+.AdminSidebar-container::v-deep .v-navigation-drawer {
   .v-list-item--active .v-list-item__action {
     // color: red;
     animation: spinaround 5s infinite linear;

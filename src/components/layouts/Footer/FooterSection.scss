@@ -1,12 +1,13 @@
 .wrapper {
     background-color: #fbfcfc;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 
     .container {
         font-family: "Montserrat", Avenir, Helvetica, Arial, sans-serif !important;
-        // max-width: 1080px;
+        max-width: 1080px;
         display: flex;
-        justify-content: space-evenly;
-        padding: 30px 0;
+        justify-content: space-around;
+        padding: 30px 10px;
 
         .column {
             h2 {
@@ -14,7 +15,7 @@
                 color: #777;
                 font-weight: 500 !important;
                 line-height: 1.5;
-                letter-spacing: .05em !important;
+                letter-spacing: 0.05em !important;
                 text-transform: uppercase;
 
                 span {
@@ -35,10 +36,8 @@
                 display: flex;
                 text-decoration: none;
                 align-items: center;
-                display: flex;
                 line-height: 0;
                 // transition: transform 1s ease;
-
 
                 .icon {
                     display: block;
@@ -58,7 +57,7 @@
                 }
 
                 &:hover {
-                    transition: transform .1s ease;
+                    transition: transform 0.1s ease;
                     transform: scale(1.05);
                     color: #919191 !important;
                 }
@@ -83,9 +82,7 @@
                 width: 220px;
                 // width: 100%;
             }
-
         }
-
     }
 
     .payment {
@@ -105,8 +102,8 @@
 
         &-icon {
             display: flex;
-            opacity: .6;
-            transition: opacity .3s;
+            opacity: 0.6;
+            transition: opacity 0.3s;
             border-radius: 5px;
             padding: 6px;
             margin: 3px 3px 0;
@@ -124,18 +121,17 @@
 
         .copyright {
             color: #fff;
-            opacity: .6;
+            opacity: 0.6;
             font-size: 15px !important;
         }
     }
 }
 
-
 @media screen and (max-width: 900px) {
     .wrapper {
         .container {
             flex-direction: column;
-            margin: 20px;
+            // margin: 20px;
 
             .column {
                 h2 {
@@ -153,11 +149,32 @@
                     .social:nth-child(2) {
                         margin: 0 20px;
                     }
-
                 }
 
                 .line-small {
                     width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 412px) {
+    .wrapper {
+        .container {
+            .column {
+                &:first-of-type {
+                    .items {
+                        flex-direction: column;
+                        a {
+                            &:nth-child(2) {
+                                margin-left: 0;
+                            }
+                        }
+                    }
+                }
+                .link-page {
+                    padding: 10px 0;
                 }
             }
         }
