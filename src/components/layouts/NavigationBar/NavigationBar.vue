@@ -12,7 +12,7 @@
         </div>
 
         <div class="search-frame" v-click-outside="onClickOutside">
-          <div class="col-3 input-effect">
+          <div class="column-search input-effect">
             <input class="effect-20" type="text" placeholder="" />
             <label>Search</label>
           </div>
@@ -140,14 +140,12 @@
                   class="responsive-container"
                   v-click-outside="onClickOutside"
                 >
-                
                   <div @click="dialog = false" class="exit-container">
-                    
                     <v-icon dense class="icons-item exit">fa-x</v-icon>
                   </div>
 
                   <div class="search-frame">
-                    <div class="col-3 input-effect">
+                    <div class="column-search input-effect">
                       <input class="effect-20" type="text" placeholder="" />
                       <label>Search</label>
                     </div>
@@ -156,8 +154,11 @@
                     >
                   </div>
                   <ul class="links">
-                    <div @click="dialog = false">
-                      <router-link to="/"><li>PLA.SOCKS</li></router-link>
+                    <div @click="dialog = false" v-if="!isAuth">
+                      <router-link to="/sign-in"><li>SIGN IN</li></router-link>
+                    </div>
+                    <div @click="dialog = false" v-else>
+                      <router-link to="/"><li>ACCOUNT</li></router-link>
                     </div>
                     <li @click="dropdown = !dropdown">
                       <router-link to="/shop">
@@ -283,8 +284,59 @@
           <router-link v-if="!isAuth" to="/sign-in">
             <v-icon small class="icons-item user">fa-user-tie</v-icon>
           </router-link>
-          <i v-else class="fa-solid fa-circle-user "></i>
-          
+          <v-menu v-else offset-y bottom transition="slide-y-transition">
+            <!-- <template v-slot:activator="{ on, attrs }">
+              <i v-bind="attrs" v-on="on" class="fa-solid fa-circle-user"></i>
+            </template> -->
+            <template v-slot:activator="{ on, attrs }">
+              <!-- <v-btn color="primary" dark v-bind="attrs" v-on="on">
+                Dropdown
+              </v-btn> -->
+              <div v-bind="attrs" v-on="on">
+                <img
+                  class="current-ava"
+                  :src="currentUser.img"
+                  alt=""
+                  v-if="currentUser.img"
+                />
+                <i class="fa-solid fa-circle-user" v-else></i>
+              </div>
+            </template>
+
+            <v-list>
+              <v-list-item
+                v-if="currentUser.admin"
+                @click="handleChangeLayout()"
+              >
+                <v-list-item-title> Admin Dashboard</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title
+                  ><router-link class="account-links" to="/shop"
+                    >My Account</router-link
+                  ></v-list-item-title
+                >
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title
+                  ><router-link class="account-links" to="/"
+                    >My Favorite</router-link
+                  ></v-list-item-title
+                >
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title
+                  ><router-link class="account-links" to="/"
+                    >My Orders</router-link
+                  ></v-list-item-title
+                >
+              </v-list-item>
+              <v-list-item @click="handleSignOut()">
+                <v-list-item-title>Log Out</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
           <!-- <v-icon  small class="icons-item user">fa-user-tie</v-icon> -->
 
           <div @click="overlay = !overlay">
@@ -362,6 +414,21 @@ export default {
         position: "bottom",
       });
     },
+    handleChangeLayout() {
+      this.$store.commit("CHANGELAYOUT");
+    },
+    handleSignOut() {
+      this.$store.commit("SIGNOUT");
+      if (this.isAuth === false) {
+        this.$toast.open({
+          message: "🙈 You have successfully signed out! 🙉",
+          type: "success",
+          duration: 2000,
+          dismissible: true,
+          position: "bottom",
+        });
+      }
+    },
   },
 
   computed: {
@@ -370,8 +437,14 @@ export default {
       cartItems: "GET_CART_ITEMS",
       totalPrice: "GET_CART_PRICE",
       isAuth: "getIsAuth",
+      currentUser: "getUserCurrent",
     }),
-    ...mapMutations(["ADD_CART_ITEM", "DELETE_CART_ITEM"]),
+    ...mapMutations([
+      "ADD_CART_ITEM",
+      "DELETE_CART_ITEM",
+      "CHANGELAYOUT",
+      "SIGNOUT",
+    ]),
   },
   watch: {
     drawer(value) {

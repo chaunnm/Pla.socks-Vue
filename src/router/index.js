@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import AdminUserView from "../views/AdminView/AdminUserView.vue";
+import AdminUserAddView from "../views/AdminView/AdminUserAddView.vue";
 import NProgress from "nprogress/nprogress.js";
 import "@/assets/styles/nprogress.scss";
 
@@ -24,7 +26,7 @@ const routes = [
   },
   {
     path: "/our-story",
-    name: "our story",
+    name: "our-story",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -55,16 +57,6 @@ const routes = [
     path: "/contact-us",
     name: "contact-us",
     component: () => import("@/views/ContactUsView.vue"),
-  },
-  {
-    path: "/admin-users",
-    name: "adminUsers",
-    component: () => import("@/views/AdminView/AdminUserView.vue"),
-  },
-  {
-    path: "/admin-users-add-new",
-    name: "adminUsersAdd",
-    component: () => import("@/views/AdminView/AdminUserAddView.vue"),
   },
   {
     path: "/cart",
@@ -102,6 +94,81 @@ const routes = [
     component: () => import("@/components/Blog/Blog.vue"),
   },
   {
+    path: "/admin/user",
+    name: "admin-user",
+    component: AdminUserView,
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/user/add",
+    name: "admin-user-add",
+    component: AdminUserAddView,
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+
+  // Admin Section
+
+  // {
+  //   path: "/admin/user/update/:id",
+  //   name: "admin-user-update",
+  //   component: AdminUserUpdateView,
+  //   meta: {
+  //     requiredAdmin: true,
+  //   },
+  // },
+  {
+    path: "/admin/category",
+    name: "admin-category",
+    component: () => import("@/views/AdminView/AdminCategoryView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/category/add",
+    name: "admin-category-add",
+    component: () => import("@/views/AdminView/AdminCategoryAddView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/category/update/:cateId(\\d+)",
+    name: "admin-category-update",
+    component: () => import("@/views/AdminView/AdminCategoryUpdateView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/product",
+    name: "admin-product",
+    component: () => import("@/views/AdminView/AdminProductView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/product/add",
+    name: "admin-product-add",
+    component: () => import("@/views/AdminView/AdminProductAddView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/product/update/:prodId(\\d+)",
+    name: "admin-product-update",
+    component: () => import("@/views/AdminView/AdminProductUpdateView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "404",
     component: () => import("@/views/404NotFound.vue"),
@@ -117,20 +184,34 @@ const router = new VueRouter({
   },
 });
 
-// router.replace({ path: '*', redirect: '/' })
 router.beforeResolve((to, from, next) => {
   // If this isn't an initial page load.
   if (to.name) {
     // Start the route progress bar.
-    NProgress.start()
+    NProgress.start();
   }
   console.log(from);
-  next()
-})
+  next();
+});
 
 router.afterEach(() => {
   // Complete the animation of the route progress bar.
-  NProgress.done()
-})
+  NProgress.done();
+});
+
+// const auth = store.getters['auth/getIsAuth'];
+// const currentUser = store.getters["auth/getUserCurrentAdmin"];
+
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiredAdmin) {
+//     if (currentUser === true) {
+//       next();
+//     } else {
+//       next("/sign-in");
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

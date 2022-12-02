@@ -127,18 +127,21 @@ const auth = {
         password: "",
         email: "",
         admin: false,
+        img: "",
       },
+      getShowAdmin: false,
     },
   },
   getters: {
     getUserQuantity: (state) => state.auth.user.length,
     getCurrentUser: (state) => state.auth.userCurent,
     getUserAll: (state) => {
-      console.log("get");
       return state.auth.user;
     },
     getIsAuth: (state) => state.auth.isAuth,
     getUserCurrent: (state) => state.auth.userCurent,
+    getShowAdmin: (state) => state.auth.getShowAdmin,
+    getUserCurrentAdmin: (state) => state.auth.userCurent.admin,
   },
   setters: {},
   mutations: {
@@ -146,55 +149,51 @@ const auth = {
       const newArray = state.auth.user.filter((item) => item.id !== payload);
       state.auth.user = newArray;
     },
+    DELETE_USERS_ID: (state, payload) => {
+      state.auth.user = state.auth.user.filter(item => !payload.includes(item.id));
+    },
     SIGNUP(state, payload) {
-      console.log("userList", state.auth.user);
-      console.log("usernew", payload);
       state.auth.user.push(payload);
     },
     SIGNIN(state, payload) {
-      console.log(payload);
       //   state.auth.isAuth = true;
       state.auth.user.map((u) => {
         if (u.name == payload.name && u.password == payload.password) {
           state.auth.isAuth = true;
           state.auth.userCurent = u;
-          console.log(u.name);
         }
       });
     },
     CHANGEPASSWORD(state, payload) {
-      console.log("data", payload);
       state.auth.user.map((u) => {
         if (u.email == payload.email && u.password == payload.password) {
           const oldUser = u;
-          console.log("u: ", u.email);
           const newUser = {
             ...oldUser,
             password: payload.newPassword,
           };
-          console.log(newUser);
           const lisetfilter = state.auth.user.filter((u) => {
             return u != oldUser;
           });
-          console.log(lisetfilter);
           lisetfilter.push(newUser);
-          console.log("listNew: ", lisetfilter);
           state.auth.user = lisetfilter;
         }
       });
     },
     SIGNOUT(state) {
-      if (state.auth.isAuth == true) {
-        state.auth.isAuth == false,
-          state.auth.userCurent ==
-            {
-              id: "",
-              name: "",
-              password: "",
-              email: "",
-              admin: false,
-            };
+      if (state.auth.isAuth === true) {
+        state.auth.isAuth = false;
+        state.auth.userCurent = {
+          id: "",
+          name: "",
+          password: "",
+          email: "",
+          admin: false,
+        };
       }
+    },
+    CHANGELAYOUT(state) {
+      state.auth.getShowAdmin = !state.auth.getShowAdmin;
     },
   },
 };

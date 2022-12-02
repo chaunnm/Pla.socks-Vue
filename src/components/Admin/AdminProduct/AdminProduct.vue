@@ -1,15 +1,15 @@
 <template>
-  <div class="adminUser-container">
+  <div class="admin-product-container">
     <div class="section">
       <div class="section-left">
         <h3>List</h3>
         <h2>
-          User
-          <i class="fa-solid fa-user-astronaut"></i>
+          Product
+          <i class="fa-solid fa-socks"></i>
         </h2>
       </div>
       <div class="section-right">
-        <router-link to="/admin/user/add">
+        <router-link to="/admin/product/add">
           <div class="text-box">
             <span class="btn btn-white btn-animated">+ Add New</span>
           </div>
@@ -30,44 +30,52 @@
             label="Search"
             single-line
             hide-details
-          ></v-text-field>
+          >
+          </v-text-field>
         </v-card-title>
         <v-data-table
+          checkbox-color="#4DB7B3"
           :search="search"
           v-model="selected"
           :headers="headers"
-          :items="userList"
+          :items="productList"
           :single-select="singleSelect"
-          item-key="name"
+          item-key="productId"
           show-select
           class="elevation-1"
           sort-by="calories"
         >
           <template v-slot:[`top`]> </template>
-          <template v-slot:[`item.img`]="{ item }">
-            <img class="avatar" :src="item.img" alt="" />
+          <template v-slot:[`item.image`]="{ item }">
+            <img class="image" :src="item.image" alt="" />
           </template>
-          <template v-slot:[`item.admin`]="{ item }">
-            <span>{{ item.admin ? "Admin" : "User" }}</span>
+          <template v-slot:[`item.price`]="{ item }">
+            <span>{{ formatOriginalPrice(item.price) }}</span>
           </template>
           <template v-slot:[`item.actions`]="{ item }">
+            <!-- <router :to="'/admin/product/update/' + item.productId"> -->
             <v-icon size="25" class="pr-2 mr-2 update" @click="editItem(item)">
               mdi-pencil
             </v-icon>
-            <v-icon class="delete" size="25" @click="deleteItem(item.id)">
+            <!-- </router> -->
+            <v-icon
+              class="delete"
+              size="25"
+              @click="deleteItem(item.productId)"
+            >
               mdi-delete
             </v-icon>
           </template>
         </v-data-table>
       </v-card>
     </div>
-    <v-dialog v-model="dialogDelete" persistent max-width="500">
+    <v-dialog v-model="dialogDelete" persistent max-width="520">
       <v-card>
         <v-card-title class="text-h5">
-          Are you sure want to delete this user?
+          Are you sure want to delete this product?
         </v-card-title>
-        <v-card-text>
-          Delete user will permanently remove this user information. 😲
+        <v-card-text class="text-content">
+          Delete product will permanently remove this product information. 😲
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -83,10 +91,10 @@
     <v-dialog v-model="dialogSelected" persistent max-width="520">
       <v-card>
         <v-card-title class="text-h5">
-          Are you sure want to delete these users?
+          Are you sure want to delete these products?
         </v-card-title>
         <v-card-text class="text-content">
-          Delete users will permanently remove these user information. 😲
+          Delete products will permanently remove these product information. 😲
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -103,36 +111,35 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
-  name: "AdminUsers",
+  name: "AdminProduct",
   data: () => ({
-    dialogDelete: false,
     dialogSelected: false,
+    dialogDelete: false,
     singleSelect: false,
     selected: [],
     search: "",
     headers: [
-      { text: "ID", value: "id" },
+      { text: "ID", value: "productId" },
       {
-        text: "Name",
+        text: "Product name",
         align: "start",
-        value: "name",
+        value: "itemTitle",
       },
-      { text: "Avartar", value: "img", sortable: false },
-      { text: "Email", value: "email" },
-      { text: "PhoneNumber", value: "phone" },
-      { text: "Admin", value: "admin" },
+      { text: "Variance", value: "variance" },
+      { text: "Category", value: "category" },
+      { text: "Image", value: "image", sortable: false },
+      { text: "Stock", value: "stock" },
+      { text: "Sold", value: "sold" },
+      { text: "Price", value: "price" },
+      { text: "Sale", value: "sale" },
       { text: "Actions", value: "actions", sortable: false },
     ],
-    desserts: [],
-    userList: [],
+    productList: [],
     editedIndex: -1,
   }),
 
   computed: {
-    ...mapGetters["getUserAll"],
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
@@ -141,11 +148,13 @@ export default {
   watch: {},
 
   created() {
-    this.userList = this.$store.getters.getUserAll;
-    console.log("user ", this.userList);
+    this.productList = this.$store.getters.GET_PRODUCT_ITEMS;
   },
 
   methods: {
+    editItem(item) {
+      this.$router.push("/admin/product/update/" + item.productId);
+    },
     deleteItem(id) {
       this.dialogDelete = true;
       this.editedIndex = id;
@@ -155,7 +164,7 @@ export default {
         this.dialogSelected = true;
       } else {
         this.$toast.open({
-          message: "Please select user(s) before going on! 😳",
+          message: "Please select item(s) before going on! 😳",
           type: "error",
           duration: 2000,
           dismissible: true,
@@ -165,47 +174,52 @@ export default {
     },
     deleteSelectedConfirm() {
       this.$store.commit(
-        "DELETE_USERS_ID",
-        this.selected.map((item) => item.id)
+        "DELETE_PRODUCTS_ID",
+        this.selected.map((item) => item.productId)
       );
-      this.userList = this.$store.getters.getUserAll;
+      this.productList = this.$store.getters.GET_PRODUCT_ITEMS;
       this.closeDelete();
     },
     closeDelete() {
       this.dialogDelete = false;
       this.dialogSelected = false;
-      // this.$nextTick(() => {
-      //     this.editedItem = Object.assign({}, this.defaultItem)
-      //     this.editedIndex = -1
-      // })
+    },
+    formatOriginalPrice(value) {
+      let number = value;
+      return new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "VND",
+      }).format(number);
     },
     deleteItemConfirm() {
-      this.$store.commit("DELETEUSER", this.editedIndex);
-      this.userList = this.$store.getters.getUserAll;
+      this.$store.commit("DELETE_PRODUCT_ID", this.editedIndex);
+      this.productList = this.$store.getters.GET_PRODUCT_ITEMS;
       this.closeDelete();
     },
   },
 };
 </script>
 
-<style lang="scss" src="./AdminUsers.scss" scoped>
-.image-delete-adminUser {
+<style lang="scss" src="./AdminProduct.scss" scoped>
+.image-delete-admin-product {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.text-delete-adminUser {
+.text-delete-admin-product {
   text-align: center;
   color: #616060;
   font-size: 15px;
   padding: 20px;
 }
+
 .btn {
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 20px;
+
   .btn-cancel {
     border: 2px solid #0dd6b8;
     color: #0dd6b8;
@@ -215,6 +229,7 @@ export default {
     transition: all 0.3s ease;
     font-weight: 700;
   }
+
   .btn-cancel:hover {
     background-color: #0dd6b8;
     color: white;
@@ -228,6 +243,7 @@ export default {
     transition: all 0.3s ease;
     font-weight: 700;
   }
+
   .btn-ok:hover {
     background-color: #fe0000;
     color: white;

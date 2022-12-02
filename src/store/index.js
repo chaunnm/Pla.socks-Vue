@@ -23,5 +23,6 @@ export default new Vuex.Store({
     coupon: coupon,
     orders: orders,
     reviews: reviews,
+    adminUi: adminUi,
   },
 });

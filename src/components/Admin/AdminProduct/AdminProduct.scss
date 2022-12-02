@@ -1,15 +1,12 @@
 ::v-deep .text-start {
     font-size: 1rem !important;
 }
-
 ::v-deep .v-data-footer {
     font-size: 1rem !important;
 }
-
 ::v-deep td {
     font-size: 1rem !important;
 }
-
 ::v-deep .v-data-table-header-mobile__select {
     justify-content: flex-start !important;
 }
@@ -18,40 +15,43 @@
     font-size: 16px !important;
     line-height: 30px !important;
 }
-
 ::v-deep .v-btn--text {
     margin-bottom: 5px;
 }
-
 ::v-deep .v-btn__content {
     font-size: 18px;
     padding: 7px 15px;
     margin: 10px 0;
 }
-.adminUser-container{
-    animation: toRight 0.3s backwards;
+
+.admin-product-container {
     padding: 20px;
-    
-    .section{
+    animation: toRight 0.3s backwards;
+
+    .section {
         margin: 20px 0;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        &-left{
-            h3{
+
+        &-left {
+            h3 {
                 color: #9c9c9c;
                 font-weight: 500;
             }
-            h2{
+
+            h2 {
                 margin-top: 10px;
                 color: #616060;
-                .fa-user-astronaut{
-                    color: #4DB7B3; 
+
+                .fa-user-astronaut {
+                    color: #4DB7B3;
                     margin-left: 20px;
                 }
             }
         }
-        &-right{
+
+        &-right {
             .text-box {
                 cursor: pointer;
                 width: fit-content;
@@ -117,44 +117,43 @@
 
         }
     }
-    .avatar{
+
+    .image {
         margin-top: 7px;
-        width: 45px;
-        height: 45px;
+        width: 70px;
+        height: 70px;
     }
-        .fa-trash {
-            color: #f29dc4;
-            margin-right: 20px;
-            margin-left: 5px;
-            cursor: pointer;
-            transition: 0.2s ease;
-    
-            &:hover {
-                color: darken(#f29dc4, 20%);
-            }
+
+    .fa-trash {
+        color: #f29dc4;
+        margin-right: 20px;
+        margin-left: 5px;
+        cursor: pointer;
+        transition: 0.2s ease;
+        &:hover {
+            color: darken(#f29dc4, 20%);
         }
-    
-        .mr-2 {
-            color: #4DB7B3;
-            border-right: 1px solid #b0b0b0cf;
-            transition: 0.2s ease;
-    
+    }
+
+    .mr-2 {
+        color: #4DB7B3;
+        border-right: 1px solid #b0b0b0cf;
+        transition: 0.2s ease;
             &:hover {
                 color: darken(#4DB7B3, 20%);
             }
-        }
-    
-        .delete {
-            color: #f29dc4;
-            transition: 0.2s ease;
-    
+    }
+
+    .delete {
+        color: #f29dc4;
+        transition: 0.2s ease;
             &:hover {
                 color: darken(#f29dc4, 20%);
             }
-        }
+    }
 }
 
- 
+
 @keyframes toRight {
     0% {
 

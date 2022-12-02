@@ -1,83 +1,92 @@
 <template>
-  <div class="AdminUserAdd">
+  <div class="AdminProductAdd">
     <div class="content">
       <h3>Add New</h3>
       <h2>
-        User
-        <i class="fa-solid fa-user-astronaut"></i>
+        Product
+        <i class="fa-solid fa-socks"></i>
       </h2>
 
       <div class="form">
         <div class="left">
           <div class="admin-add-new-row">
-            <label>Full Name</label>
-            <v-text-field v-model="fullName" outlined></v-text-field>
-          </div>
-          <div class="admin-add-new-row">
-            <label>Email</label>
+            <label>Product Name</label>
             <v-text-field
-              v-model="email"
-              :error-messages="emailErrors"
-              @input="$v.email.$touch()"
-              @blur="$v.email.$touch()"
+              v-model="productName"
+              :error-messages="productNameErrors"
+              @input="$v.productName.$touch()"
+              @blur="$v.productName.$touch()"
               outlined
             ></v-text-field>
           </div>
           <div class="admin-add-new-row">
-            <label>Number Phone</label>
+            <label>Variance</label>
             <v-text-field
-              v-model="phone"
-              :error-messages="phoneErrors"
-              @input="$v.phone.$touch()"
-              @blur="$v.phone.$touch()"
+              v-model="variance"
+              :error-messages="varianceErrors"
+              @input="$v.variance.$touch()"
+              @blur="$v.variance.$touch()"
               outlined
             ></v-text-field>
           </div>
           <div class="admin-add-new-row">
-            <label>Address</label>
-            <v-text-field v-model="address" outlined></v-text-field>
+            <label>Price</label>
+            <v-text-field
+              v-model="price"
+              :error-messages="priceErrors"
+              @input="$v.price.$touch()"
+              @blur="$v.price.$touch()"
+              outlined
+            ></v-text-field>
+          </div>
+          <div class="admin-add-new-row">
+            <label>Stock</label>
+            <v-text-field
+              v-model="stock"
+              :error-messages="stockErrors"
+              @input="$v.stock.$touch()"
+              @blur="$v.stock.$touch()"
+              outlined
+            ></v-text-field>
+          </div>
+          <div class="admin-add-new-row">
+            <label>Sold</label>
+            <v-text-field
+              v-model="sold"
+              :error-messages="soldErrors"
+              @input="$v.sold.$touch()"
+              @blur="$v.sold.$touch()"
+              outlined
+            ></v-text-field>
           </div>
         </div>
         <div class="right">
           <div class="admin-add-new-row">
-            <label>User Name</label>
-            <v-text-field
-              v-model="userName"
-              :error-messages="userNameErrors"
-              @input="$v.userName.$touch()"
-              @blur="$v.userName.$touch()"
-              outlined
-            ></v-text-field>
+            <label>Height</label>
+            <v-text-field v-model="height" outlined></v-text-field>
           </div>
           <div class="admin-add-new-row">
-            <label>Password</label>
-            <v-text-field
-              v-model="password"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show1 ? 'text' : 'password'"
-              name="input-10-1"
-              :error-messages="passwordErrors"
-              @input="$v.password.$touch()"
-              @blur="$v.password.$touch()"
-              hint="At least 8 characters"
-              counter
-              @click:append="show1 = !show1"
-              outlined
-            ></v-text-field>
-          </div>
-          <div class="admin-add-new-row">
-            <label>Role</label>
+            <label>Category</label>
             <v-select
-              v-model="role"
-              :error-messages="roleErrors"
-              @input="$v.role.$touch()"
-              @blur="$v.role.$touch()"
-              :items="itemRole"
+              v-model="category"
+              :error-messages="categoryErrors"
+              @input="$v.category.$touch()"
+              @blur="$v.category.$touch()"
+              :items="productCategory"
               outlined
             ></v-select>
           </div>
           <div class="admin-add-new-row">
-            <label>Avartar</label>
+            <label>Thickness</label>
+            <v-text-field v-model="thickness" outlined></v-text-field>
+          </div>
+          <div class="admin-add-new-row">
+            <label>Sale</label>
+            <v-text-field v-model="sale" outlined></v-text-field>
+          </div>
+
+          <div class="admin-add-new-row">
+            <label>Image</label>
             <div class="admin-add-new-row-group">
               <div class="admin-add-new-row-group-left">
                 <label for="file-upload" class="custom-file-upload">
@@ -85,14 +94,14 @@
                 </label>
                 <input
                   id="file-upload"
-                  name="avatar"
+                  name="image"
                   accept="image/*"
                   type="file"
-                  @change="handleChangeAvartar"
+                  @change="handleChangeImage"
                 />
               </div>
               <div class="admin-add-new-row-group-right">
-                <img class="avatar" :src="avartar" alt="" />
+                <img class="image" :src="image" alt="" />
               </div>
             </div>
           </div>
@@ -108,81 +117,85 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import {
-  required,
-  maxLength,
-  minLength,
-  email,
-} from "vuelidate/lib/validators";
+import { required, minLength } from "vuelidate/lib/validators";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   mixins: [validationMixin],
-
   data() {
     return {
-      show1: false,
-      itemRole: ["Admin", "User"],
-      email: "",
-      fullName: "",
-      userName: "",
-      phone: "",
-      address: "",
-      password: "",
-      role: [],
-      avartar:
+      productCategory: [],
+      productName: "",
+      variance: 0,
+      image:
         "https://1.bp.blogspot.com/-ZpujRR4C2mE/U2WpXLpFETI/AAAAAAAAPSc/I2YshWDsjRA/s1600/Yondaime+Chibi.png",
+      stock: 0,
+      sold: 0,
+      price: 0,
+      height: 0,
+      category: "",
+      thickness: "",
+      sale: 0,
+      review: [],
+      createdAt: "",
     };
   },
   validations: {
-    email: { required, email },
-    userName: { required, maxLength: maxLength(10) },
-    password: { required, minLength: minLength(8) },
-    phone: { required },
-    role: { required },
+    productName: { required, minLength: minLength(8) },
+    image: { required },
+    stock: { required },
+    variance: { required },
+    price: { required },
   },
   computed: {
-    emailErrors() {
+    productNameErrors() {
       const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Invalid e-mail."),
-        !this.$v.email.required && errors.push("Email is required.");
+      if (!this.$v.productName.$dirty) return errors;
+      !this.$v.productName.minLength && errors.push("Minimum 8 characters");
+      !this.$v.productName.required && errors.push("Product name is required");
       return errors;
     },
-    userNameErrors() {
+    imageErrors() {
       const errors = [];
-      if (!this.$v.userName.$dirty) return errors;
-      !this.$v.userName.maxLength &&
-        errors.push("Name must be at most 10 characters long");
-      !this.$v.userName.required && errors.push("Name is required.");
+      if (!this.$v.image.$dirty) return errors;
+      !this.$v.image.required && errors.push("Product image is required");
       return errors;
     },
-    passwordErrors() {
+    stockErrors() {
       const errors = [];
-      if (!this.$v.password.$dirty) return errors;
-      !this.$v.password.minLength && errors.push("Min 8 characters");
-      !this.$v.password.required && errors.push("Password is required.");
+      if (!this.$v.stock.$dirty) return errors;
+      !this.$v.stock.required && errors.push("Aren't we having something?");
       return errors;
     },
-    phoneErrors() {
+    varianceErrors() {
       const errors = [];
-      if (!this.$v.phone.$dirty) return errors;
-      !this.$v.phone.required && errors.push("Password is required.");
+      if (!this.$v.variance.$dirty) return errors;
+      !this.$v.variance.required &&
+        errors.push("Please set a variance title for this product");
       return errors;
     },
-    roleErrors() {
+    priceErrors() {
       const errors = [];
-      if (!this.$v.role.$dirty) return errors;
-      !this.$v.role.required && errors.push("Role is required.");
+      if (!this.$v.price.$dirty) return errors;
+      !this.$v.price.required && errors.push("A product must have a price");
       return errors;
     },
+    ...mapGetters({
+      productItems: "GET_PRODUCT_ITEMS",
+      productQuantity: "GET_PRODUCT_NUMBER",
+    }),
+    ...mapMutations(["ADD_PRODUCT_ITEM"]),
+  },
+  created() {
+    this.productCategory = this.$store.getters.GET_CATEGORY;
   },
   methods: {
-    handleChangeAvartar(e) {
-      if (e.target.name === "avatar") {
+    handleChangeImage(e) {
+      if (e.target.name === "image") {
         const reader = new FileReader();
         reader.onload = () => {
           if (reader.readyState === 2) {
-            this.avartar = reader.result;
+            this.image = reader.result;
           }
         };
         reader.readAsDataURL(e.target.files[0]);
@@ -190,59 +203,68 @@ export default {
     },
     submit() {
       this.$v.$touch();
-      console.log(this.$v.$invalid);
       if (this.$v.$invalid) {
         this.$toast.open({
           message:
-            "There is some problems while adding new user, please try again! ☹️",
-          type: "warning",
+            "There is some problems while adding new product, please try again! ☹️",
+          type: "error",
           duration: 2000,
           dismissible: true,
           position: "bottom",
         });
       } else {
-        const isAdmin = this.role == "Admin" ? true : false;
-        const newUser = {
-          id: this.$store.getters.getUserQuantity + 1,
-          name: this.userName,
-          email: this.email,
-          password: this.password,
-          admin: isAdmin,
-          img: this.avartar,
-          phone: this.phone,
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+        const temp = today.toISOString();
+        const newProduct = {
+          productId: this.productQuantity + 1,
+          itemTitle: this.productName,
+          variance: this.variance,
+          image: this.image,
+          stock: this.stock,
+          sold: this.sold,
+          price: this.price,
+          height: this.height,
+          category: this.category,
+          thickness: this.thickness,
+          sale: this.sale,
+          review: [],
+          createdAt: temp,
         };
-        console.log(newUser);
-        this.$store.commit("SIGNUP", newUser);
+        this.$store.commit("ADD_PRODUCT_ITEM", newProduct);
         this.$toast.open({
-          message: "New user added successfully! 🎆",
+          message: "New product added successfully! 🎆",
           type: "success",
           duration: 2000,
           dismissible: true,
           position: "bottom",
         });
-        this.$router.push("/admin/user");
+        this.$router.push("/admin/product");
         this.clear();
       }
     },
     clear() {
       this.$v.$reset();
-      this.phone = "";
-      this.avartar =
+      this.productName = "";
+      this.variance = 0;
+      this.image =
         "https://1.bp.blogspot.com/-ZpujRR4C2mE/U2WpXLpFETI/AAAAAAAAPSc/I2YshWDsjRA/s1600/Yondaime+Chibi.png";
-      this.password = "";
-      this.email = "";
-      this.userName = "";
-      this.fullName = "";
-      this.address = "";
+      this.stock = 0;
+      this.sold = 0;
+      this.price = 0;
+      this.height = 0;
+      this.category = "";
+      this.thickness = "";
+      this.sale = 0;
+      this.review = [];
+      this.createdAt = "";
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.AdminUserAdd {
-  // height: 100vh;
-  // width: 100%;
+.AdminProductAdd {
   height: auto;
   padding: 20px;
   animation: toLeft 0.3s backwards;
@@ -275,7 +297,7 @@ export default {
       margin-bottom: 30px;
       padding-bottom: 5px;
       border-bottom: 1px solid #4db7b3;
-      .fa-user-astronaut {
+      .fa-socks {
         color: #4db7b3;
         // background-color: #4DB7B3;
         margin-left: 20px;
@@ -297,11 +319,11 @@ export default {
     .right {
       flex: 1;
       margin-left: 30px;
-      .avatar {
+      .image {
         width: 70px;
         height: 70px;
       }
-      .avatar {
+      .image {
         margin-top: 10px;
         border-radius: 50%;
       }
@@ -445,7 +467,7 @@ export default {
   }
 }
 @media screen and (max-width: 500px) {
-  .AdminUserAdd {
+  .AdminProductAdd {
     .form {
       margin-bottom: 15px;
       flex-direction: column;
