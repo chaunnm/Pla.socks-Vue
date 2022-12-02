@@ -1,0 +1,29 @@
+.reviewItem-container {
+    width: 25vw;
+    margin: auto;
+
+    .avatar-img {
+        margin: auto;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        box-shadow: 4.0px 8.0px 8.0px hsl(0deg 0% 0% / 0.38);
+    }
+
+    .content-container {
+        margin: auto;
+        text-align: center;
+
+        .review-rate {
+            .icon-rate {
+                color: #f299c2;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1700px) {
+    .reviewItem-container {
+        width: 25vw;
+    }
+}

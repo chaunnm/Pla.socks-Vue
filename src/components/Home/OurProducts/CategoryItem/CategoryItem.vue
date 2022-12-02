@@ -6,11 +6,15 @@
     >
       <img :src="category.image" alt="" />
     </figure>
-    <h3 class="category-title text-uppercase">{{ category.itemTitle }}</h3>
-    <p class="category-des">{{ category.description }}</p>
-    <router-link to="/shop">
-      <v-btn elevation="2" outlined rounded>See more</v-btn>
-    </router-link>
+    <div class="content-container">
+      <h3 class="category-title text-uppercase">{{ category.itemTitle }}</h3>
+      <p class="category-des">{{ category.description }}</p>
+      <router-link to="/shop" class="btn-container">
+        <v-btn class="btn-see-more" elevation="2" outlined rounded
+          >See more</v-btn
+        >
+      </router-link>
+    </div>
   </div>
 </template>
 

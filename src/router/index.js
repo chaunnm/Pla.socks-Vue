@@ -1,21 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import SignInView from "../views/SignInView.vue";
-import SignUpView from "../views/SignUpView.vue";
-import ForgotPasswordView from "../views/ForgotPasswordView.vue";
-import changePasswordView from "../views/ChangePasswordView.vue";
-import ContactUsView from "../views/ContactUsView.vue";
-import AdminUserView from "../views/AdminView/AdminUserView.vue";
-import AdminUserAddView from "../views/AdminView/AdminUserAddView.vue";
 import NProgress from "nprogress/nprogress.js";
 import "@/assets/styles/nprogress.scss";
-import Blog from "../components/Blog/Blog.vue";
-import PrivacyProvicy from "../components/GetHelp/PrivacyProvicy.vue";
-import FAQs from "../components/GetHelp/FAQs.vue";
-import ReturnPolicy from "../components/GetHelp/ReturnPolicy.vue";
-import ShippingInformation from "../components/GetHelp/ShippingInformation.vue";
-import SizingGuide from "../components/GetHelp/SizingGuide.vue";
 
 Vue.use(VueRouter);
 
@@ -73,12 +59,12 @@ const routes = [
   {
     path: "/admin-users",
     name: "adminUsers",
-    component: AdminUserView,
+    component: () => import("@/views/AdminView/AdminUserView.vue"),
   },
   {
     path: "/admin-users-add-new",
     name: "adminUsersAdd",
-    component: AdminUserAddView,
+    component: () => import("@/views/AdminView/AdminUserAddView.vue"),
   },
   {
     path: "/cart",
@@ -86,39 +72,39 @@ const routes = [
     component: () => import("@/views/CartView.vue"),
   },
   {
-    path: "/:pathMatch(.*)*",
-    name: "404",
-    component: () => import("@/views/404NotFound.vue"),
-  }
-  {
     path: "/privacy-policy",
     name: "privacy-provicy",
-    component: PrivacyProvicy,
+    component: () => import("@/components/GetHelp/PrivacyProvicy.vue"),
   },
   {
     path: "/FAQs",
     name: "FAQs",
-    component: FAQs,
+    component: () => import("@/components/GetHelp/FAQs.vue"),
   },
   {
     path: "/return-policy",
     name: "return-policy",
-    component: ReturnPolicy,
+    component: () => import("@/components/GetHelp/ReturnPolicy.vue"),
   },
   {
     path: "/shipping-information",
     name: "shipping-information",
-    component: ShippingInformation,
+    component: () => import("@/components/GetHelp/ShippingInformation.vue"),
   },
   {
     path: "/sizing-guide",
     name: "sizing-guide",
-    component: SizingGuide,
+    component: () => import("@/components/GetHelp/SizingGuide.vue"),
   },
   {
     path: "/blog",
     name: "blog",
-    component: Blog,
+    component: () => import("@/components/Blog/Blog.vue"),
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "404",
+    component: () => import("@/views/404NotFound.vue"),
   },
 ];
 
