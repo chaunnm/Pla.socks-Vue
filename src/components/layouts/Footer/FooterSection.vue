@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="container">
+      
       <div class="column">
         <h2 class="title">PLA.SOCKS <span>WE CREATE VALUES!</span></h2>
         <div class="line-big"></div>
@@ -77,21 +78,20 @@
       <div class="column">
         <h2 class="title">ABOUT US</h2>
         <div class="line-big"></div>
-        <router-link class="link-page" to="/admin-users">Admin</router-link>
+        <router-link class="link-page" to="/our-story">Our story</router-link>
         <div class="line-small"></div>
-        <a class="link-page" href="#">Blog</a>
+        <router-link class="link-page" to="/blog">Blog</router-link>
         <div class="line-small"></div>
-        <a class="link-page" href="#">Rewards</a>
+        <router-link class="link-page" to="/rewards">Rewards</router-link>
         <div class="line-small"></div>
-        <a class="link-page" href="#">Pla.socks recycles</a>
+        <router-link class="link-page" to="/pla-socks-recycles">Pla.socks recycles</router-link>
         <div class="line-small"></div>
       </div>
 
       <div class="column">
         <h2 class="title">SHOP</h2>
         <div class="line-big"></div>
-
-        <a class="link-page" href="#">Custom</a>
+        <router-link class="link-page" to="/custom">Custom</router-link>
         <div class="line-small"></div>
         <a class="link-page" href="#">Boxes Of Love</a>
         <div class="line-small"></div>
