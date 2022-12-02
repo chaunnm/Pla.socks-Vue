@@ -22,11 +22,12 @@
 
 @media screen and (min-width: 1600px) {
   .ourstore-container {
-    margin: 10px 200px;
+    margin: 10px 400px;
     .container {
       .map-container {
         .map {
-          height: 70vh;
+          //height: 60vh;
+          width: 30vw;
         }
       }
       .content {
@@ -38,7 +39,7 @@
 
 @media screen and (max-width: 950px) {
   .ourstore-container {
-    margin: 10px 40px;
+    margin: 10px 60px;
     .container {
       display: flex;
       flex-direction: column;
@@ -46,7 +47,7 @@
       .map-container {
         margin: auto;
         .map {
-          width: 90vw;
+          width: 80vw;
         }
       }
 
