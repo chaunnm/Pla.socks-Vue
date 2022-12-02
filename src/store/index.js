@@ -7,6 +7,7 @@ import category from "./modules/category";
 import coupon from "./modules/coupon";
 import orders from "./modules/orders";
 import reviews from "./modules/reviews";
+import adminUi from "./modules/adminUi";
 
 Vue.use(Vuex);
 
