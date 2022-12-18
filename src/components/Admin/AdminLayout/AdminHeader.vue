@@ -11,7 +11,7 @@
         </template>
       </v-btn>
       <v-toolbar-title
-        ><div class="logo">
+        ><div class="logo" @click="backToHome()">
           <img
             width="70%"
             src="https://drive.google.com/uc?id=1JmLugXYmrdb-OX_2V6stcuTzXautMehF"
@@ -159,6 +159,7 @@
               outlined
               color="primary"
               class="text-capitalize"
+              @click="handleSignOut"
               >Sign Out
             </v-btn>
           </div>
@@ -251,6 +252,15 @@ export default {
     logOut: function () {
       window.localStorage.setItem("authenticated", false);
       this.$router.push("/login");
+    },
+    handleSignOut: function () {
+      this.$store.commit("SIGNOUT");
+      this.$store.commit("CHANGELAYOUT");
+      this.$router.push("/sign-in");
+    },
+    backToHome() {
+      this.$store.commit("CHANGELAYOUT");
+      this.$router.push("/");
     },
   },
   components: { HeaderSearch },

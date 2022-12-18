@@ -14,6 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import vuetify from "./plugins/vuetify";
 import Vuelidate from "vuelidate";
 import "@/assets/styles/scrollbar.scss";
+import VueApexCharts from "vue-apexcharts";
+Vue.use(VueApexCharts);
 
 //Vuelidate
 Vue.use(Vuelidate);

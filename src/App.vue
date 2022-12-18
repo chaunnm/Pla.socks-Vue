@@ -39,6 +39,8 @@ export default {
   data: () => ({
     scTimer: 0,
     scY: 0,
+    // showAdmin: null,
+    // isAdmin: null,
   }),
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -58,6 +60,12 @@ export default {
         behavior: "smooth",
       });
     },
+  },
+  created() {
+    // this.showAdmin = this.$store.getters.getShowAdminUI;
+    // this.isAdmin = this.$store.getters.getUserCurrent.admin;
+    // console.log("show", this.showAdmin);
+    // console.log("isAdmin", this.isAdmin);
   },
   computed: {
     ...mapGetters(["getShowAdmin"]),

@@ -142,6 +142,9 @@ const auth = {
     getUserCurrent: (state) => state.auth.userCurent,
     getShowAdmin: (state) => state.auth.getShowAdmin,
     getUserCurrentAdmin: (state) => state.auth.userCurent.admin,
+    getUserById: (state) => (payload) => {
+      return state.auth.user.find((item) => item.id == payload);
+    },
   },
   setters: {},
   mutations: {
@@ -150,7 +153,9 @@ const auth = {
       state.auth.user = newArray;
     },
     DELETE_USERS_ID: (state, payload) => {
-      state.auth.user = state.auth.user.filter(item => !payload.includes(item.id));
+      state.auth.user = state.auth.user.filter(
+        (item) => !payload.includes(item.id)
+      );
     },
     SIGNUP(state, payload) {
       state.auth.user.push(payload);
@@ -194,6 +199,12 @@ const auth = {
     },
     CHANGELAYOUT(state) {
       state.auth.getShowAdmin = !state.auth.getShowAdmin;
+    },
+    updateUser(state, payload) {
+      const index = state.auth.user.findIndex((item) => {
+        return item.id == payload.id;
+      });
+      state.auth.user[index] = payload;
     },
   },
 };
