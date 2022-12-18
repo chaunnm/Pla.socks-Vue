@@ -17,6 +17,10 @@ import ReturnPolicy from "../components/GetHelp/ReturnPolicy.vue";
 import ShippingInformation from "../components/GetHelp/ShippingInformation.vue";
 import SizingGuide from "../components/GetHelp/SizingGuide.vue";
 import Recycles from "../components/GetHelp/Recycles.vue";
+import AdminOrders from "../components/Admin/AdminOrder/AdminOrders.vue";
+import AdminOrder_Update from "../components/Admin/AdminOrder/AdminOrder_Update.vue";
+import AdminBlogs from "../components/Admin/AdminBlog/AdminBlogs.vue";
+import AdminBlog_Update from "../components/Admin/AdminBlog/AdminBlog_Update";
 
 Vue.use(VueRouter);
 
@@ -80,6 +84,29 @@ const routes = [
     path: "/admin-users-add-new",
     name: "adminUsersAdd",
     component: AdminUserAddView,
+  },
+  {
+    path: "/admin-orders",
+    name: "orderUpdate",
+    component: AdminOrders,
+  },
+
+  {
+    path: "/admin-orders-update",
+    name: "adminOrders",
+    component: AdminOrder_Update,
+  },
+
+  {
+    path: "/admin-blogs",
+    name: "AdminBlogs",
+    component: AdminBlogs,
+  },
+
+  {
+    path: "/admin-blogs-update",
+    name: "AdminBlogsUpdate",
+    component: AdminBlog_Update,
   },
   {
     path: "/cart",
