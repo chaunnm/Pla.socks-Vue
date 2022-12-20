@@ -308,7 +308,9 @@
                 v-if="currentUser.admin"
                 @click="handleChangeLayout()"
               >
-                <v-list-item-title> Admin Dashboard</v-list-item-title>
+                <router-link class="toDashboard" to="/admin/user">
+                  <v-list-item-title> Admin Dashboard</v-list-item-title>
+                </router-link>
               </v-list-item>
               <v-list-item>
                 <v-list-item-title

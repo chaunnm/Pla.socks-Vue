@@ -4,8 +4,12 @@
 }
 
 ::v-deep .account-links {
-  text-decoration: none !important; 
+  text-decoration: none !important;
   color: rgba(0, 0, 0, 0.87);
+}
+.toDashboard {
+  text-decoration: none;
+  color: black !important;
 }
 
 .responsive-container {
@@ -77,7 +81,7 @@
       transition: 0.3s ease-out;
     }
 
-    .effect-20~label {
+    .effect-20 ~ label {
       position: absolute;
       left: 14px;
       top: 10px;
@@ -87,8 +91,8 @@
       letter-spacing: 0.5px;
     }
 
-    .effect-20:focus~label,
-    .has-content.effect-20~label {
+    .effect-20:focus ~ label,
+    .has-content.effect-20 ~ label {
       top: -25px;
       left: 0;
       font-size: 12px;
@@ -201,7 +205,7 @@
           transition: 0.3s ease-out;
         }
 
-        .effect-20~label {
+        .effect-20 ~ label {
           position: absolute;
           left: 14px;
           top: 10px;
@@ -211,8 +215,8 @@
           letter-spacing: 0.5px;
         }
 
-        .effect-20:focus~label,
-        .has-content.effect-20~label {
+        .effect-20:focus ~ label,
+        .has-content.effect-20 ~ label {
           top: -18px;
           left: 0;
           font-size: 12px;
@@ -442,7 +446,6 @@
           }
 
           &:hover {
-
             svg,
             a {
               color: black;
@@ -470,7 +473,6 @@
           }
 
           &:hover {
-
             svg,
             a {
               color: black;
@@ -496,7 +498,8 @@
       height: 72px;
       padding: 0;
       opacity: 0.15;
-      background: url(https://plasocks.com/wp-content/uploads/2022/07/277602375_1042043753054162_4429385387159967082_n.jpg) repeat-x;
+      background: url(https://plasocks.com/wp-content/uploads/2022/07/277602375_1042043753054162_4429385387159967082_n.jpg)
+        repeat-x;
       // background-color: white;
     }
 
