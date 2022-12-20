@@ -20,7 +20,7 @@ const adminUi = {
     DRAWER_STATE(state) {
       return state.drawer;
     },
-    getShowAdmin(state) {
+    getShowAdminUI(state) {
       return state.showAdmin;
     },
   },

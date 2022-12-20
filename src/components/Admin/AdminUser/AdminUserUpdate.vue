@@ -1,17 +1,17 @@
 <template>
-  <div class="AdminUserAdd">
+  <div class="AdminUserUpdate">
     <div class="content">
-      <h3>Add New</h3>
-      <h2>
-        User
-        <i class="fa-solid fa-user-astronaut"></i>
-      </h2>
+      <h2>Update User</h2>
 
       <div class="form">
         <div class="left">
           <div class="admin-add-new-row">
             <label>Full Name</label>
-            <v-text-field v-model="fullName" outlined></v-text-field>
+            <v-text-field
+              v-model="fullName"
+              placeholder="Placeholder"
+              outlined
+            ></v-text-field>
           </div>
           <div class="admin-add-new-row">
             <label>Email</label>
@@ -20,6 +20,7 @@
               :error-messages="emailErrors"
               @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
+              placeholder="Placeholder"
               outlined
             ></v-text-field>
           </div>
@@ -30,12 +31,21 @@
               :error-messages="phoneErrors"
               @input="$v.phone.$touch()"
               @blur="$v.phone.$touch()"
+              placeholder="Placeholder"
               outlined
             ></v-text-field>
           </div>
           <div class="admin-add-new-row">
             <label>Address</label>
-            <v-text-field v-model="address" outlined></v-text-field>
+            <v-text-field
+              v-model="address"
+              placeholder="Placeholder"
+              outlined
+            ></v-text-field>
+          </div>
+          <div class="btn-group">
+            <div class="btn-add" @click="submit"><span>UPDATE</span></div>
+            <div class="btn-clear" @click="clear"><span>CLEAR</span></div>
           </div>
         </div>
         <div class="right">
@@ -46,6 +56,7 @@
               :error-messages="userNameErrors"
               @input="$v.userName.$touch()"
               @blur="$v.userName.$touch()"
+              placeholder="Placeholder"
               outlined
             ></v-text-field>
           </div>
@@ -98,15 +109,12 @@
           </div>
         </div>
       </div>
-      <div class="btn-group">
-        <div class="btn-add" @click="submit"><span>ADD NEW</span></div>
-        <div class="btn-clear" @click="clear"><span>CLEAR</span></div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
+// import { v4 as uuidv4 } from "uuid";
 import { validationMixin } from "vuelidate";
 import {
   required,
@@ -114,12 +122,15 @@ import {
   minLength,
   email,
 } from "vuelidate/lib/validators";
+import { mapGetters } from "vuex";
 
 export default {
   mixins: [validationMixin],
+  name: "AdminUserUpdate",
 
   data() {
     return {
+      user: {},
       show1: false,
       itemRole: ["Admin", "User"],
       email: "",
@@ -176,6 +187,19 @@ export default {
       return errors;
     },
   },
+  ...mapGetters({
+    getUserById: "getUserById",
+  }),
+  created() {
+    this.user = this.$store.getters.getUserById(this.$route.params.userId);
+    this.fullName = this.user.name;
+    this.email = this.user.email;
+    this.userName = this.user.name;
+    this.phone = this.user.phone;
+    this.password = this.user.password;
+    this.role = this.user.admin == true ? "Admin" : "User";
+    this.avartar = this.user.img;
+  },
   methods: {
     handleChangeAvartar(e) {
       if (e.target.name === "avatar") {
@@ -188,13 +212,13 @@ export default {
         reader.readAsDataURL(e.target.files[0]);
       }
     },
+
     submit() {
       this.$v.$touch();
-      // console.log(this.$v.$invalid);
+      console.log(this.$v.$invalid);
       if (this.$v.$invalid) {
         this.$toast.open({
-          message:
-            "There is some problems while adding new user, please try again! ☹️",
+          message: "Thêm người dùng mới không thành công vui lòng thử lại!!",
           type: "warning",
           duration: 2000,
           dismissible: true,
@@ -203,7 +227,7 @@ export default {
       } else {
         const isAdmin = this.role == "Admin" ? true : false;
         const newUser = {
-          id: this.$store.getters.getUserQuantity + 1,
+          id: this.$route.params.userId,
           name: this.userName,
           email: this.email,
           password: this.password,
@@ -211,10 +235,10 @@ export default {
           img: this.avartar,
           phone: this.phone,
         };
-        // console.log(newUser);
-        this.$store.commit("SIGNUP", newUser);
+        console.log(newUser);
+        this.$store.commit("updateUser", newUser);
         this.$toast.open({
-          message: "New user added successfully! 🎆",
+          message: "Cập nhật người dùng thành công!!",
           type: "success",
           duration: 2000,
           dismissible: true,
@@ -240,48 +264,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.AdminUserAdd {
+.AdminUserUpdate {
   // height: 100vh;
   // width: 100%;
   height: auto;
   padding: 20px;
-  animation: toLeft 0.3s backwards;
-  @keyframes toLeft {
-    0% {
-      transform: translateX(100%);
-    }
-
-    100% {
-      transform: translateX(0);
-    }
-  }
 
   .content {
-    // width: 90%;
-    // margin: 20px auto;
-    // border: 2px solid #4db7b3;
-    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
-      0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
-
-    border-radius: 7px;
-    padding: 20px;
-    h3 {
-      color: #9c9c9c;
-      font-weight: 500;
-    }
+    width: 90%;
+    margin: 20px auto;
+    border: 2px solid #4db7b3;
+    border-radius: 10px;
+    padding: 20px 40px;
     h2 {
-      margin-top: 10px;
-      color: #616060;
-      margin-bottom: 30px;
-      padding-bottom: 5px;
+      margin-bottom: 20px;
       border-bottom: 1px solid #4db7b3;
-      .fa-user-astronaut {
-        color: #4db7b3;
-        // background-color: #4DB7B3;
-        margin-left: 20px;
-        // font-size: 15px;
-        // animation: spinaround 5s infinite linear;
-      }
     }
   }
   .form {
@@ -328,109 +325,111 @@ export default {
         }
       }
     }
-  }
-  .btn-group {
-    display: flex;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .btn-add {
-    margin-right: 20px;
-    // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    //   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-    //   rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    display: block;
-    width: 150px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 18px;
-    font-family: sans-serif;
-    text-decoration: none;
-    color: #4db7b3;
-    border: 2px solid #4db7b3;
-    letter-spacing: 2px;
-    text-align: center;
-    position: relative;
-    transition: all 0.35s;
+    .btn-group {
+      display: flex;
+      width: 100%;
+    }
+    .btn-add {
+      margin-right: 20px;
+      // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      //   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      //   rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+      display: block;
+      width: 150px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 18px;
+      font-family: sans-serif;
+      text-decoration: none;
+      color: #4db7b3;
+      border: 2px solid #4db7b3;
+      letter-spacing: 2px;
+      text-align: center;
+      position: relative;
+      transition: all 0.35s;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
 
-  .btn-add span {
-    position: relative;
-    z-index: 2;
-    font-weight: 600;
-  }
+    .btn-add span {
+      position: relative;
+      z-index: 2;
+      font-weight: 600;
+    }
 
-  .btn-add:after {
-    position: absolute;
-    content: "";
-    top: -1;
-    left: -1;
-    width: 0;
-    height: 100%;
-    background: #4db7b3;
-    transition: all 0.35s;
-  }
+    .btn-add:after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: #4db7b3;
+      transition: all 0.35s;
+    }
 
-  .btn-add:hover {
-    border: none;
-    color: #fff;
-    transform: translateX(5px);
-  }
+    .btn-add:hover {
+      // border: none;
+      color: #fff;
+      transform: translateX(5px);
+    }
 
-  .btn-add:hover:after {
-    width: 100%;
-  }
-  .btn-clear {
-    display: block;
-    width: 150px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 18px;
-    font-family: sans-serif;
-    text-decoration: none;
-    color: #333;
-    border: 2px solid #979b9b;
-    letter-spacing: 2px;
-    text-align: center;
-    position: relative;
-    transition: all 0.35s;
-    // background-color: #979b9b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
+    .btn-add:hover:after {
+      width: 100%;
+    }
+    .btn-clear {
+      // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      //   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      //   rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+      display: block;
+      width: 150px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 18px;
+      font-family: sans-serif;
+      text-decoration: none;
+      color: #333;
+      border: 2px solid #979b9b;
+      letter-spacing: 2px;
+      text-align: center;
+      position: relative;
+      transition: all 0.35s;
+      // background-color: #979b9b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
 
-  .btn-clear span {
-    position: relative;
-    z-index: 2;
-    font-weight: 600;
-  }
+    .btn-clear span {
+      position: relative;
+      z-index: 2;
+      font-weight: 600;
+    }
 
-  .btn-clear:after {
-    position: absolute;
-    content: "";
-    top: -1;
-    left: -1;
-    width: 0;
-    height: 100%;
-    background: #979b9b;
-    transition: all 0.35s;
-  }
+    .btn-clear:after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: #979b9b;
+      transition: all 0.35s;
+    }
 
-  .btn-clear:hover {
-    border: none;
-    color: #fff;
-    transform: translateX(5px);
-  }
+    .btn-clear:hover {
+      border: none;
+      color: #fff;
+      transform: translateX(5px);
+    }
 
-  .btn-clear:hover:after {
-    width: 100%;
+    .btn-clear:hover:after {
+      width: 100%;
+    }
   }
   .form::v-deep .v-input input {
     padding: 0 !important;
@@ -442,23 +441,6 @@ export default {
     margin: 0;
     height: 40px;
     align-items: center;
-  }
-}
-@media screen and (max-width: 500px) {
-  .AdminUserAdd {
-    .form {
-      margin-bottom: 15px;
-      flex-direction: column;
-      .left {
-        margin-right: 0;
-      }
-      .right {
-        margin-left: 0;
-      }
-    }
-    .btn-group {
-      margin-bottom: 20px;
-    }
   }
 }
 </style>

@@ -4,6 +4,8 @@ import AdminUserView from "../views/AdminView/AdminUserView.vue";
 import AdminUserAddView from "../views/AdminView/AdminUserAddView.vue";
 import NProgress from "nprogress/nprogress.js";
 import "@/assets/styles/nprogress.scss";
+import AdminDashboardView from "../views/AdminView/AdminDashboardView.vue";
+import AdminUserUpdateView from "../views/AdminView/AdminUserUpdateView.vue";
 
 Vue.use(VueRouter);
 
@@ -108,6 +110,16 @@ const routes = [
     meta: {
       requiredAdmin: true,
     },
+  },
+  {
+    path: "/admin/user/update/:userId(\\d+)",
+    name: "adminUsersUpdate",
+    component: AdminUserUpdateView,
+  },
+  {
+    path: "/dashboard",
+    name: "admin-dashboard",
+    component: AdminDashboardView,
   },
 
   // Admin Section

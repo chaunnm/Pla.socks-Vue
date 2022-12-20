@@ -142,7 +142,7 @@ export default {
 
   created() {
     this.userList = this.$store.getters.getUserAll;
-    console.log("user ", this.userList);
+    // console.log("user ", this.userList);
   },
 
   methods: {
@@ -183,6 +183,10 @@ export default {
       this.$store.commit("DELETEUSER", this.editedIndex);
       this.userList = this.$store.getters.getUserAll;
       this.closeDelete();
+    },
+    editItem(item) {
+      // console.log(item);
+      this.$router.push("/admin/user/update/" + item.id);
     },
   },
 };
