@@ -4,19 +4,19 @@
     <main class="main-slot" style="z-index: -1">
       <slot></slot>
     </main>
-    <!-- <FooterSection /> -->
+    <FooterSection />
   </div>
 </template>
 
 <script>
 import NavigationBar from "./NavigationBar/NavigationBar.vue";
-// import FooterSection from "./Footer/FooterSection.vue";
+import FooterSection from "./Footer/FooterSection.vue";
 
 export default {
   name: "LayoutDefault",
   components: {
     NavigationBar,
-    // FooterSection,
+    FooterSection,
   },
 };
 </script>

@@ -14,7 +14,7 @@
         ><div class="logo" @click="backToHome()">
           <img
             width="70%"
-            src="https://drive.google.com/uc?id=1JmLugXYmrdb-OX_2V6stcuTzXautMehF"
+            src="https://drive.google.com/uc?id=1wOr4ODtO-L4L44oYhzJ26fOL7zbmowM-"
             alt=""
           /></div
       ></v-toolbar-title>
