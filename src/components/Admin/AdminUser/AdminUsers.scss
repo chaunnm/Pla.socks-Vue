@@ -1,8 +1,36 @@
+::v-deep .text-start {
+    font-size: 1rem !important;
+}
+
+::v-deep .v-data-footer {
+    font-size: 1rem !important;
+}
+
+::v-deep td {
+    font-size: 1rem !important;
+}
+
+::v-deep .v-data-table-header-mobile__select {
+    justify-content: flex-start !important;
+}
+
+::v-deep .text-content {
+    font-size: 16px !important;
+    line-height: 30px !important;
+}
+
+::v-deep .v-btn--text {
+    margin-bottom: 5px;
+}
+
+::v-deep .v-btn__content {
+    font-size: 18px;
+    padding: 7px 15px;
+    margin: 10px 0;
+}
 .adminUser-container{
-    
+    animation: toRight 0.3s backwards;
     padding: 20px;
-    // margin-top: 64px !important;
-    // height: calc(100vh - 64px) !important;
     
     .section{
         margin: 20px 0;
@@ -17,12 +45,9 @@
             h2{
                 margin-top: 10px;
                 color: #616060;
-                .fa-users{
+                .fa-user-astronaut{
                     color: #4DB7B3; 
-                    // background-color: #4DB7B3;
                     margin-left: 20px;
-                    // font-size: 15px;
-                    // animation: spinaround 5s infinite linear;
                 }
             }
         }
@@ -93,35 +118,51 @@
         }
     }
     .avatar{
-        width: 30px;
-        height: 30px;
+        margin-top: 7px;
+        width: 45px;
+        height: 45px;
     }
-    .fa-trash{
-        color: #4DB7B3;
-        margin-right: 20px;
-        // animation: spinaround 3s infinite linear;
-    }
-    .mr-2{
-        color: #4DB7B3;
-    }
-    .delete{
-        color: #f29dc4;
-    }
-   
-    h5{
-        
-    }
+        .fa-trash {
+            color: #f29dc4;
+            margin-right: 20px;
+            margin-left: 5px;
+            cursor: pointer;
+            transition: 0.2s ease;
+    
+            &:hover {
+                color: darken(#f29dc4, 20%);
+            }
+        }
+    
+        .mr-2 {
+            color: #4DB7B3;
+            border-right: 1px solid #b0b0b0cf;
+            transition: 0.2s ease;
+    
+            &:hover {
+                color: darken(#4DB7B3, 20%);
+            }
+        }
+    
+        .delete {
+            color: #f29dc4;
+            transition: 0.2s ease;
+    
+            &:hover {
+                color: darken(#f29dc4, 20%);
+            }
+        }
 }
 
  
-@keyframes spinaround {
+@keyframes toRight {
     0% {
-        
-        transform: rotateY(0deg);
+
+        transform: translateX(-100%);
     }
 
     100% {
-    
-        transform: rotateY(360deg);
+
+        transform: translateX(0);
     }
 }

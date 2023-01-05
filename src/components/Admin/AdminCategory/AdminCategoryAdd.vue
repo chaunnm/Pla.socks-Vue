@@ -1,100 +1,55 @@
 <template>
-  <div class="AdminUserAdd">
+  <div class="AdminCategoryAdd">
     <div class="content">
       <h3>Add New</h3>
       <h2>
-        User
-        <i class="fa-solid fa-user-astronaut"></i>
+        Category
+        <i class="fa-solid fa-socks"></i>
       </h2>
 
       <div class="form">
         <div class="left">
           <div class="admin-add-new-row">
-            <label>Full Name</label>
-            <v-text-field v-model="fullName" outlined></v-text-field>
-          </div>
-          <div class="admin-add-new-row">
-            <label>Email</label>
+            <label>Category Name</label>
             <v-text-field
-              v-model="email"
-              :error-messages="emailErrors"
-              @input="$v.email.$touch()"
-              @blur="$v.email.$touch()"
+              v-model="name"
+              :error-messages="nameErrors"
+              @input="$v.name.$touch()"
+              @blur="$v.name.$touch()"
               outlined
             ></v-text-field>
           </div>
           <div class="admin-add-new-row">
-            <label>Number Phone</label>
-            <v-text-field
-              v-model="phone"
-              :error-messages="phoneErrors"
-              @input="$v.phone.$touch()"
-              @blur="$v.phone.$touch()"
+            <label>Description</label>
+            <v-textarea
+              solo
+              v-model="description"
+              :error-messages="descriptionErrors"
+              @input="$v.description.$touch()"
+              @blur="$v.description.$touch()"
               outlined
-            ></v-text-field>
-          </div>
-          <div class="admin-add-new-row">
-            <label>Address</label>
-            <v-text-field v-model="address" outlined></v-text-field>
+            ></v-textarea>
           </div>
         </div>
         <div class="right">
           <div class="admin-add-new-row">
-            <label>User Name</label>
-            <v-text-field
-              v-model="userName"
-              :error-messages="userNameErrors"
-              @input="$v.userName.$touch()"
-              @blur="$v.userName.$touch()"
-              outlined
-            ></v-text-field>
-          </div>
-          <div class="admin-add-new-row">
-            <label>Password</label>
-            <v-text-field
-              v-model="password"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show1 ? 'text' : 'password'"
-              name="input-10-1"
-              :error-messages="passwordErrors"
-              @input="$v.password.$touch()"
-              @blur="$v.password.$touch()"
-              hint="At least 8 characters"
-              counter
-              @click:append="show1 = !show1"
-              outlined
-            ></v-text-field>
-          </div>
-          <div class="admin-add-new-row">
-            <label>Role</label>
+            <label>Level</label>
             <v-select
-              v-model="role"
-              :error-messages="roleErrors"
-              @input="$v.role.$touch()"
-              @blur="$v.role.$touch()"
-              :items="itemRole"
+              v-model="level"
+              :error-messages="levelErrors"
+              @input="$v.level.$touch()"
+              @blur="$v.level.$touch()"
+              :items="selectLevel"
               outlined
             ></v-select>
           </div>
           <div class="admin-add-new-row">
-            <label>Avartar</label>
-            <div class="admin-add-new-row-group">
-              <div class="admin-add-new-row-group-left">
-                <label for="file-upload" class="custom-file-upload">
-                  <i class="fa-solid fa-folder-open"></i>
-                </label>
-                <input
-                  id="file-upload"
-                  name="avatar"
-                  accept="image/*"
-                  type="file"
-                  @change="handleChangeAvartar"
-                />
-              </div>
-              <div class="admin-add-new-row-group-right">
-                <img class="avatar" :src="avartar" alt="" />
-              </div>
-            </div>
+            <label>Parent</label>
+            <v-select
+              v-model="isChild"
+              :items="productCategory"
+              outlined
+            ></v-select>
           </div>
         </div>
       </div>
@@ -108,141 +63,93 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import {
-  required,
-  maxLength,
-  minLength,
-  email,
-} from "vuelidate/lib/validators";
+import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
-
   data() {
     return {
-      show1: false,
-      itemRole: ["Admin", "User"],
-      email: "",
-      fullName: "",
-      userName: "",
-      phone: "",
-      address: "",
-      password: "",
-      role: [],
-      avartar:
-        "https://1.bp.blogspot.com/-ZpujRR4C2mE/U2WpXLpFETI/AAAAAAAAPSc/I2YshWDsjRA/s1600/Yondaime+Chibi.png",
+      productCategory: [],
+      selectLevel: [1, 2],
+      name: "",
+      description: "",
+      level: 1,
+      isChild: "",
     };
   },
   validations: {
-    email: { required, email },
-    userName: { required, maxLength: maxLength(10) },
-    password: { required, minLength: minLength(8) },
-    phone: { required },
-    role: { required },
+    name: { required, minLength: minLength(8) },
+    level: { required },
   },
   computed: {
-    emailErrors() {
+    nameErrors() {
       const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Invalid e-mail."),
-        !this.$v.email.required && errors.push("Email is required.");
+      if (!this.$v.name.$dirty) return errors;
+      !this.$v.name.minLength && errors.push("Minimum 8 characters");
+      !this.$v.name.required && errors.push("Category name is required");
       return errors;
     },
-    userNameErrors() {
+    levelErrors() {
       const errors = [];
-      if (!this.$v.userName.$dirty) return errors;
-      !this.$v.userName.maxLength &&
-        errors.push("Name must be at most 10 characters long");
-      !this.$v.userName.required && errors.push("Name is required.");
-      return errors;
-    },
-    passwordErrors() {
-      const errors = [];
-      if (!this.$v.password.$dirty) return errors;
-      !this.$v.password.minLength && errors.push("Min 8 characters");
-      !this.$v.password.required && errors.push("Password is required.");
-      return errors;
-    },
-    phoneErrors() {
-      const errors = [];
-      if (!this.$v.phone.$dirty) return errors;
-      !this.$v.phone.required && errors.push("Password is required.");
-      return errors;
-    },
-    roleErrors() {
-      const errors = [];
-      if (!this.$v.role.$dirty) return errors;
-      !this.$v.role.required && errors.push("Role is required.");
+      if (!this.$v.level.$dirty) return errors;
+      !this.$v.level.required &&
+        errors.push("A category must have a specific level");
       return errors;
     },
   },
+  created() {
+    this.productCategory = this.$store.getters.GET_CATEGORY;
+  },
   methods: {
-    handleChangeAvartar(e) {
-      if (e.target.name === "avatar") {
-        const reader = new FileReader();
-        reader.onload = () => {
-          if (reader.readyState === 2) {
-            this.avartar = reader.result;
-          }
-        };
-        reader.readAsDataURL(e.target.files[0]);
-      }
-    },
     submit() {
       this.$v.$touch();
-      console.log(this.$v.$invalid);
       if (this.$v.$invalid) {
         this.$toast.open({
           message:
-            "There is some problems while adding new user, please try again! ☹️",
-          type: "warning",
+            "There is some problems while adding new category, please try again! ☹️",
+          type: "error",
           duration: 2000,
           dismissible: true,
           position: "bottom",
         });
       } else {
-        const isAdmin = this.role == "Admin" ? true : false;
-        const newUser = {
-          id: this.$store.getters.getUserQuantity + 1,
-          name: this.userName,
-          email: this.email,
-          password: this.password,
-          admin: isAdmin,
-          img: this.avartar,
-          phone: this.phone,
+        const timeElapsed = Date.now();
+        const today = new Date(timeElapsed);
+        const temp = today.toISOString();
+        const newCategory = {
+          categoryId: this.$store.getters.GET_CATEGORY_QUANTITY + 1,
+          name: this.name,
+          description: this.description,
+          level: this.level,
+          isChild: this.isChild,
+          createdAt: temp,
+          updatedAt: "",
         };
-        console.log(newUser);
-        this.$store.commit("SIGNUP", newUser);
+        this.$store.commit("ADD_CATEGORY_ITEM", newCategory);
         this.$toast.open({
-          message: "New user added successfully! 🎆",
+          message: "New category added successfully! 🎆",
           type: "success",
           duration: 2000,
           dismissible: true,
           position: "bottom",
         });
-        this.$router.push("/admin/user");
+        this.$router.push("/admin/category");
         this.clear();
       }
     },
     clear() {
       this.$v.$reset();
-      this.phone = "";
-      this.avartar =
-        "https://1.bp.blogspot.com/-ZpujRR4C2mE/U2WpXLpFETI/AAAAAAAAPSc/I2YshWDsjRA/s1600/Yondaime+Chibi.png";
-      this.password = "";
-      this.email = "";
-      this.userName = "";
-      this.fullName = "";
-      this.address = "";
+      this.name = "";
+      this.description = "";
+      this.level = 1;
+      this.isChild = "";
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.AdminUserAdd {
-  // height: 100vh;
-  // width: 100%;
+.AdminCategoryAdd {
   height: auto;
   padding: 20px;
   animation: toLeft 0.3s backwards;
@@ -275,7 +182,7 @@ export default {
       margin-bottom: 30px;
       padding-bottom: 5px;
       border-bottom: 1px solid #4db7b3;
-      .fa-user-astronaut {
+      .fa-socks {
         color: #4db7b3;
         // background-color: #4DB7B3;
         margin-left: 20px;
@@ -297,11 +204,11 @@ export default {
     .right {
       flex: 1;
       margin-left: 30px;
-      .avatar {
+      .image {
         width: 70px;
         height: 70px;
       }
-      .avatar {
+      .image {
         margin-top: 10px;
         border-radius: 50%;
       }
@@ -445,7 +352,7 @@ export default {
   }
 }
 @media screen and (max-width: 500px) {
-  .AdminUserAdd {
+  .AdminCategoryAdd {
     .form {
       margin-bottom: 15px;
       flex-direction: column;

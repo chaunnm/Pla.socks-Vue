@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <CarouselSection/>
-    <!-- <OurProducts/> -->
+    <OurProducts/>
     <BestSellers/>
     <ShopCustom/>
     <PlasocksStory/>
@@ -13,7 +13,7 @@
 
 <script>
 import CarouselSection from '@/components/Home/Carousel/Carousel.vue';
-// import OurProducts from '@/components/Home/OurProducts/OurProducts.vue';
+import OurProducts from '@/components/Home/OurProducts/OurProducts.vue';
 import BestSellers from '@/components/Home/BestSellers/BestSellers.vue';
 import ShopCustom from '@/components/Home/ShopCustom/ShopCustom.vue';
 import PlasocksStory from '@/components/Home/PlasocksStory/PlasocksStory.vue';
@@ -26,7 +26,7 @@ export default {
   name: "HomeView",
   components: {
     CarouselSection,
-    // OurProducts,
+    OurProducts,
     BestSellers,
     ShopCustom,
     PlasocksStory,

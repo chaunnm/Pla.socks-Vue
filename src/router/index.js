@@ -1,22 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import HomeView from "../views/HomeView.vue";
-// import SignInView from "../views/SignInView.vue";
-// import SignUpView from "../views/SignUpView.vue";
-// import ForgotPasswordView from "../views/ForgotPasswordView.vue";
-// import changePasswordView from "../views/ChangePasswordView.vue";
-// import ContactUsView from "../views/ContactUsView.vue";
 import AdminUserView from "../views/AdminView/AdminUserView.vue";
 import AdminUserAddView from "../views/AdminView/AdminUserAddView.vue";
 import NProgress from "nprogress/nprogress.js";
 import "@/assets/styles/nprogress.scss";
-import Blog from "../components/Blog/Blog.vue";
-import PrivacyProvicy from "../components/GetHelp/PrivacyProvicy.vue";
-import FAQs from "../components/GetHelp/FAQs.vue";
-import ReturnPolicy from "../components/GetHelp/ReturnPolicy.vue";
-import ShippingInformation from "../components/GetHelp/ShippingInformation.vue";
-import SizingGuide from "../components/GetHelp/SizingGuide.vue";
-import Recycles from "../components/GetHelp/Recycles.vue";
+// import Blog from "../components/Blog/Blog.vue";
+// import PrivacyProvicy from "../components/GetHelp/PrivacyProvicy.vue";
+// import FAQs from "../components/GetHelp/FAQs.vue";
+// import ReturnPolicy from "../components/GetHelp/ReturnPolicy.vue";
+// import ShippingInformation from "../components/GetHelp/ShippingInformation.vue";
+// import SizingGuide from "../components/GetHelp/SizingGuide.vue";
+// import Recycles from "../components/GetHelp/Recycles.vue";
 import AdminOrders from "../components/Admin/AdminOrder/AdminOrders.vue";
 import AdminOrder_Update from "../components/Admin/AdminOrder/AdminOrder_Update.vue";
 import AdminBlogs from "../components/Admin/AdminBlog/AdminBlogs.vue";
@@ -43,7 +37,7 @@ const routes = [
   },
   {
     path: "/our-story",
-    name: "our story",
+    name: "our-story",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -86,27 +80,40 @@ const routes = [
     component: AdminUserAddView,
   },
   {
-    path: "/admin-orders",
+    path: "/admin/admin-orders",
     name: "orderUpdate",
     component: AdminOrders,
+    meta: {
+      requiredAdmin: true,
+    },
   },
 
   {
     path: "/admin-orders-update",
     name: "adminOrders",
     component: AdminOrder_Update,
+    meta: {
+      requiredAdmin: true,
+    },
   },
 
   {
     path: "/admin-blogs",
     name: "AdminBlogs",
     component: AdminBlogs,
+    meta: {
+      requiredAdmin: true,
+    },
   },
 
   {
+    // /admin/category/update/:cateId(\\d+)
     path: "/admin-blogs-update",
     name: "AdminBlogsUpdate",
     component: AdminBlog_Update,
+    meta: {
+      requiredAdmin: true,
+    },
   },
   {
     path: "/cart",
@@ -116,37 +123,107 @@ const routes = [
   {
     path: "/privacy-policy",
     name: "privacy-provicy",
-    component: PrivacyProvicy,
+    component: () => import("@/components/GetHelp/PrivacyProvicy.vue"),
   },
   {
     path: "/FAQs",
     name: "FAQs",
-    component: FAQs,
+    component: () => import("@/components/GetHelp/FAQs.vue"),
   },
   {
     path: "/return-policy",
     name: "return-policy",
-    component: ReturnPolicy,
+    component: () => import("@/components/GetHelp/ReturnPolicy.vue"),
   },
   {
     path: "/shipping-information",
     name: "shipping-information",
-    component: ShippingInformation,
+    component: () => import("@/components/GetHelp/ShippingInformation.vue"),
   },
   {
     path: "/sizing-guide",
     name: "sizing-guide",
-    component: SizingGuide,
+    component: () => import("@/components/GetHelp/SizingGuide.vue"),
   },
   {
     path: "/blog",
     name: "blog",
-    component: Blog,
+    component: () => import("@/components/Blog/Blog.vue"),
   },
   {
-    path: "/pla-socks-recycles",
-    name: "pla-socks-recylces",
-    component: Recycles,
+    path: "/admin/user",
+    name: "admin-user",
+    component: AdminUserView,
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/user/add",
+    name: "admin-user-add",
+    component: AdminUserAddView,
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+
+  // Admin Section
+
+  // {
+  //   path: "/admin/user/update/:id",
+  //   name: "admin-user-update",
+  //   component: AdminUserUpdateView,
+  //   meta: {
+  //     requiredAdmin: true,
+  //   },
+  // },
+  {
+    path: "/admin/category",
+    name: "admin-category",
+    component: () => import("@/views/AdminView/AdminCategoryView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/category/add",
+    name: "admin-category-add",
+    component: () => import("@/views/AdminView/AdminCategoryAddView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/category/update/:cateId(\\d+)",
+    name: "admin-category-update",
+    component: () => import("@/views/AdminView/AdminCategoryUpdateView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/product",
+    name: "admin-product",
+    component: () => import("@/views/AdminView/AdminProductView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/product/add",
+    name: "admin-product-add",
+    component: () => import("@/views/AdminView/AdminProductAddView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/product/update/:prodId(\\d+)",
+    name: "admin-product-update",
+    component: () => import("@/views/AdminView/AdminProductUpdateView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
   },
   {
     path: "/:pathMatch(.*)*",
@@ -164,7 +241,6 @@ const router = new VueRouter({
   },
 });
 
-// router.replace({ path: '*', redirect: '/' })
 router.beforeResolve((to, from, next) => {
   // If this isn't an initial page load.
   if (to.name) {
@@ -179,5 +255,20 @@ router.afterEach(() => {
   // Complete the animation of the route progress bar.
   NProgress.done();
 });
+
+// const auth = store.getters['auth/getIsAuth'];
+// const currentUser = store.getters["auth/getUserCurrentAdmin"];
+
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiredAdmin) {
+//     if (currentUser === true) {
+//       next();
+//     } else {
+//       next("/sign-in");
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

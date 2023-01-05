@@ -11,7 +11,6 @@
           <router-view />
         </template>
       </LayoutDefault>
-
       <div id="pagetop" class="fixed right-0 bottom-0" v-show="scY > 300" @click="toTop">
         <img src="https://drive.google.com/uc?id=1aCFB6UWlKIhdfkwmHYq82WsSWbxckKmL" alt="" />
       </div>
@@ -63,10 +62,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-toast {
-  z-index: 99999999999 !important;
-}
-
 #app {
   font-family: "Montserrat", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

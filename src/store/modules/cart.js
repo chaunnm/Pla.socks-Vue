@@ -56,7 +56,6 @@ const cart = {
       }
     },
     CHANGE_CART_QUANTITY: (state, payload) => {
-      // console.log(state, payload);
       const index = state.cartData.findIndex((item) => {
         return item.cartId === payload.cartId;
       });
