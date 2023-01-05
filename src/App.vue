@@ -11,16 +11,8 @@
           <router-view />
         </template>
       </LayoutDefault>
-      <div
-        id="pagetop"
-        class="fixed right-0 bottom-0"
-        v-show="scY > 300"
-        @click="toTop"
-      >
-        <img
-          src="https://drive.google.com/uc?id=1aCFB6UWlKIhdfkwmHYq82WsSWbxckKmL"
-          alt=""
-        />
+      <div id="pagetop" class="fixed right-0 bottom-0" v-show="scY > 300" @click="toTop">
+        <img src="https://drive.google.com/uc?id=1aCFB6UWlKIhdfkwmHYq82WsSWbxckKmL" alt="" />
       </div>
     </v-main>
   </v-app>
@@ -86,6 +78,7 @@ export default {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
+
 nav {
   padding: 30px;
 }
@@ -104,6 +97,7 @@ nav a.router-link-exact-active {
   right: 1rem;
   bottom: 1rem;
   cursor: pointer;
+
   img {
     float: right;
     width: 80px;

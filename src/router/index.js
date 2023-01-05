@@ -6,6 +6,10 @@ import NProgress from "nprogress/nprogress.js";
 import "@/assets/styles/nprogress.scss";
 import AdminDashboardView from "../views/AdminView/AdminDashboardView.vue";
 import AdminUserUpdateView from "../views/AdminView/AdminUserUpdateView.vue";
+import AdminOrders from "../components/Admin/AdminOrder/AdminOrders.vue";
+import AdminOrder_Update from "../components/Admin/AdminOrder/AdminOrder_Update.vue";
+import AdminBlogs from "../components/Admin/AdminBlog/AdminBlogs.vue";
+import AdminBlog_Update from "../components/Admin/AdminBlog/AdminBlog_Update";
 
 Vue.use(VueRouter);
 
@@ -59,6 +63,52 @@ const routes = [
     path: "/contact-us",
     name: "contact-us",
     component: () => import("@/views/ContactUsView.vue"),
+  },
+  {
+    path: "/admin-users",
+    name: "adminUsers",
+    component: AdminUserView,
+  },
+  {
+    path: "/admin-users-add-new",
+    name: "adminUsersAdd",
+    component: AdminUserAddView,
+  },
+  {
+    path: "/admin/admin-orders",
+    name: "orderUpdate",
+    component: AdminOrders,
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+
+  {
+    path: "/admin-orders-update",
+    name: "adminOrders",
+    component: AdminOrder_Update,
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+
+  {
+    path: "/admin-blogs",
+    name: "AdminBlogs",
+    component: AdminBlogs,
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+
+  {
+    // /admin/category/update/:cateId(\\d+)
+    path: "/admin-blogs-update",
+    name: "AdminBlogsUpdate",
+    component: AdminBlog_Update,
+    meta: {
+      requiredAdmin: true,
+    },
   },
   {
     path: "/cart",

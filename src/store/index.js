@@ -8,6 +8,7 @@ import coupon from "./modules/coupon";
 import orders from "./modules/orders";
 import reviews from "./modules/reviews";
 import adminUi from "./modules/adminUi";
+import blogs from "./modules/blog";
 
 Vue.use(Vuex);
 
@@ -25,5 +26,6 @@ export default new Vuex.Store({
     orders: orders,
     reviews: reviews,
     adminUi: adminUi,
+    blogs: blogs,
   },
 });

@@ -598,4 +598,16 @@ export default {
 
     }
 }
+
+@media screen and (max-width: 650px) {
+    .container {
+        margin-bottom: 0;
+
+        .content {
+            .wrapper {
+                margin: 0;
+            }
+        }
+    }
+}
 </style>
