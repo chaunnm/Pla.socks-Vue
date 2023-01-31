@@ -3,32 +3,28 @@ const blogs = {
     blogsData: [
       {
         blogID: 1,
-        image:
-          "https://plasocks.com/wp-content/uploads/2022/07/z3571975991764_6c5aac385ee991d1f32ba5405d596470-768x768.jpg",
+        image: "https://i.imgur.com/u9Ehaut.png",
         titleName: "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         author: "anguynv",
         pulishingDate: "15/11/2022",
       },
       {
         blogID: 2,
-        image:
-          "https://plasocks.com/wp-content/uploads/2022/07/z3571975991764_6c5aac385ee991d1f32ba5405d596470-768x768.jpg",
+        image: "https://i.imgur.com/a8NLJDg.png",
         titleName: "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         author: "nnmc",
         pulishingDate: "20/12/2022",
       },
       {
         blogID: 3,
-        image:
-          "https://plasocks.com/wp-content/uploads/2022/07/z3571975989496_320be5d4342a3a90a48516b143ba6885.jpg",
+        image: "https://i.imgur.com/f3jtjfL.png",
         titleName: "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         author: "ltyn",
         pulishingDate: "30/10/2022",
       },
       {
         blogID: 4,
-        image:
-          "https://plasocks.com/wp-content/uploads/2022/07/z3571976000984_b32c5ed8c85e787edb59281f6d7da799-768x768.jpg",
+        image: "https://i.imgur.com/PpHBD0G.png",
         titleName: "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         author: "btdc",
         pulishingDate: "21/10/2022",

@@ -205,10 +205,7 @@
           </v-dialog>
         </div>
         <div class="logo">
-          <img
-            src="https://plasocks.com/wp-content/uploads/2022/07/289951629_5421917167875766_6698382690436412766_n-removebg-preview.png"
-            alt="PlaSock Logo"
-          />
+          <img src="https://i.imgur.com/mnt90vV.png" alt="PlaSock Logo" />
         </div>
         <ul class="links">
           <li>

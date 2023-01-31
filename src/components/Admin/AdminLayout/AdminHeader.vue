@@ -12,11 +12,7 @@
       </v-btn>
       <v-toolbar-title
         ><div class="logo" @click="backToHome()">
-          <img
-            width="70%"
-            src="https://drive.google.com/uc?id=1wOr4ODtO-L4L44oYhzJ26fOL7zbmowM-"
-            alt=""
-          /></div
+          <img width="70%" src="https://i.imgur.com/mnt90vV.png" alt="" /></div
       ></v-toolbar-title>
       <v-spacer></v-spacer>
       <HeaderSearch />
@@ -272,6 +268,9 @@ export default {
   .logo {
     display: flex;
     align-items: center;
+    img {
+      width: 150px;
+    }
   }
   .main-header::v-deep {
     background-color: #4db7b3 !important;

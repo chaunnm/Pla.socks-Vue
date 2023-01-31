@@ -17,13 +17,10 @@
     </div>
     <div class="plasoc-intro">
       <div class="intro-top">
-        <div class="top-img">
-          <img
-            src="https://plasocks.com/wp-content/uploads/2022/07/The%CC%82m-no%CC%A3%CC%82i-dung-tha%CC%82n-va%CC%86n-ba%CC%89n-1-1320x743.png"
-            alt=""
-          />
+        <div class="top-img" data-aos="fade-right">
+          <img src="https://i.imgur.com/D2IJZFI.png" alt="" />
         </div>
-        <div class="top-box">
+        <div class="top-box" data-aos="fade-left">
           <h3>Be good! Feel good!</h3>
           <p>
             We are passionate about making our socks here and we also care
@@ -39,7 +36,7 @@
         </div>
       </div>
       <div class="intro-bottom">
-        <div class="bottom-box">
+        <div class="bottom-box" data-aos="zoom-in-right">
           <h3>Born and bred in the South</h3>
           <p>
             At Pla.Socks, we are honored to learn the extensive plastic-to-woven
@@ -53,34 +50,31 @@
             safe, synchronous, long-lasting socks at reasonable prices.
           </p>
         </div>
-        <div class="bottom-img">
-          <img
-            src="https://plasocks.com/wp-content/uploads/2022/07/A%CC%89nh-chu%CC%A3p-Ma%CC%80n-hi%CC%80nh-2022-07-31-lu%CC%81c-10.21.26-CH-1320x734.png"
-            alt=""
-          />
+        <div class="bottom-img" data-aos="zoom-in-left">
+          <img src="https://i.imgur.com/clkGVbq.png" alt="" />
         </div>
       </div>
     </div>
     <div class="commitments-container">
       <h2>Sustainable & eco-conscious</h2>
       <div class="commitments-icons">
-        <div>
+        <div data-aos="flip-left">
           <img
-            src="https://plasocks.com/wp-content/uploads/2022/07/icons8-vietnam-100-1.png"
+            src="https://drive.google.com/uc?id=1UeQ32vZCkCYJ1Zl2AqREjF1SjaR2wvkc"
             alt=""
           />
           <h3>Made in Vietnam</h3>
         </div>
-        <div>
+        <div data-aos="flip-up">
           <img
-            src="https://plasocks.com/wp-content/uploads/2022/07/icons8-organic-64-1.png"
+            src="https://drive.google.com/uc?id=1sIr563NDWeJEflZzXX9hahvvCgWUb8hP"
             alt=""
           />
           <h3>Knit with plastic material</h3>
         </div>
-        <div>
+        <div data-aos="flip-right">
           <img
-            src="https://plasocks.com/wp-content/uploads/2022/07/icons8-dye-64-1.png"
+            src="https://drive.google.com/uc?id=1HekQRVYU6U9HAT7ugvsNq5ecYtMFZi1K"
             alt=""
           />
           <h3>Low impact dyes</h3>
@@ -92,12 +86,26 @@
 </template>
 
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 export default {
   name: "OurStory",
   data: () => ({}),
   computed: {},
   methods: {},
   watch: {},
+  mounted() {
+    AOS.init({
+      // Global settings:
+      offset: 120, // offset (in px) from the original trigger point
+      delay: 200, // values from 0 to 3000, with step 50ms
+      duration: 1000, // values from 0 to 3000, with step 50ms
+      easing: "ease-in-sine", // default easing for AOS animations
+      once: true, // whether animation should happen only once - while scrolling down
+      anchorPlacement: "top-bottom", // defines which position of the element regarding to window should trigger the animation
+    });
+  },
 };
 </script>
 
