@@ -54,7 +54,7 @@ const products = {
         itemTitle: "Happy High",
         variance: 4,
         image:
-          "https://i0.wp.com/yaya21.co.uk/wp-content/uploads/2019/10/Happy-Socks-I-Love-You-Gift-Box_XLOV08-4300_5.jpg?resize=800%2C800&ssl=1",
+          "https://www.dynafit.com/media/image/7c/1e/de/03385e4a-b625-48d7-b6af-9d9739f5a05c_dynafit_600x600.jpg",
         stock: "10",
         sold: "0",
         price: 100000,
