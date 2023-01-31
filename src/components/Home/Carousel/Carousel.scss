@@ -1,0 +1,423 @@
+.carousel-container {
+  height: 500px;
+  .carousel {
+    height: 100%;
+    .carousel-item {
+      .carousel-sheet-1 {
+        background-image: url(https://drive.google.com/uc?id=1BAE1KpnNvMACPZ90rV8pHBo_B7lH2N08);
+        background-size: cover;
+        .carousel-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          .main-content {
+            width: 100%;
+            .title {
+              font-size: 75px !important;
+              color: #fff;
+              text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.2),
+                0px -4px 10px rgba(255, 255, 255, 0.3);
+            }
+            .introduction {
+              width: 50vw;
+              margin: auto;
+              font-size: 20px;
+              color: #fff;
+              text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+            }
+            .divider {
+              width: 20vw;
+              border-top: 5px solid #faf7f785;
+              margin: auto;
+            }
+          }
+          .buttons-container {
+            margin-top: -200px;
+            .btn-container {
+              text-decoration: none;
+              .button {
+                color: #fff;
+                font-weight: 700;
+                border: 3px solid #fff;
+                width: 200px;
+                text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+                transform: 0.3s, border 0.3s, background 0.3s, box-shadow 0.3s,
+                  opacity 0.3s, color 0.3s;
+                padding-right: 5px;
+                .btn-text {
+                  transform: translateX(4px);
+                  white-space: nowrap;
+                  animation: moveRight 0.3s ease-out;
+                  animation-fill-mode: backwards;
+                }
+                .btn-icon {
+                  transition: 0.3s ease;
+                  opacity: 0;
+                }
+
+                &:hover {
+                  border-radius: 5px;
+
+                  .btn-text {
+                    // color: #333;
+                    animation: moveLeft 0.3s ease-out;
+                    animation-fill-mode: backwards;
+                    transform: translateX(-8px);
+                    transition-delay: 0.3s;
+                  }
+
+                  .btn-icon {
+                    opacity: 1;
+                  }
+
+                  @keyframes moveLeft {
+                    0% {
+                      transform: translateX(4px);
+                    }
+
+                    100% {
+                      transform: translateX(-4px);
+                    }
+                  }
+
+                  @keyframes moveRight {
+                    0% {
+                      opacity: 1;
+                      transform: translateX(-4px);
+                    }
+
+                    100% {
+                      transform: translateX(4px);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .carousel-sheet-2 {
+        background-image: url(https://drive.google.com/uc?id=1mPlSV4uiZSm5OpGQlcioz5mhnA6DcgB_);
+        background-size: cover;
+        .carousel-row {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: center;
+          text-align: center;
+          .main-content {
+            color: #51b7b3;
+            font-size: 50px;
+            font-weight: 700;
+            text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.2),
+              0px -4px 10px rgba(255, 255, 255, 0.3);
+            width: 100%;
+          }
+          .btn-container {
+            text-decoration: none;
+            .button {
+              border: 3px solid #fff;
+              width: 200px;
+              text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+              transform: 0.3s, border 0.3s, background 0.3s, box-shadow 0.3s,
+                opacity 0.3s, color 0.3s;
+              padding-right: 5px;
+              .btn-text {
+                transform: translateX(4px);
+                white-space: nowrap;
+                animation: moveRight 0.3s ease-out;
+                animation-fill-mode: backwards;
+              }
+              .btn-icon {
+                transition: 0.3s ease;
+                opacity: 0;
+              }
+
+              &:hover {
+                border-radius: 5px;
+
+                .btn-text {
+                  // color: #333;
+                  animation: moveLeft 0.3s ease-out;
+                  animation-fill-mode: backwards;
+                  transform: translateX(-8px);
+                  transition-delay: 0.3s;
+                }
+
+                .btn-icon {
+                  opacity: 1;
+                }
+
+                @keyframes moveLeft {
+                  0% {
+                    transform: translateX(4px);
+                  }
+
+                  100% {
+                    transform: translateX(-4px);
+                  }
+                }
+
+                @keyframes moveRight {
+                  0% {
+                    opacity: 1;
+                    transform: translateX(-4px);
+                  }
+
+                  100% {
+                    transform: translateX(4px);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .carousel-sheet-3 {
+        background-image: url(https://drive.google.com/uc?id=18Z4P4r4Xm9Ee7h61SnrRyTFfTwwpLDV9);
+        background-size: cover;
+        background-position: 40%;
+        .carousel-row {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: flex-start;
+          text-align: flex-start;
+          .main-content {
+            font-weight: 600;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2),
+              0px -4px 10px rgba(255, 255, 255, 0.3);
+            width: 100%;
+          }
+          .btn-container {
+            text-decoration: none;
+            .button {
+              border: 3px solid #fff;
+              width: 200px;
+              text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+              transform: 0.3s, border 0.3s, background 0.3s, box-shadow 0.3s,
+                opacity 0.3s, color 0.3s;
+              padding-right: 5px;
+              .btn-text {
+                transform: translateX(4px);
+                white-space: nowrap;
+                animation: moveRight 0.3s ease-out;
+                animation-fill-mode: backwards;
+              }
+              .btn-icon {
+                transition: 0.3s ease;
+                opacity: 0;
+              }
+
+              &:hover {
+                border-radius: 5px;
+
+                .btn-text {
+                  // color: #333;
+                  animation: moveLeft 0.3s ease-out;
+                  animation-fill-mode: backwards;
+                  transform: translateX(-8px);
+                  transition-delay: 0.3s;
+                }
+
+                .btn-icon {
+                  opacity: 1;
+                }
+
+                @keyframes moveLeft {
+                  0% {
+                    transform: translateX(4px);
+                  }
+
+                  100% {
+                    transform: translateX(-4px);
+                  }
+                }
+
+                @keyframes moveRight {
+                  0% {
+                    opacity: 1;
+                    transform: translateX(-4px);
+                  }
+
+                  100% {
+                    transform: translateX(4px);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .carousel-sheet-4 {
+        background-image: url(https://drive.google.com/uc?id=1Fdkb5rTLp2Gie4YEiLLhi5uX6WsonBKg);
+        background-size: cover;
+        .carousel-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          .main-content {
+            text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.2),
+              0px -4px 10px rgba(255, 255, 255, 0.3);
+            width: 100%;
+            margin-top: 150px;
+            h1 {
+                font-size: 50px;
+            }
+            p {
+              width: 50%;
+              margin: auto;
+            }
+          }
+          .btn-container {
+            text-decoration: none;
+            .button {
+              border: 3px solid #fff;
+              width: 200px;
+              text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+              transform: 0.3s, border 0.3s, background 0.3s, box-shadow 0.3s,
+                opacity 0.3s, color 0.3s;
+              padding-right: 5px;
+              .btn-text {
+                transform: translateX(4px);
+                white-space: nowrap;
+                animation: moveRight 0.3s ease-out;
+                animation-fill-mode: backwards;
+              }
+              .btn-icon {
+                transition: 0.3s ease;
+                opacity: 0;
+              }
+
+              &:hover {
+                border-radius: 5px;
+
+                .btn-text {
+                  animation: moveLeft 0.3s ease-out;
+                  animation-fill-mode: backwards;
+                  transform: translateX(-8px);
+                  transition-delay: 0.3s;
+                }
+
+                .btn-icon {
+                  opacity: 1;
+                }
+
+                @keyframes moveLeft {
+                  0% {
+                    transform: translateX(4px);
+                  }
+
+                  100% {
+                    transform: translateX(-4px);
+                  }
+                }
+
+                @keyframes moveRight {
+                  0% {
+                    opacity: 1;
+                    transform: translateX(-4px);
+                  }
+
+                  100% {
+                    transform: translateX(4px);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .carousel-sheet-5 {
+        background-image: url(https://drive.google.com/uc?id=1XQfiIT3cxflHGxCYIHxO-sf8LNfwDy-9);
+        background-size: cover;
+        background-position: 40%;
+        .carousel-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          padding-left: 200px;
+          padding-top: 10vh;
+          .main-content {
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2),
+              0px -4px 10px rgba(255, 255, 255, 0.3);
+            width: 100%;
+            h1 {
+                font-size: 60px;
+            }
+            h3 {
+                width: 30%;
+            }
+            p {
+                width: 40%;
+                color: #797979;
+                font-weight: 500;
+            }
+          }
+          .btn-container {
+            text-decoration: none;
+            .button {
+              border: 3px solid #fff;
+              width: 200px;
+              text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+              transform: 0.3s, border 0.3s, background 0.3s, box-shadow 0.3s,
+                opacity 0.3s, color 0.3s;
+              padding-right: 5px;
+              .btn-text {
+                transform: translateX(4px);
+                white-space: nowrap;
+                animation: moveRight 0.3s ease-out;
+                animation-fill-mode: backwards;
+              }
+              .btn-icon {
+                transition: 0.3s ease;
+                opacity: 0;
+              }
+
+              &:hover {
+                border-radius: 5px;
+
+                .btn-text {
+                  animation: moveLeft 0.3s ease-out;
+                  animation-fill-mode: backwards;
+                  transform: translateX(-8px);
+                  transition-delay: 0.3s;
+                }
+
+                .btn-icon {
+                  opacity: 1;
+                }
+
+                @keyframes moveLeft {
+                  0% {
+                    transform: translateX(4px);
+                  }
+
+                  100% {
+                    transform: translateX(-4px);
+                  }
+                }
+
+                @keyframes moveRight {
+                  0% {
+                    opacity: 1;
+                    transform: translateX(-4px);
+                  }
+
+                  100% {
+                    transform: translateX(4px);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
