@@ -75,7 +75,7 @@ const routes = [
     component: AdminUserAddView,
   },
   {
-    path: "/admin/admin-orders",
+    path: "/admin/orders",
     name: "orderUpdate",
     component: AdminOrders,
     meta: {
@@ -93,7 +93,7 @@ const routes = [
   },
 
   {
-    path: "/admin-blogs",
+    path: "/admin/blogs",
     name: "AdminBlogs",
     component: AdminBlogs,
     meta: {

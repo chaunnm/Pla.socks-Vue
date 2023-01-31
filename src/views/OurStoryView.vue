@@ -30,19 +30,31 @@
       <div class="banner">
         <h1 class="banner-text">Find your perfect pair of socks</h1>
         <div class="button-group">
-          <button class="shop-btn">
+          <button
+            class="shop-btn"
+            data-aos="fade-up"
+            data-aos-anchor-placement="top-bottom"
+          >
             <div class="btn-text">SHOP MEN</div>
             <v-badge :content="1" :value="1" color="#f299c2" overlap>
               <i class="fa-solid fa-bag-shopping"></i>
             </v-badge>
           </button>
-          <button class="shop-btn">
+          <button
+            class="shop-btn"
+            data-aos="fade-up"
+            data-aos-anchor-placement="center-bottom"
+          >
             <div class="btn-text">SHOP CUSTOM</div>
             <v-badge :content="1" :value="1" color="#f299c2" overlap>
               <i class="fa-solid fa-bag-shopping"></i>
             </v-badge>
           </button>
-          <button class="shop-btn">
+          <button
+            class="shop-btn"
+            data-aos="fade-up"
+            data-aos-anchor-placement="bottom-bottom"
+          >
             <div class="btn-text">SHOP WOMEN</div>
             <v-badge :content="1" :value="1" color="#f299c2" overlap>
               <i class="fa-solid fa-bag-shopping"></i>
@@ -82,6 +94,8 @@
 import OurStoryVue from "@/components/OurStory/OurStoryTab/OurStory.vue";
 import AboutUsVue from "@/components/OurStory/AboutUsTab/AboutUs.vue";
 import SustainabilityVue from "@/components/OurStory/SustainabilityTab/Sustainability.vue";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default {
   title: "Pla.Socks - Our Story",
@@ -99,6 +113,18 @@ export default {
     $route() {
       this.selected = 1;
     },
+  },
+
+  mounted() {
+    AOS.init({
+      // Global settings:
+      offset: 120, // offset (in px) from the original trigger point
+      delay: 200, // values from 0 to 3000, with step 50ms
+      duration: 1000, // values from 0 to 3000, with step 50ms
+      easing: "ease-in-sine", // default easing for AOS animations
+      once: true, // whether animation should happen only once - while scrolling down
+      anchorPlacement: "top-bottom", // defines which position of the element regarding to window should trigger the animation
+    });
   },
 };
 </script>
@@ -149,8 +175,7 @@ export default {
     .shopping-bg {
       width: 100%;
       height: 450px;
-      background: url("https://plasocks.com/wp-content/uploads/2022/07/LCole_2022-2677_less_saturated_2592x-1024x526.webp")
-        no-repeat;
+      background: url("https://i.imgur.com/sGIzDjl.png") no-repeat;
       background-size: cover;
       position: relative;
 
