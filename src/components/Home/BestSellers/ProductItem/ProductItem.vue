@@ -12,8 +12,8 @@
         <img :src="product.image" alt="" />
         <div class="item-information">
           <p class="item-box"></p>
-          <p class="item-category text-uppercase">{{ product.category }}</p>
-          <p class="item-title">
+          <p class="item-category text-uppercase black--text font-weight-bold">{{ product.category }}</p>
+          <p class="item-title black--text font-weight-bold">
             {{ product.itemTitle }}
           </p>
           <div class="item-price">
@@ -26,7 +26,7 @@
           </div>
           <router-link to="/shop" class="btn-container">
         <v-btn class="btn-quick-view" elevation="2" rounded x-small color="rgba(0,0,0,0.2)"
-          >Quick view</v-btn
+          >View detail</v-btn
         >
       </router-link>
         </div>

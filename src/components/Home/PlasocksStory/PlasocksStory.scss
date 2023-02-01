@@ -1,9 +1,9 @@
 .plasocks-story-container {
   background: url(https://drive.google.com/uc?export=view&id=1W1VypJUofSpW0Mt3xJOt7eITdIrgShMo);
   background-repeat: no-repeat;
-  background-size: 100vw 500px;
+  background-size: 100vw;
   height: 70vh;
-  min-height: 500px;
+  min-height: fit-content;
   box-shadow: inset 0 0 0 100vw rgba(255, 255, 255, 0.7);
   margin: auto;
 
@@ -33,6 +33,8 @@
         transform: 0.3s, border 0.3s, background 0.3s, box-shadow 0.3s,
           opacity 0.3s, color 0.3s;
         padding-right: 5px;
+        width: 25vw;
+        min-width: fit-content;
       }
 
       .btn-text {
@@ -96,7 +98,6 @@
 @media screen and (min-width: 1600px) {
   .plasocks-story-container {
     min-height: 550px;
-    background-size: 100vw 550px;
 
     .story-content {
       font-size: larger;
@@ -107,7 +108,6 @@
 @media screen and (max-width: 1200px) {
   .plasocks-story-container {
     min-height: 400px;
-    background-size: 100vw 600px;
 
     .video-container {
       width: 60%;
@@ -137,11 +137,11 @@
 
   .story-content {
     width: 90vw !important;
-    margin: auto !important;
+    margin: 10px auto !important;
 
     router-link {
       .btn-learn-more {
-        width: 30vw !important;
+        width: 40vw;
         margin-bottom: 30px;
       }
     }
@@ -150,8 +150,7 @@
 
 @media screen and (max-width: 550px) {
   .plasocks-story-container {
-    background-size: 100vw 500px;
-    min-height: 500px;
+    min-height: 650px;
     justify-content: flex-start !important;
 
     .video-container {
@@ -173,10 +172,11 @@
         }
 
         .btn-container {
+            width: 50vw;
+
           .btn-learn-more {
             margin-bottom: 10px !important;
             padding: 5px !important;
-            width: fit-content !important;
             font-size: x-small !important;
           }
         }

@@ -1,0 +1,254 @@
+.rewards-container {
+  background-color: #f6f6f6;
+  .title {
+    background-color: #4db7b3;
+    h1 {
+      font-size: 40px !important;
+      font-weight: bold;
+      text-align: center;
+      padding: 30px 0;
+      text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.2),
+        0px -4px 10px rgba(255, 255, 255, 0.2);
+    }
+  }
+  .benefit-container {
+    display: flex;
+    padding: 10px 100px;
+    align-items: center;
+
+    .img-container {
+      flex: 1;
+      width: 50%;
+      img {
+        position: relative;
+        width: 90%;
+        margin: auto;
+        box-shadow: 5px 5px 2px #ccc;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+    .main-content {
+      flex: 1;
+      width: 50%;
+      text-align: center;
+      .change {
+        font-weight: 700;
+      }
+      .btn-container {
+        text-decoration: none;
+        .button {
+          border: 3px solid #fff;
+          width: fit-content;
+          text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+          text-align: center;
+        }
+      }
+    }
+  }
+  .material-container-group {
+    padding: 10px 100px;
+  }
+  .collect-container-group {
+    padding: 10px 100px;
+  }
+  .gift-container {
+    padding: 10px 100px;
+    .sales-container {
+      width: 50%;
+      background-image: url(https://drive.google.com/uc?id=1-wAVdV94tu54zs9TTkfsMujK8QlfhNOe);
+      background-size: cover;
+      background-position: 15%;
+      .main-content {
+        .buttons-container {
+          .btn-container {
+            text-decoration: none;
+            .button {
+              color: #fff;
+              font-weight: 700;
+              width: fit-content;
+              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+              transform: 0.3s, border 0.3s, background 0.3s, box-shadow 0.3s,
+                opacity 0.3s, color 0.3s;
+              padding-right: 5px;
+              .btn-text {
+                transform: translateX(4px);
+                white-space: nowrap;
+                animation: moveRight 0.3s ease-out;
+                animation-fill-mode: backwards;
+              }
+              .btn-icon {
+                transition: 0.3s ease;
+                opacity: 0;
+              }
+
+              &:hover {
+                border-radius: 5px;
+
+                .btn-text {
+                  animation: moveLeft 0.3s ease-out;
+                  animation-fill-mode: backwards;
+                  transform: translateX(-8px);
+                  transition-delay: 0.3s;
+                }
+
+                .btn-icon {
+                  opacity: 1;
+                }
+
+                @keyframes moveLeft {
+                  0% {
+                    transform: translateX(4px);
+                  }
+
+                  100% {
+                    transform: translateX(-4px);
+                  }
+                }
+
+                @keyframes moveRight {
+                  0% {
+                    opacity: 1;
+                    transform: translateX(-4px);
+                  }
+
+                  100% {
+                    transform: translateX(4px);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .categories-container {
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .rewards-container {
+    .title {
+      h1 {
+        font-size: 35px !important;
+      }
+    }
+    .benefit-container {
+      padding: 10px 90px;
+      .main-content {
+        font-size: small;
+        .content {
+          margin-bottom: 0 !important;
+        }
+        .change {
+          margin: 5px auto;
+        }
+      }
+      .btn-container {
+        .button {
+          .btn-text {
+            font-size: small;
+          }
+        }
+      }
+    }
+  }
+  .material-container-group {
+    padding: 10px 90px;
+  }
+  .collect-container-group {
+    padding: 10px 90px;
+  }
+  .gift-container {
+    padding: 10px 90px;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .rewards-container {
+    .title {
+      h1 {
+        font-size: 30px !important;
+        padding: 25px 0;
+      }
+    }
+    .benefit-container {
+      padding: 10px 50px;
+      .main-content {
+        font-size: small;
+        text-align: justify;
+      }
+      .btn-container {
+        .button {
+          .btn-text {
+            font-size: smaller;
+          }
+        }
+      }
+    }
+    .material-container-group {
+      padding: 10px 50px;
+    }
+    .collect-container-group {
+      padding: 10px 50px;
+    }
+    .gift-container {
+      padding: 10px 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .rewards-container {
+    .title {
+      h1 {
+        font-size: 30px !important;
+        padding: 20px 0;
+      }
+    }
+    .benefit-container {
+      padding: 10px 20px;
+      .img-container {
+        img {
+          height: 50vh;
+        }
+      }
+    }
+    .material-container-group {
+      padding: 10px 20px;
+    }
+    .collect-container-group {
+      padding: 10px 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .rewards-container {
+    .title {
+      h1 {
+        font-size: 30px !important;
+        padding: 20px 0;
+      }
+    }
+    .benefit-container {
+      flex-direction: column;
+      .img-container {
+        width: 100%;
+        img {
+          height: 40vh;
+          width: 100%;
+        }
+      }
+      .main-content {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  }
+}
