@@ -1,0 +1,36 @@
+.main-container {
+    .header-title {
+            .icon-title {
+                color: #51B7B3;
+            }
+    
+            font-size: 20px;
+            font-weight: bold;
+            color: #51B7B3;
+        }
+    .favorite-list {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        column-gap: 30px;
+        .favorite-item {
+            margin-bottom: 30px;
+        }
+    }
+    
+}
+@media screen and (max-width: 1200px) {
+    .favorite-list {
+            grid-template-columns: auto auto auto !important;
+            column-gap: 20px;
+        }
+}
+@media screen and (max-width: 1100px) {
+    .favorite-list {
+        grid-template-columns: auto auto !important;
+    }
+}
+@media screen and (max-width: 650px) {
+    .favorite-list {
+        grid-template-columns: auto !important;
+    }
+}
