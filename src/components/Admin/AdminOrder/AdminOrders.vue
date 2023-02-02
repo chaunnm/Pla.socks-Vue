@@ -142,7 +142,6 @@ export default {
 
   created() {
     this.orderList = this.$store.getters.GET_ORDERS_ITEMS;
-    // console.log("order ", this.orderList);
   },
 
   methods: {

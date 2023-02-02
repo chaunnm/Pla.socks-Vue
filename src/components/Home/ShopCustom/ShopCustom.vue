@@ -1,6 +1,6 @@
 <template>
   <div class="shopcustom-container">
-    <h1>This is ShopCustom section</h1>
+    <img src="https://i.imgur.com/9Q2pzsp.png" />
   </div>
 </template>
 
