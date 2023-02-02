@@ -713,4 +713,28 @@ export default {
       rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   }
 }
+@media screen and (max-width: 760px) {
+  .dashboard-container .section .right {
+    grid-template-columns: auto auto !important;
+  }
+  .dashboard-container .section-chart {
+    flex-direction: column;
+  }
+  .dashboard-container .section-chart .cricle-chart {
+    margin-right: 0 !important;
+  }
+}
+// @media screen and (max-width: 680px) {
+//   .dashboard-container .section .right {
+//     grid-template-columns: auto !important;
+//   }
+// }
+@media screen and (max-width: 680px) {
+  .dashboard-container .section {
+    flex-direction: column !important;
+  }
+  .dashboard-container .section .left {
+    margin-right: 0;
+  }
+}
 </style>

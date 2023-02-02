@@ -311,21 +311,21 @@
               </v-list-item>
               <v-list-item>
                 <v-list-item-title
-                  ><router-link class="account-links" to="/shop"
+                  ><router-link class="account-links" to="/account"
                     >My Account</router-link
                   ></v-list-item-title
                 >
               </v-list-item>
               <v-list-item>
                 <v-list-item-title
-                  ><router-link class="account-links" to="/"
+                  ><router-link class="account-links" to="/account"
                     >My Favorite</router-link
                   ></v-list-item-title
                 >
               </v-list-item>
               <v-list-item>
                 <v-list-item-title
-                  ><router-link class="account-links" to="/"
+                  ><router-link class="account-links" to="/account"
                     >My Orders</router-link
                   ></v-list-item-title
                 >
