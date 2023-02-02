@@ -242,6 +242,30 @@ const routes = [
     },
   },
   {
+    path: "/admin/todo",
+    name: "admin-to-do",
+    component: () => import("@/views/AdminView/AdminToDoView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/calendar",
+    name: "admin-calendar",
+    component: () => import("@/views/AdminView/AdminCalendarView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/color",
+    name: "admin-color",
+    component: () => import("@/views/AdminView/AdminColorPickView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "404",
     component: () => import("@/views/404NotFound.vue"),

@@ -1,0 +1,26 @@
+.adminColorPick-container {
+  animation: toRight 0.3s backwards;
+  padding: 20px;
+  .section {
+    margin: 20px 0;
+    h3 {
+      color: #9c9c9c;
+      font-weight: 500;
+    }
+    h2 {
+      margin-top: 10px;
+      color: #616060;
+      .fa-palette {
+        color: #4db7b3;
+        margin-left: 20px;
+      }
+    }
+  }
+  .color-picker {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+  }
+}
