@@ -5,7 +5,8 @@ const category = {
       {
         categoryId: 1,
         name: "Boxes Of Love",
-        description: "Haahahahahahahahahahahahah",
+        description:
+          "We create many beautiful socks for couples that make their love stronger",
         level: 1,
         isChild: "",
         createdAt: "",
@@ -14,7 +15,8 @@ const category = {
       {
         categoryId: 2,
         name: "Customized Socks",
-        description: "Haahahahahahahahahahahahah",
+        description:
+          "You can send us images or descriptions of their signature pictures or signs",
         level: 1,
         isChild: "",
         createdAt: "",
@@ -23,7 +25,8 @@ const category = {
       {
         categoryId: 3,
         name: "Socks For Kids",
-        description: "Haahahahahahahahahahahahah",
+        description:
+          "Discover our kids socks collection and bring joy to little feet all over the world.",
         level: 1,
         isChild: "",
         createdAt: "",
@@ -32,7 +35,7 @@ const category = {
       {
         categoryId: 4,
         name: "Socks For Men",
-        description: "Haahahahahahahahahahahahah",
+        description: "Many beautiful designs of socks for young ",
         level: 1,
         isChild: "",
         createdAt: "",
@@ -41,7 +44,7 @@ const category = {
       {
         categoryId: 5,
         name: "Socks For Winter",
-        description: "Haahahahahahahahahahahahah",
+        description: "We have designed a new collection for active ",
         level: 1,
         isChild: "",
         createdAt: "",
@@ -50,7 +53,8 @@ const category = {
       {
         categoryId: 6,
         name: "Socks For Women",
-        description: "Haahahahahahahahahahahahah",
+        description:
+          "Many beautiful designs of socks for young and beautiful women ",
         level: 1,
         isChild: "",
         createdAt: "",
@@ -64,7 +68,7 @@ const category = {
         image:
           "https://drive.google.com/uc?id=1h29pQ7-KTwsswyxiEv4PNMJlLE6XzKm2",
         description:
-          "We have designed a new collection for active and cool winter shopping, giving away vouchers with purchase",
+          "We have designed a new collection for active and cool winter shopping",
       },
       {
         categoryId: 2,
@@ -72,15 +76,14 @@ const category = {
         image:
           "https://drive.google.com/uc?id=1Ykb80VpmIO9lR4syAtzZNoIjtalbY5V8",
         description:
-          "You can send us images or descriptions of their signature pictures or signs, or they can draw and create their own pattern on Pla.Socks’ website",
+          "You can send us images or descriptions of their signature pictures",
       },
       {
         categoryId: 3,
         itemTitle: "Socks for women",
         image:
           "https://drive.google.com/uc?id=1zWw2ETtfV--GiCX53F1RXjrwbH2RkhfE",
-        description:
-          "Many beautiful designs of socks for young and beautiful women are sure to attract you",
+        description: "Many beautiful designs of socks for young and beautiful ",
       },
       {
         categoryId: 4,

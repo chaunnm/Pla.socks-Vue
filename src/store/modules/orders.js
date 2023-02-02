@@ -20,14 +20,14 @@ const orders = {
           note: "Đừng hối lấy hàng ạ!",
         },
         couponCodes: "ANCUTE20",
-        createdAt: "2022-11-16T18:40:48.113Z",
+        createdAt: "01/02/2023",
         paidAt: "2022-11-16T18:50:48.113Z",
         paidMethod: "COD",
         isPaid: true,
         status: "Delivered",
         completedAt: "2022-11-20T18:50:48.113Z",
       },
-      
+
       {
         orderId: 1,
         userId: "11",
@@ -67,7 +67,7 @@ const orders = {
           note: "Đừng giao hàng ạ!",
         },
         couponCodes: "ANKAWAII20",
-        createdAt: "2022-12-16T18:40:48.113Z",
+        createdAt: "16/01/2023",
         paidAt: "2022-12-16T18:50:48.113Z",
         paidMethod: "Momo",
         isPaid: true,
@@ -84,37 +84,33 @@ const orders = {
       return state.orderData;
     },
     GET_ORDER_ITEM_BY_ID: (state) => (id) => {
-      return state.orderData.find(
-        (orderItem) => orderItem.orderId === id
-      );
+      return state.orderData.find((orderItem) => orderItem.orderId === id);
     },
     GET_ORDER_ITEM_BY_USERID: (state) => (id) => {
-      return state.orderData.filter(
-        (orderItem) => orderItem.userId === id
-      );
+      return state.orderData.filter((orderItem) => orderItem.userId === id);
     },
   },
   setters: {},
   mutations: {
     ADD_ORDER_ITEM: (state, data) => {
-        state.orderData.push(data);
-      }
+      state.orderData.push(data);
     },
-    // CHANGE_ORDER_QUANTITY: (state, payload) => {
-    //   // console.log(state, payload);
-    //   const index = state.orderData.findIndex((item) => {
-    //     return item.orderId === payload.orderId;
-    //   });
-    //   const temp = state.orderData[index].quantity;
-    //   if (index !== -1) {
-    //     state.orderData[index].quantity = temp + payload.quantity;
-    //   }
-    // },
-    // DELETE_ORDER_ITEM: (state, id) => {
-    //   state.orderData.splice(
-    //     state.orderData.findIndex((item) => item.orderId === id),
-    //     1
-    //   );
-    // },
-}
+  },
+  // CHANGE_ORDER_QUANTITY: (state, payload) => {
+  //   // console.log(state, payload);
+  //   const index = state.orderData.findIndex((item) => {
+  //     return item.orderId === payload.orderId;
+  //   });
+  //   const temp = state.orderData[index].quantity;
+  //   if (index !== -1) {
+  //     state.orderData[index].quantity = temp + payload.quantity;
+  //   }
+  // },
+  // DELETE_ORDER_ITEM: (state, id) => {
+  //   state.orderData.splice(
+  //     state.orderData.findIndex((item) => item.orderId === id),
+  //     1
+  //   );
+  // },
+};
 export default orders;

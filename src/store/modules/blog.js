@@ -4,28 +4,29 @@ const blogs = {
       {
         blogID: 1,
         image: "https://i.imgur.com/u9Ehaut.png",
-        titleName: "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+        titleName: "Vintage style with all textures",
         author: "anguynv",
         pulishingDate: "15/11/2022",
       },
       {
         blogID: 2,
         image: "https://i.imgur.com/a8NLJDg.png",
-        titleName: "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+        titleName: "Reviews on Medieval Socks",
         author: "nnmc",
         pulishingDate: "20/12/2022",
       },
       {
         blogID: 3,
         image: "https://i.imgur.com/f3jtjfL.png",
-        titleName: "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+        titleName: "Reviews on Low Neck Socks",
         author: "ltyn",
         pulishingDate: "30/10/2022",
       },
       {
         blogID: 4,
         image: "https://i.imgur.com/PpHBD0G.png",
-        titleName: "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+        titleName:
+          "What is the age of a pair of socks made from recycled bottles?",
         author: "btdc",
         pulishingDate: "21/10/2022",
       },

@@ -29,6 +29,10 @@
   // margin-top: 64px !important;
   // height: calc(100vh - 64px) !important;
 
+  &::v-deep tr {
+    height: 45px;
+  }
+
   .section {
     margin: 20px 0;
     display: flex;
