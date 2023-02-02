@@ -27,7 +27,6 @@
           class="btn-learn-more uppercase white--text font-weight-bold"
           color="#4db7b3"
           elevation="4"
-          width="15vw"
         >
           <div class="btn-text">Learn more</div>
           <i class="icon-more fas fa-plus"></i>

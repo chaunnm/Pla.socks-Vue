@@ -1,21 +1,27 @@
 <template>
   <div class="bestsellers-container mt-5">
-    <div class="title d-flex align-center" data-aos="zoom-in">
-      <v-divider class="divider mr-4"></v-divider>
-      <h3 class="text-center">Best Sellers</h3>
-      <v-divider class="divider ml-4"></v-divider>
-    </div>
-    <div class="main-container">
-      <div class="products">
-        <ProductItem
-          class="item"
-          v-for="item in visibleProducts"
-          :key="item.productId"
-          :product="item"
-          data-aos="flip-left"
-        />
+    <v-sheet class="mx-auto" elevation="8">
+      <div class="title d-flex align-center" data-aos="zoom-in">
+        <v-divider class="divider mr-4"></v-divider>
+        <h3 class="text-center">Best Sellers</h3>
+        <v-divider class="divider ml-4"></v-divider>
       </div>
-    </div>
+      <v-slide-group
+        v-model="visibleProducts"
+        class="main-container pa-4 pa-sm-2"
+        show-arrows
+      >
+        <v-slide-item v-for="item in visibleProducts" :key="item.productId">
+          <v-card class="ma-4" data-aos="flip-left">
+            <ProductItem
+              class="item mx-auto"
+              :product="item"
+              data-aos="flip-left"
+            />
+          </v-card>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
   </div>
 </template>
 
@@ -42,7 +48,7 @@ export default {
     }),
     visibleProducts() {
       var [...temp] = this.productList;
-      return temp.slice(0, 4);
+      return temp.slice(0, 15);
     },
   },
   created() {

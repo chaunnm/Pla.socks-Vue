@@ -40,6 +40,12 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/OurStoryView.vue"),
   },
   {
+    path: "/rewards",
+    name: "rewards",
+    props: true,
+    component: () => import("../views/RewardsView.vue"),
+  },
+  {
     path: "/sign-in",
     name: "signIn",
     component: () => import("@/views/SignInView.vue"),
@@ -231,6 +237,30 @@ const routes = [
     path: "/admin/product/update/:prodId(\\d+)",
     name: "admin-product-update",
     component: () => import("@/views/AdminView/AdminProductUpdateView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/todo",
+    name: "admin-to-do",
+    component: () => import("@/views/AdminView/AdminToDoView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/calendar",
+    name: "admin-calendar",
+    component: () => import("@/views/AdminView/AdminCalendarView.vue"),
+    meta: {
+      requiredAdmin: true,
+    },
+  },
+  {
+    path: "/admin/color",
+    name: "admin-color",
+    component: () => import("@/views/AdminView/AdminColorPickView.vue"),
     meta: {
       requiredAdmin: true,
     },

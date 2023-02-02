@@ -3,38 +3,59 @@
     <v-carousel
       hide-delimiter-background
       show-arrows-on-hover
-      cycle
+      cycled
       class="carousel"
       width="100%"
     >
       <v-carousel-item class="carousel-item">
         <v-sheet class="carousel-sheet-1" height="100%">
           <v-row class="carousel-row fill-height">
-            <div class="main-content">
-              <h1 class="title my-5">Pla.Socks</h1>
+            <div class="main-content mb-sm-5">
+              <h1 class="title my-5 mb-sm-6">Pla.Socks</h1>
               <h4 class="introduction my-4">
                 Using a pair of Pla.Socks socks, you have successfully rescued
                 10 discarded plastic bottles, together with Pla.socks careate a
                 sustainable green future from green footsteps!
               </h4>
-              <v-divider class="divider my-4"></v-divider>
+              <v-divider class="divider my-4 mb-sm-2"></v-divider>
             </div>
 
-            <div class="buttons-container">
+            <div class="buttons-container mt-xs-4">
               <router-link to="/shop" class="btn-container">
-                <v-btn class="button" elevation="2" outlined x-large>
+                <v-btn
+                  class="button mb-4"
+                  elevation="2"
+                  outlined
+                  md-x-large
+                  sm-large
+                  xs-small
+                >
                   <div class="btn-text">Shop men</div>
                   <i class="btn-icon fa-solid fa-bag-shopping"></i>
                 </v-btn>
               </router-link>
               <router-link to="/shop" class="btn-container mx-5">
-                <v-btn class="button" elevation="2" outlined x-large>
+                <v-btn
+                  class="button mb-4"
+                  elevation="2"
+                  outlined
+                  md-x-large
+                  sm-large
+                  xs-small
+                >
                   <div class="btn-text">Shop custom</div>
                   <i class="btn-icon fa-solid fa-bag-shopping"></i>
                 </v-btn>
               </router-link>
               <router-link to="/shop" class="btn-container">
-                <v-btn class="button" elevation="2" outlined x-large>
+                <v-btn
+                  class="button mb-4"
+                  elevation="2"
+                  outlined
+                  md-x-large
+                  sm-large
+                  xs-small
+                >
                   <div class="btn-text">Shop women</div>
                   <i class="btn-icon fa-solid fa-bag-shopping"></i>
                 </v-btn>
@@ -55,7 +76,8 @@
                 class="button uppercase white--text font-weight-bold"
                 elevation="4"
                 color="#4db7b3"
-                x-large
+                md-x-large
+                sm-large
               >
                 <div class="btn-text">Shop custom</div>
                 <i class="btn-icon fa-solid fa-bag-shopping"></i>
@@ -76,7 +98,8 @@
                 class="button uppercase white--text font-weight-bold"
                 elevation="2"
                 outlined
-                large
+                md-large
+                xs-small
               >
                 <div class="btn-text">Shop now</div>
                 <i class="btn-icon fa-solid fa-bag-shopping"></i>
@@ -103,7 +126,9 @@
                 class="button uppercase white--text font-weight-bold"
                 elevation="4"
                 color="#F299C2"
-                x-large
+                md-x-large
+                sm-large
+                xs-small
               >
                 <div class="btn-text">Shop custom</div>
                 <i class="btn-icon fa-solid fa-bag-shopping"></i>
@@ -131,7 +156,8 @@
                 class="button uppercase white--text font-weight-bold"
                 elevation="2"
                 outlined
-                large
+                md-large
+                xs-small
               >
                 <div class="btn-text">rewards</div>
                 <i class="btn-icon fa-solid fa-gift"></i>
