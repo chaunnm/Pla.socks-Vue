@@ -51,7 +51,7 @@
                 </div>
               </div>
               <div class="right-content">
-                <div class="tranking-order">Tracking Order</div>
+                <div class="tranking-order font-weight-bold">Tracking Order</div>
               </div>
             </div>
           </div>
