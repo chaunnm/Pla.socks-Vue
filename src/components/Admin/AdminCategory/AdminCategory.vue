@@ -114,15 +114,15 @@ export default {
     selected: [],
     search: "",
     headers: [
-      { text: "ID", value: "categoryId" },
+      { text: "ID", value: "categoryId",},
       {
-        text: "Category name",
+        text: "Category",
         align: "start",
         value: "name",
       },
       { text: "Description", value: "description", sortable: false },
       { text: "Level", value: "level" },
-      { text: "Parent", value: "isChild" },
+      // { text: "Parent", value: "isChild" },
       { text: "Actions", value: "actions", sortable: false },
     ],
     categoryList: [],

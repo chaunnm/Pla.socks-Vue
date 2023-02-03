@@ -157,7 +157,7 @@ export default {
           Summary: "Analyze the new requirements gathered from the customer.",
           Type: "Story",
           Priority: "Low",
-          Tags: ["Analyze", "Customer"],
+          Tags: ["Analyze"],
           Estimate: 3.5,
           Assignee: "Nancy Davloio",
           RankId: 1,

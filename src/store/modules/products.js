@@ -851,22 +851,6 @@ const products = {
         createdAt: "2023-01-14T18:40:48.113Z",
       },
       {
-        productId: 55,
-        itemTitle: "Thin Office Working Socks",
-        variance: 3,
-        image:
-          "https://i0.wp.com/salt.tikicdn.com/cache/w1200/ts/product/7a/a6/b2/6011fea7d38b749cdc194ee22dc9ac58.png",
-        stock: "100",
-        sold: "0",
-        price: 48000,
-        height: 110,
-        category: "Socks For Men",
-        thickness: "Low",
-        sale: 5,
-        review: [],
-        createdAt: "2023-01-14T18:40:48.113Z",
-      },
-      {
         productId: 56,
         itemTitle: "Thin Office Working Socks",
         variance: 4,
