@@ -4,7 +4,7 @@
       <div class="section-left">
         <h3>List</h3>
         <h2>
-          Product
+          Products
           <i class="fa-solid fa-socks"></i>
         </h2>
       </div>

@@ -4,7 +4,7 @@
       <div class="section-left">
         <h3>List</h3>
         <h2>
-          Category
+          Categories
           <i class="fa-brands fa-slack"></i>
         </h2>
       </div>

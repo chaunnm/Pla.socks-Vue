@@ -4,7 +4,7 @@
       <div class="section-left">
         <h3>List</h3>
         <h2>
-          User
+          Users
           <i class="fa-solid fa-user-astronaut"></i>
         </h2>
       </div>
