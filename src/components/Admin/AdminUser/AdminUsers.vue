@@ -170,6 +170,13 @@ export default {
       );
       this.userList = this.$store.getters.getUserAll;
       this.closeDelete();
+      this.$toast.open({
+        message: "Delete users successfully! 🙂",
+        type: "success",
+        duration: 2000,
+        dismissible: true,
+        position: "bottom",
+      });
     },
     closeDelete() {
       this.dialogDelete = false;
@@ -183,6 +190,13 @@ export default {
       this.$store.commit("DELETEUSER", this.editedIndex);
       this.userList = this.$store.getters.getUserAll;
       this.closeDelete();
+      this.$toast.open({
+        message: "Delete user successfully! 🙂",
+        type: "success",
+        duration: 2000,
+        dismissible: true,
+        position: "bottom",
+      });
     },
     editItem(item) {
       // console.log(item);
