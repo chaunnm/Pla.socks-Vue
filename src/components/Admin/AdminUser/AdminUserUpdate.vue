@@ -1,66 +1,55 @@
 <template>
   <div class="AdminUserUpdate">
     <div class="content">
-      <h2>Update User</h2>
+      <h3>Update</h3>
+      <h2>
+        User
+        <i class="fa-solid fa-user-astronaut"></i>
+      </h2>
 
       <div class="form">
         <div class="left">
-          <div class="admin-add-new-row">
+          <div class="admin-update-new-row">
             <label>Full Name</label>
-            <v-text-field
-              v-model="fullName"
-              placeholder="Placeholder"
-              outlined
-            ></v-text-field>
+            <v-text-field v-model="fullName" outlined></v-text-field>
           </div>
-          <div class="admin-add-new-row">
+          <div class="admin-update-new-row">
             <label>Email</label>
             <v-text-field
               v-model="email"
               :error-messages="emailErrors"
               @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
-              placeholder="Placeholder"
               outlined
             ></v-text-field>
           </div>
-          <div class="admin-add-new-row">
+          <div class="admin-update-new-row">
             <label>Number Phone</label>
             <v-text-field
               v-model="phone"
               :error-messages="phoneErrors"
               @input="$v.phone.$touch()"
               @blur="$v.phone.$touch()"
-              placeholder="Placeholder"
               outlined
             ></v-text-field>
           </div>
-          <div class="admin-add-new-row">
+          <div class="admin-update-new-row">
             <label>Address</label>
-            <v-text-field
-              v-model="address"
-              placeholder="Placeholder"
-              outlined
-            ></v-text-field>
-          </div>
-          <div class="btn-group">
-            <div class="btn-add" @click="submit"><span>UPDATE</span></div>
-            <div class="btn-clear" @click="clear"><span>CLEAR</span></div>
+            <v-text-field v-model="address" outlined></v-text-field>
           </div>
         </div>
         <div class="right">
-          <div class="admin-add-new-row">
+          <div class="admin-update-new-row">
             <label>User Name</label>
             <v-text-field
               v-model="userName"
               :error-messages="userNameErrors"
               @input="$v.userName.$touch()"
               @blur="$v.userName.$touch()"
-              placeholder="Placeholder"
               outlined
             ></v-text-field>
           </div>
-          <div class="admin-add-new-row">
+          <div class="admin-update-new-row">
             <label>Password</label>
             <v-text-field
               v-model="password"
@@ -76,7 +65,7 @@
               outlined
             ></v-text-field>
           </div>
-          <div class="admin-add-new-row">
+          <div class="admin-update-new-row">
             <label>Role</label>
             <v-select
               v-model="role"
@@ -87,10 +76,10 @@
               outlined
             ></v-select>
           </div>
-          <div class="admin-add-new-row">
+          <div class="admin-update-new-row">
             <label>Avartar</label>
-            <div class="admin-add-new-row-group">
-              <div class="admin-add-new-row-group-left">
+            <div class="admin-update-new-row-group">
+              <div class="admin-update-new-row-group-left">
                 <label for="file-upload" class="custom-file-upload">
                   <i class="fa-solid fa-folder-open"></i>
                 </label>
@@ -102,12 +91,16 @@
                   @change="handleChangeAvartar"
                 />
               </div>
-              <div class="admin-add-new-row-group-right">
+              <div class="admin-update-new-row-group-right">
                 <img class="avatar" :src="avartar" alt="" />
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="btn-group">
+        <div class="btn-update" @click="submit"><span>UPDATE</span></div>
+        <div class="btn-clear" @click="clear"><span>CLEAR</span></div>
       </div>
     </div>
   </div>
@@ -238,7 +231,7 @@ export default {
         console.log(newUser);
         this.$store.commit("updateUser", newUser);
         this.$toast.open({
-          message: "Cập nhật người dùng thành công!!",
+          message: "Update user successfully !! 🎆",
           type: "success",
           duration: 2000,
           dismissible: true,
@@ -269,16 +262,43 @@ export default {
   // width: 100%;
   height: auto;
   padding: 20px;
+  animation: toLeft 0.3s backwards;
+  @keyframes toLeft {
+    0% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
 
   .content {
-    width: 90%;
-    margin: 20px auto;
-    border: 2px solid #4db7b3;
-    border-radius: 10px;
-    padding: 20px 40px;
+    // width: 90%;
+    // margin: 20px auto;
+    // border: 2px solid #4db7b3;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
+      0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+
+    border-radius: 7px;
+    padding: 20px;
+    h3 {
+      color: #9c9c9c;
+      font-weight: 500;
+    }
     h2 {
-      margin-bottom: 20px;
+      margin-top: 10px;
+      color: #616060;
+      margin-bottom: 30px;
+      padding-bottom: 5px;
       border-bottom: 1px solid #4db7b3;
+      .fa-user-astronaut {
+        color: #4db7b3;
+        // background-color: #4DB7B3;
+        margin-left: 20px;
+        // font-size: 15px;
+        // animation: spinaround 5s infinite linear;
+      }
     }
   }
   .form {
@@ -315,7 +335,7 @@ export default {
         padding: 6px 12px;
         cursor: pointer;
       }
-      .admin-add-new-row {
+      .admin-update-new-row {
         &-group {
           display: flex;
           align-items: center;
@@ -325,111 +345,109 @@ export default {
         }
       }
     }
-    .btn-group {
-      display: flex;
-      width: 100%;
-    }
-    .btn-add {
-      margin-right: 20px;
-      // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-      //   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-      //   rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-      display: block;
-      width: 150px;
-      height: 40px;
-      line-height: 40px;
-      font-size: 18px;
-      font-family: sans-serif;
-      text-decoration: none;
-      color: #4db7b3;
-      border: 2px solid #4db7b3;
-      letter-spacing: 2px;
-      text-align: center;
-      position: relative;
-      transition: all 0.35s;
+  }
+  .btn-group {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .btn-update {
+    margin-right: 20px;
+    // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    //   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    //   rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    display: block;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #4db7b3;
+    border: 2px solid #4db7b3;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all 0.35s;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
 
-    .btn-add span {
-      position: relative;
-      z-index: 2;
-      font-weight: 600;
-    }
+  .btn-update span {
+    position: relative;
+    z-index: 2;
+    font-weight: 600;
+  }
 
-    .btn-add:after {
-      position: absolute;
-      content: "";
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: #4db7b3;
-      transition: all 0.35s;
-    }
+  .btn-update:after {
+    position: absolute;
+    content: "";
+    top: -1;
+    left: -1;
+    width: 0;
+    height: 100%;
+    background: #4db7b3;
+    transition: all 0.35s;
+  }
 
-    .btn-add:hover {
-      // border: none;
-      color: #fff;
-      transform: translateX(5px);
-    }
+  .btn-update:hover {
+    border: none;
+    color: #fff;
+    transform: translateX(5px);
+  }
 
-    .btn-add:hover:after {
-      width: 100%;
-    }
-    .btn-clear {
-      // box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-      //   rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-      //   rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-      display: block;
-      width: 150px;
-      height: 40px;
-      line-height: 40px;
-      font-size: 18px;
-      font-family: sans-serif;
-      text-decoration: none;
-      color: #333;
-      border: 2px solid #979b9b;
-      letter-spacing: 2px;
-      text-align: center;
-      position: relative;
-      transition: all 0.35s;
-      // background-color: #979b9b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
+  .btn-update:hover:after {
+    width: 100%;
+  }
+  .btn-clear {
+    display: block;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: #333;
+    border: 2px solid #979b9b;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all 0.35s;
+    // background-color: #979b9b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
 
-    .btn-clear span {
-      position: relative;
-      z-index: 2;
-      font-weight: 600;
-    }
+  .btn-clear span {
+    position: relative;
+    z-index: 2;
+    font-weight: 600;
+  }
 
-    .btn-clear:after {
-      position: absolute;
-      content: "";
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: #979b9b;
-      transition: all 0.35s;
-    }
+  .btn-clear:after {
+    position: absolute;
+    content: "";
+    top: -1;
+    left: -1;
+    width: 0;
+    height: 100%;
+    background: #979b9b;
+    transition: all 0.35s;
+  }
 
-    .btn-clear:hover {
-      border: none;
-      color: #fff;
-      transform: translateX(5px);
-    }
+  .btn-clear:hover {
+    border: none;
+    color: #fff;
+    transform: translateX(5px);
+  }
 
-    .btn-clear:hover:after {
-      width: 100%;
-    }
+  .btn-clear:hover:after {
+    width: 100%;
   }
   .form::v-deep .v-input input {
     padding: 0 !important;
@@ -441,6 +459,23 @@ export default {
     margin: 0;
     height: 40px;
     align-items: center;
+  }
+}
+@media screen and (max-width: 500px) {
+  .AdminUserUpdate {
+    .form {
+      margin-bottom: 15px;
+      flex-direction: column;
+      .left {
+        margin-right: 0;
+      }
+      .right {
+        margin-left: 0;
+      }
+    }
+    .btn-group {
+      margin-bottom: 20px;
+    }
   }
 }
 </style>
